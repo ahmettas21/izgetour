@@ -1,0 +1,78 @@
+{
+  "nav": {
+    "home": "Home",
+    "tours": "Tours",
+    "flights": "Flights",
+    "contact": "Contact",
+    "about": "About Us",
+    "login": "Login"
+  },
+  "hero": {
+    "title": "Discover Turkey",
+    "subtitle": "From Cappadocia to Ephesus, unique routes and unforgettable experiences await you.",
+    "cta": "Explore Tours"
+  },
+  "search": {
+    "placeholder": "What are you looking for?",
+    "button": "Search"
+  },
+  "tours": {
+    "title": "Popular Tours",
+    "subtitle": "Our most preferred tours",
+    "viewAll": "View All",
+    "perPerson": "per person",
+    "days": "days",
+    "readMore": "Read More"
+  },
+  "footer": {
+    "tagline": "Turkey's most beautiful routes",
+    "quickLinks": "Quick Links",
+    "contactUs": "Contact Us",
+    "email": "info@izgetour.com",
+    "phone": "+90 212 555 0123",
+    "rights": "All rights reserved."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Get in touch for questions, suggestions or reservation requests.",
+    "form_title": "Send a Message",
+    "name": "Full Name",
+    "email": "Email",
+    "message": "Your Message",
+    "submit": "Send",
+    "success": "Your message has been sent! We will get back to you shortly.",
+    "namePlaceholder": "Your full name",
+    "emailPlaceholder": "example@email.com",
+    "messagePlaceholder": "Write your message here...",
+    "email_us": "Email",
+    "call_us": "Phone",
+    "address": "Address"
+  },
+  "about": {
+    "title": "About Us",
+    "description": "Since 2010, Izgetour has been providing reliable and comfortable tour services throughout Turkey.",
+    "feature1_title": "100+ Tour Routes",
+    "feature1_desc": "Tours to Turkey's most beautiful destinations",
+    "feature2_title": "Expert Guides",
+    "feature2_desc": "Experienced, multilingual professional tour guides",
+    "feature3_title": "Secure Payment",
+    "feature3_desc": "Secure shopping with 256-bit SSL encryption"
+  },
+  "login": {
+    "title": "Login",
+    "subtitle": "Sign in to your account",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Login",
+    "noAccount": "Don't have an account?",
+    "register": "Sign Up"
+  },
+  "flights": {
+    "title": "Search Flights",
+    "subtitle": "Find the best flight deals"
+  },
+  "meta": {
+    "siteName": "Izgetour",
+    "description": "Turkey's leading tourism platform. Cappadocia, Ephesus, Pamukkale and more."
+  }
+}

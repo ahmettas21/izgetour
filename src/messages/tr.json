@@ -1,0 +1,78 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "tours": "Turlar",
+    "flights": "Uçuşlar",
+    "contact": "İletişim",
+    "about": "Hakkımızda",
+    "login": "Giriş Yap"
+  },
+  "hero": {
+    "title": "Türkiye'yi Keşfedin",
+    "subtitle": "Kapadokya'dan Efes'e, eşsiz rotalar ve unutulmaz deneyimler sizi bekliyor.",
+    "cta": "Turları Keşfet"
+  },
+  "search": {
+    "placeholder": "Ne aramak istersiniz?",
+    "button": "Ara"
+  },
+  "tours": {
+    "title": "Popüler Turlar",
+    "subtitle": "En çok tercih edilen turlarımız",
+    "viewAll": "Tümünü Gör",
+    "perPerson": "kişi başı",
+    "days": "gün",
+    "readMore": "Detaylı Bilgi"
+  },
+  "footer": {
+    "tagline": "Türkiye'nin en güzel rotaları",
+    "quickLinks": "Hızlı Linkler",
+    "contactUs": "Bize Ulaşın",
+    "email": "info@izgetour.com",
+    "phone": "+90 212 555 0123",
+    "rights": "Tüm hakları saklıdır."
+  },
+  "contact": {
+    "title": "Bize Ulaşın",
+    "description": "Sorularınız, önerileriniz veya rezervasyon talepleriniz için bizimle iletişime geçin.",
+    "form_title": "Mesaj Gönderin",
+    "name": "Ad Soyad",
+    "email": "E-posta",
+    "message": "Mesajınız",
+    "submit": "Gönder",
+    "success": "Mesajınız gönderildi! En kısa sürede dönüş yapacağız.",
+    "namePlaceholder": "Adınız ve soyadınız",
+    "emailPlaceholder": "ornek@email.com",
+    "messagePlaceholder": "Mesajınızı buraya yazın...",
+    "email_us": "E-posta",
+    "call_us": "Telefon",
+    "address": "Adres"
+  },
+  "about": {
+    "title": "Hakkımızda",
+    "description": "İzgetour olarak 2010'dan bu yana Türkiye'nin dört bir yanında güvenilir ve konforlu tur hizmetleri sunuyoruz.",
+    "feature1_title": "100+ Tur Rotası",
+    "feature1_desc": "Türkiye'nin en güzel noktalarına düzenlenen turlar",
+    "feature2_title": "Uzman Rehberler",
+    "feature2_desc": "Deneyimli ve dilleri bilen profesyonel tur rehberleri",
+    "feature3_title": "Güvenli Ödeme",
+    "feature3_desc": "256-bit SSL şifreleme ile güvenli alışveriş"
+  },
+  "login": {
+    "title": "Giriş Yap",
+    "subtitle": "Hesabınıza giriş yapın",
+    "email": "E-posta",
+    "password": "Şifre",
+    "submit": "Giriş Yap",
+    "noAccount": "Hesabınız yok mu?",
+    "register": "Kayıt Olun"
+  },
+  "flights": {
+    "title": "Uçuş Ara",
+    "subtitle": "En uygun uçuşları bulun"
+  },
+  "meta": {
+    "siteName": "İzgetour",
+    "description": "Türkiye'nin önde gelen turizm platformu. Kapadokya, Efes, Pamukkale ve daha fazlası."
+  }
+}
