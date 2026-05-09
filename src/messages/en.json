@@ -3,14 +3,20 @@
     "home": "Home",
     "tours": "Tours",
     "flights": "Flights",
+    "hotels": "Hotels",
+    "cars": "Car Rental",
+    "visa": "Visa",
     "contact": "Contact",
     "about": "About Us",
-    "login": "Login"
+    "login": "Login",
+    "dashboard": "Dashboard"
   },
   "hero": {
     "title": "Discover Turkey",
     "subtitle": "From Cappadocia to Ephesus, unique routes and unforgettable experiences await you.",
-    "cta": "Explore Tours"
+    "cta": "Explore Tours",
+    "ctaTours": "Discover Tours",
+    "ctaCall": "Call Now"
   },
   "search": {
     "placeholder": "What are you looking for?",
@@ -24,6 +30,115 @@
     "days": "days",
     "readMore": "Read More",
     "bookNow": "Book Now"
+  },
+  "hotels": {
+    "title": "Hotels",
+    "subtitle": "Best accommodation options at the best prices",
+    "searchPlaceholder": "Search hotel name or location...",
+    "filterTitle": "Filters",
+    "sortBy": "Sort By",
+    "priceLow": "Lowest Price",
+    "priceHigh": "Highest Price",
+    "rating": "Rating",
+    "amenities": "Amenities",
+    "rooms": "Rooms",
+    "adults": "Adults",
+    "night": "Night",
+    "roomsAvailable": "Available Rooms",
+    "bookNow": "Book Now",
+    "perNight": "per night",
+    "totalPrice": "Total Price",
+    "selectRoom": "Select Room",
+    "boardTypes": "Board Types",
+    "areaTransfer": "Area Transfer",
+    "checkIn": "Check In",
+    "checkOut": "Check Out"
+  },
+  "visa": {
+    "title": "Visa Services",
+    "subtitle": "Fast and reliable visa application service",
+    "selectCountry": "Select Country",
+    "requirements": "Required Documents",
+    "processingTime": "Processing Time",
+    "price": "Visa Fee",
+    "apply": "Apply",
+    "documentChecklist": "Document Checklist",
+    "timeline": "Application Process",
+    "step1": "Prepare Documents",
+    "step2": "Fill Application Form",
+    "step3": "Get Appointment",
+    "step4": "Interview / Biometric",
+    "step5": "Wait for Result",
+    "info": "Prices include consultation fee. Consular fees are excluded."
+  },
+  "cars": {
+    "title": "Car Rental",
+    "subtitle": "Car rental opportunities with your reservation",
+    "pickupLocation": "Pickup Location",
+    "dropoffLocation": "Drop-off Location",
+    "pickupDate": "Pickup Date",
+    "dropoffDate": "Drop-off Date",
+    "searchCar": "Search Car",
+    "seats": "Seats",
+    "transmission": "Transmission",
+    "manual": "Manual",
+    "automatic": "Automatic",
+    "ac": "A/C",
+    "perDay": "per day",
+    "rentNow": "Rent Now",
+    "airportTransfer": "Airport Transfer",
+    "airportTransferDesc": "Comfortable transfer between airport and hotel",
+    "transferFrom": "From",
+    "contactUs": "Contact Us for Transfer"
+  },
+  "reservation": {
+    "title": "Reservation",
+    "subtitle": "Complete your reservation information",
+    "passengerInfo": "Passenger Information",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "extras": "Extra Services",
+    "travelInsurance": "Travel Insurance",
+    "travelInsuranceDesc": "Cancellation coverage and health insurance",
+    "guideService": "Guide Service",
+    "guideServiceDesc": "Professional guided exploration",
+    "transfer": "Transfer Service",
+    "transferDesc": "Airport to accommodation transportation",
+    "paymentSummary": "Payment Summary",
+    "subtotal": "Subtotal",
+    "extrasTotal": "Extra Services",
+    "discount": "Discount",
+    "total": "Total",
+    "completePayment": "Complete Payment",
+    "extrasPrice": "Amount",
+    "processing": "Processing...",
+    "paymentSuccess": "Payment Successful!",
+    "paymentSuccessDesc": "Your reservation has been received. Details will be sent to your email address."
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome",
+    "izgePoints": "IzgePoints",
+    "activeBookings": "Active Bookings",
+    "totalSpent": "Total Spent",
+    "bookingHistory": "Booking History",
+    "bookingId": "Booking ID",
+    "type": "Type",
+    "date": "Date",
+    "amount": "Amount",
+    "status": "Status",
+    "confirmed": "Confirmed",
+    "pending": "Pending",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "tour": "Tour",
+    "hotel": "Hotel",
+    "flight": "Flight",
+    "visa": "Visa",
+    "profile": "Profile Info",
+    "memberSince": "Member Since",
+    "upcomingBookings": "Upcoming Bookings"
   },
   "footer": {
     "tagline": "Turkey's most beautiful routes",
@@ -75,5 +190,19 @@
   "meta": {
     "siteName": "Izgetour",
     "description": "Turkey's leading tourism platform. Cappadocia, Ephesus, Pamukkale and more."
+  },
+  "features": {
+    "secure": {
+      "title": "Secure Payment",
+      "desc": "All transactions are protected with SSL certificates."
+    },
+    "support": {
+      "title": "24/7 Support",
+      "desc": "Uninterrupted customer service throughout your holiday."
+    },
+    "quality": {
+      "title": "Premium Quality",
+      "desc": "Carefully selected hotels and professional guides."
+    }
   }
 }

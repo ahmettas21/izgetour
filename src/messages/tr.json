@@ -3,14 +3,20 @@
     "home": "Ana Sayfa",
     "tours": "Turlar",
     "flights": "Uçuşlar",
+    "hotels": "Oteller",
+    "cars": "Araç Kiralama",
+    "visa": "Vize",
     "contact": "İletişim",
     "about": "Hakkımızda",
-    "login": "Giriş Yap"
+    "login": "Giriş Yap",
+    "dashboard": "Panelim"
   },
   "hero": {
     "title": "Türkiye'yi Keşfedin",
     "subtitle": "Kapadokya'dan Efes'e, eşsiz rotalar ve unutulmaz deneyimler sizi bekliyor.",
-    "cta": "Turları Keşfet"
+    "cta": "Turları Keşfet",
+    "ctaTours": "Turları Keşfet",
+    "ctaCall": "Hemen Ara"
   },
   "search": {
     "placeholder": "Ne aramak istersiniz?",
@@ -24,6 +30,115 @@
     "days": "gün",
     "readMore": "Detaylı Bilgi",
     "bookNow": "Rezervasyon"
+  },
+  "hotels": {
+    "title": "Oteller",
+    "subtitle": "En iyi fiyatlarla konaklama seçenekleri",
+    "searchPlaceholder": "Otel adı veya lokasyon ara...",
+    "filterTitle": "Filtrele",
+    "sortBy": "Sırala",
+    "priceLow": "En Düşük Fiyat",
+    "priceHigh": "En Yüksek Fiyat",
+    "rating": "Puan",
+    "amenities": "Özellikler",
+    "rooms": "Odalar",
+    "adults": "Yetişkin",
+    "night": "Gece",
+    "roomsAvailable": "Müsait Odalar",
+    "bookNow": "Şimdi Rezerve Et",
+    "perNight": "gecelik",
+    "totalPrice": "Toplam Tutar",
+    "selectRoom": "Oda Seçin",
+    "boardTypes": "Pansiyon Tipleri",
+    "areaTransfer": "Bölge Transferi",
+    "checkIn": "Giriş",
+    "checkOut": "Çıkış"
+  },
+  "visa": {
+    "title": "Vize Hizmetleri",
+    "subtitle": "Hızlı ve güvenilir vize başvuru hizmeti",
+    "selectCountry": "Ülke Seçin",
+    "requirements": "Gerekli Evraklar",
+    "processingTime": "İşlem Süresi",
+    "price": "Vize Ücreti",
+    "apply": "Başvur",
+    "documentChecklist": "Evrak Kontrol Listesi",
+    "timeline": "Başvuru Süreci",
+    "step1": "Evrakları Hazırla",
+    "step2": "Başvuru Formu Doldur",
+    "step3": "Randevu Al",
+    "step4": "Mülakat / Biyometrik",
+    "step5": "Sonuç Bekle",
+    "info": "Fiyatlar danışmanlık ücretini içerir. Konsolosluk ücretleri hariçtir."
+  },
+  "cars": {
+    "title": "Araç Kiralama",
+    "subtitle": "Rezervasyonunuzla birlikte araç kiralama fırsatları",
+    "pickupLocation": "Alış Yeri",
+    "dropoffLocation": "Teslim Yeri",
+    "pickupDate": "Alış Tarihi",
+    "dropoffDate": "Teslim Tarihi",
+    "searchCar": "Araç Ara",
+    "seats": "Koltuk",
+    "transmission": "Vites",
+    "manual": "Manuel",
+    "automatic": "Otomatik",
+    "ac": "Klima",
+    "perDay": "günlük",
+    "rentNow": "Kirala",
+    "airportTransfer": "Havalimanı Transferi",
+    "airportTransferDesc": "Havalimanı - Otel arası konforlu transfer hizmeti",
+    "transferFrom": "Kişi başı",
+    "contactUs": "Transfer için Bize Ulaşın"
+  },
+  "reservation": {
+    "title": "Rezervasyon",
+    "subtitle": "Rezervasyon bilgilerinizi tamamlayın",
+    "passengerInfo": "Yolcu Bilgileri",
+    "fullName": "Ad Soyad",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "extras": "Ek Hizmetler",
+    "travelInsurance": "Seyahat Sigortası",
+    "travelInsuranceDesc": "Rezervasyon iptali ve sağlık güvencesi",
+    "guideService": "Rehberlik Hizmeti",
+    "guideServiceDesc": "Profesyonel rehber eşliğinde keşif",
+    "transfer": "Transfer Hizmeti",
+    "transferDesc": "Havalimanından konaklama noktasına ulaşım",
+    "paymentSummary": "Ödeme Özeti",
+    "subtotal": "Ara Toplam",
+    "extrasTotal": "Ek Hizmetler",
+    "discount": "İndirim",
+    "total": "Toplam",
+    "completePayment": "Ödemeyi Tamamla",
+    "extrasPrice": "Tutar",
+    "processing": "İşleniyor...",
+    "paymentSuccess": "Ödeme Başarılı!",
+    "paymentSuccessDesc": "Rezervasyonunuz alınmıştır. Detaylar e-posta adresinize gönderilecektir."
+  },
+  "dashboard": {
+    "title": "Panelim",
+    "welcome": "Hoş Geldiniz",
+    "izgePoints": "İzgePuan",
+    "activeBookings": "Aktif Rezervasyonlar",
+    "totalSpent": "Toplam Harcama",
+    "bookingHistory": "Rezervasyon Geçmişi",
+    "bookingId": "Rezervasyon No",
+    "type": "Tür",
+    "date": "Tarih",
+    "amount": "Tutar",
+    "status": "Durum",
+    "confirmed": "Onaylandı",
+    "pending": "Beklemede",
+    "completed": "Tamamlandı",
+    "cancelled": "İptal Edildi",
+    "tour": "Tur",
+    "hotel": "Otel",
+    "flight": "Uçuş",
+    "visa": "Vize",
+    "profile": "Profil Bilgileri",
+    "memberSince": "Üyelik Tarihi",
+    "upcomingBookings": "Yaklaşan Rezervasyonlar"
   },
   "footer": {
     "tagline": "Türkiye'nin en güzel rotaları",
@@ -75,5 +190,19 @@
   "meta": {
     "siteName": "İzgetour",
     "description": "Türkiye'nin önde gelen turizm platformu. Kapadokya, Efes, Pamukkale ve daha fazlası."
+  },
+  "features": {
+    "secure": {
+      "title": "Güvenli Ödeme",
+      "desc": "Tüm işlemleriniz SSL sertifikası ile korunmaktadır."
+    },
+    "support": {
+      "title": "7/24 Destek",
+      "desc": "Tatiliniz boyunca kesintisiz özel müşteri hizmetleri."
+    },
+    "quality": {
+      "title": "Premium Kalite",
+      "desc": "Özenle seçilmiş oteller ve profesyonel rehberler."
+    }
   }
 }
