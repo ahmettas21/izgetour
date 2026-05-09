@@ -1,3 +1,5 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { Globe, Mail, Phone, AtSign, Share2, Users } from 'lucide-react';
