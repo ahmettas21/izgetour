@@ -1,26 +1,130 @@
 @import "tailwindcss";
 
+/* =====================================================
+   Design Tokens — İzgetour
+   ===================================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Brand */
+  --brand:        #0066CC;
+  --brand-dark:   #0052a3;
+  --brand-light:  #e8f0fb;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Neutrals */
+  --background:   #f8f9fc;
+  --surface:      #ffffff;
+  --foreground:   #111827;
+  --muted:        #6b7280;
+  --border:       #e5e7eb;
+
+  /* Typography scale */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+  --text-5xl:  3rem;
+  --text-6xl:  3.75rem;
+
+  /* Spacing rhythm */
+  --radius-sm:  0.375rem;
+  --radius-md:  0.75rem;
+  --radius-lg:  1rem;
+  --radius-xl:  1.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 2px 8px 0 rgb(0 0 0 / 0.08), 0 0 0 1px rgb(0 0 0 / 0.04);
+  --shadow-card-hover: 0 8px 32px 0 rgb(0 0 0 / 0.14), 0 0 0 1px rgb(0 0 0 / 0.06);
+  --shadow-header: 0 1px 16px 0 rgb(0 0 0 / 0.08);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background:  #0f1117;
+    --surface:     #1a1d27;
+    --foreground:  #f1f5f9;
+    --muted:       #9ca3af;
+    --border:      #2d3142;
+    --brand-light: #1e2a3a;
   }
+}
+
+/* =====================================================
+   Tailwind Theme Bridge
+   ===================================================== */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface:    var(--surface);
+  --color-muted:      var(--muted);
+  --color-border:     var(--border);
+  --color-brand:      var(--brand);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* =====================================================
+   Base Reset & Typography
+   ===================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans, 'Inter', system-ui, sans-serif);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  min-height: 100dvh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img, video {
+  max-width: 100%;
+  display: block;
+}
+
+/* =====================================================
+   Utility Classes
+   ===================================================== */
+.section-container {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-container { padding-inline: 1.5rem; }
+}
+
+@media (min-width: 1024px) {
+  .section-container { padding-inline: 2rem; }
 }
