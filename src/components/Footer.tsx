@@ -1,21 +1,21 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { Globe, Mail, Phone, Instagram, Twitter, Facebook } from 'lucide-react';
+import { Globe, Mail, Phone, AtSign, Share2, Users } from 'lucide-react';
 
 const SOCIAL = [
   {
     label: 'Instagram',
-    icon: Instagram,
+    icon: AtSign,
     href: 'https://instagram.com',
   },
   {
     label: 'Twitter',
-    icon: Twitter,
+    icon: Share2,
     href: 'https://twitter.com',
   },
   {
     label: 'Facebook',
-    icon: Facebook,
+    icon: Users,
     href: 'https://facebook.com',
   },
 ];
