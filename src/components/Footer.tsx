@@ -1,6 +1,24 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { Globe, Mail, Phone } from 'lucide-react';
+import { Globe, Mail, Phone, Instagram, Twitter, Facebook } from 'lucide-react';
+
+const SOCIAL = [
+  {
+    label: 'Instagram',
+    icon: Instagram,
+    href: 'https://instagram.com',
+  },
+  {
+    label: 'Twitter',
+    icon: Twitter,
+    href: 'https://twitter.com',
+  },
+  {
+    label: 'Facebook',
+    icon: Facebook,
+    href: 'https://facebook.com',
+  },
+];
 
 export default function Footer() {
   const t = useTranslations('footer');
@@ -8,79 +26,136 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-zinc-900 text-zinc-300">
-      <div className="mx-auto max-w-7xl px-4 py-12">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Brand */}
-          <div>
+    <footer className="bg-zinc-950 text-zinc-300">
+      {/* Top wave separator */}
+      <div
+        className="h-1 w-full"
+        style={{
+          background:
+            'linear-gradient(90deg, var(--brand) 0%, #00a8ff 50%, var(--brand) 100%)',
+        }}
+      />
+
+      <div className="mx-auto max-w-7xl px-4 pb-10 pt-14 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          {/* ── Brand ─────────────────────────────────── */}
+          <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2">
-              <Globe className="h-7 w-7 text-[#0066CC]" />
-              <span className="text-xl font-bold text-white">İzgetour</span>
+              <Globe className="h-7 w-7 text-[var(--brand)]" />
+              <span className="text-xl font-bold tracking-tight text-white">
+                İzgetour
+              </span>
             </Link>
-            <p className="mt-3 text-sm leading-relaxed text-zinc-400">{t('tagline')}</p>
-          </div>
+            <p className="mt-4 text-sm leading-relaxed text-zinc-400">
+              {t('tagline')}
+            </p>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
-              {t('quickLinks')}
-            </h3>
-            <ul className="space-y-2">
-              {(['home', 'tours', 'flights', 'about', 'contact'] as const).map((key) => (
-                <li key={key}>
-                  <Link
-                    href={key === 'home' ? '/' : `/${key}`}
-                    className="text-sm hover:text-[#0066CC]"
-                  >
-                    {tNav(key)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
-              {t('contactUs')}
-            </h3>
-            <ul className="space-y-3">
-              <li className="flex items-center gap-2 text-sm">
-                <Mail className="h-4 w-4 shrink-0 text-[#0066CC]" />
-                <a href={`mailto:${t('email')}`} className="hover:text-[#0066CC]">
-                  {t('email')}
-                </a>
-              </li>
-              <li className="flex items-center gap-2 text-sm">
-                <Phone className="h-4 w-4 shrink-0 text-[#0066CC]" />
-                <a href={`tel:${t('phone')}`} className="hover:text-[#0066CC]">
-                  {t('phone')}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Social placeholder */}
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
-              Sosyal Medya
-            </h3>
-            <div className="flex gap-3">
-              {['Instagram', 'Twitter', 'Facebook'].map((social) => (
+            {/* Social icons */}
+            <div className="mt-6 flex gap-3">
+              {SOCIAL.map(({ label, icon: Icon, href }) => (
                 <a
-                  key={social}
-                  href="#"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-800 text-sm font-semibold text-zinc-400 transition-colors hover:bg-[#0066CC] hover:text-white"
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-700 text-zinc-400 transition-all duration-200 hover:border-[var(--brand)] hover:bg-[var(--brand)] hover:text-white"
                 >
-                  {social[0]}
+                  <Icon className="h-4 w-4" />
                 </a>
               ))}
             </div>
           </div>
+
+          {/* ── Quick Links ───────────────────────────── */}
+          <div>
+            <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-white">
+              {t('quickLinks')}
+            </h3>
+            <ul className="space-y-3">
+              {(['home', 'tours', 'flights', 'about', 'contact'] as const).map(
+                (key) => (
+                  <li key={key}>
+                    <Link
+                      href={key === 'home' ? '/' : `/${key}`}
+                      className="group flex items-center gap-2 text-sm text-zinc-400 transition-colors hover:text-white"
+                    >
+                      <span className="h-px w-4 bg-zinc-700 transition-all group-hover:w-6 group-hover:bg-[var(--brand)]" />
+                      {tNav(key)}
+                    </Link>
+                  </li>
+                ),
+              )}
+            </ul>
+          </div>
+
+          {/* ── Contact ───────────────────────────────── */}
+          <div>
+            <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-white">
+              {t('contactUs')}
+            </h3>
+            <ul className="space-y-4">
+              <li>
+                <a
+                  href={`mailto:${t('email')}`}
+                  className="group flex items-start gap-3 text-sm text-zinc-400 transition-colors hover:text-white"
+                >
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[var(--brand)]" />
+                  <span>{t('email')}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`tel:${t('phone')}`}
+                  className="group flex items-start gap-3 text-sm text-zinc-400 transition-colors hover:text-white"
+                >
+                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-[var(--brand)]" />
+                  <span>{t('phone')}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* ── Newsletter ────────────────────────────── */}
+          <div>
+            <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-white">
+              Bülten
+            </h3>
+            <p className="mb-4 text-sm text-zinc-400">
+              Yeni turlar ve fırsatlardan haberdar olun.
+            </p>
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="flex flex-col gap-2"
+            >
+              <input
+                type="email"
+                placeholder="E-posta adresiniz"
+                className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-white placeholder-zinc-500 outline-none transition-colors focus:border-[var(--brand)]"
+              />
+              <button
+                type="submit"
+                className="rounded-lg bg-[var(--brand)] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)]"
+              >
+                Abone Ol
+              </button>
+            </form>
+          </div>
         </div>
 
-        <div className="mt-10 border-t border-zinc-800 pt-6 text-center text-sm text-zinc-500">
-          © {year} İzgetour. {t('rights')}
+        {/* Bottom bar */}
+        <div className="mt-12 flex flex-col items-center gap-3 border-t border-zinc-800 pt-6 sm:flex-row sm:justify-between">
+          <p className="text-sm text-zinc-500">
+            © {year} İzgetour. {t('rights')}
+          </p>
+          <div className="flex gap-5 text-xs text-zinc-500">
+            <a href="#" className="hover:text-white transition-colors">
+              Gizlilik Politikası
+            </a>
+            <a href="#" className="hover:text-white transition-colors">
+              Kullanım Şartları
+            </a>
+          </div>
         </div>
       </div>
     </footer>
