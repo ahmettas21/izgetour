@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app';
-import { SupabaseProvider } from '../../components/auth/SupabaseProvider';
+import { SupabaseProvider } from '../components/auth/SupabaseProvider';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
