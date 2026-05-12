@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import { useTranslations } from 'next-intl';
 import { ArrowLeft, ArrowRight, Check, Loader2 } from 'lucide-react';
 
@@ -10,15 +11,26 @@ const EXTRAS = [
   { id: 'transfer', price: 350 },
 ];
 
-function StepForm({ step, form, setForm, selectedExtras, toggleExtra, t }: any) {
+type FormState = { [key: string]: string } & { name: string; email: string; phone: string };
+
+interface StepFormProps {
+  step: number;
+  form: FormState;
+  setForm: Dispatch<SetStateAction<FormState>>;
+  selectedExtras: string[];
+  toggleExtra: (id: string) => void;
+  t: (key: string) => string;
+}
+
+function StepForm({ step, form, setForm, selectedExtras, toggleExtra, t }: StepFormProps) {
   if (step === 1) {
     return (
       <div className="rounded-2xl border border-zinc-200 bg-white p-6">
         <h2 className="mb-6 text-xl font-bold text-zinc-900">{t('passengerInfo')}</h2>
         <div className="space-y-4">
-          {['name', 'email', 'phone'].map((f) => (
+          {(['name', 'email', 'phone'] as (keyof FormState)[]).map((f) => (
             <div key={f}>
-              <label className="mb-1 block text-sm font-medium text-zinc-700">{t(f)}</label>
+              <label className="mb-1 block text-sm font-medium text-zinc-700">{t(f as string)}</label>
               <input
                 value={form[f]}
                 onChange={(e) => setForm({ ...form, [f]: e.target.value })}
