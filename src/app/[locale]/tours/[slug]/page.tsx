@@ -12,6 +12,7 @@ import AncillaryManager from '@/components/Ancillary/AncillaryManager';
 import VoiceInteractiveMap from '@/components/VoiceInteractiveMap';
 import DynamicCuisineRecommender from '@/components/DynamicCuisineRecommender';
 import SustainabilityScore from '@/components/SustainabilityScore';
+import Breadcrumb from '@/components/Breadcrumb';
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -227,6 +228,14 @@ export default async function TourDetailPage({ params }: Props) {
 
   return (
     <>
+      {/* Breadcrumb */}
+      <Breadcrumb
+        items={[
+          { label: t('title'), href: '/tours' },
+          { label: title },
+        ]}
+        locale={locale as 'tr' | 'en'}
+      />
       <div className="mx-auto max-w-5xl px-4 py-8 pb-24 lg:pb-12">
         {/* Main content grid: content + sidebar */}
         <div className="lg:grid lg:grid-cols-3 lg:gap-8">

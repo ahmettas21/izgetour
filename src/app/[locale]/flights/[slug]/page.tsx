@@ -49,7 +49,14 @@ export default function FlightDetailPage() {
   });
 
   return (
-    <div className="min-h-screen bg-zinc-50">
+    <>
+      <Breadcrumb
+        items={[
+          { label: 'Uçuşlar', href: '/flights' },
+          { label: `${flight.airline} - ${flight.flightNumber}` },
+        ]}
+      />
+      <div className="min-h-screen bg-zinc-50">
       {/* Back Button */}
       <div className="mx-auto max-w-5xl px-4 pt-6">
         <Link href="/flights"
@@ -270,5 +277,6 @@ export default function FlightDetailPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

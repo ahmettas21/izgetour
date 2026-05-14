@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import { hotels } from '@/data/hotels';
 import { Check, MapPin, Star, Leaf } from 'lucide-react';
 import PredictiveTripBundler from '@/components/PredictiveTripBundler';
+import Breadcrumb from '@/components/Breadcrumb';
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -23,7 +24,15 @@ export default async function HotelDetailPage({ params }: Props) {
   const desc = locale === 'tr' ? hotel.description : hotel.descriptionEn;
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
+    <>
+      <Breadcrumb
+        items={[
+          { label: t('title'), href: '/hotels' },
+          { label: title },
+        ]}
+        locale={locale as 'tr' | 'en'}
+      />
+      <div className="mx-auto max-w-6xl px-4 py-8">
       <div className="overflow-hidden rounded-2xl bg-white shadow-lg">
         {/* Hero Image */}
         <div className="relative aspect-[21/9] overflow-hidden bg-zinc-100">
@@ -167,5 +176,6 @@ export default async function HotelDetailPage({ params }: Props) {
         </div>
       </div>
     </div>
+    </>
   );
 }
