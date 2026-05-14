@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Bell, BellOff, Clock, Shield, Users, ArrowRight } from 'lucide-react';
+import { Bell, BellOff, Clock, Shield, Users, ArrowRight, ShoppingCart } from 'lucide-react';
 import type { FlightResult } from './types';
 
 interface FlightCardProps {
@@ -195,8 +195,9 @@ export default function FlightCard({
           </div>
           <button
             onClick={() => onSelect?.(flight)}
-            className="mt-2 inline-block w-full rounded-xl bg-gradient-to-r from-primary to-primary/90 px-4 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:shadow-lg hover:scale-105 active:scale-95"
+            className="mt-2 inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[var(--brand)] to-primary px-4 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:shadow-lg hover:scale-105 active:scale-95"
           >
+            <ShoppingCart className="h-3.5 w-3.5" />
             {t('select')} →
           </button>
         </div>

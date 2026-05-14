@@ -2,10 +2,10 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import {
-  Plane,
   RefreshCw,
   Columns2,
   WifiOff,
@@ -13,6 +13,7 @@ import {
   Search,
 } from 'lucide-react';
 import { searchFlights } from '@/actions/searchFlights';
+import { MOCK_FLIGHTS } from '@/data/flights';
 import type { FlightResult, SearchParams } from '@/components/flights/types';
 import FilterPanel, { FilterState, DEFAULT_FILTERS } from '@/components/flights/FilterPanel';
 import SortSelect, { SortOption } from '@/components/flights/SortSelect';
@@ -28,6 +29,39 @@ const FlightComparePanel = dynamic(
 
 type SearchState = 'idle' | 'loading' | 'success' | 'error' | 'empty';
 type ViewMode = 'list' | 'compare';
+
+// ─── Helpers ───────────────────────────────────────────────────────────────
+
+/** Convert MOCK_FLIGHTS (Flight) to FlightResult for display */
+function toFlightResult(flight: (typeof MOCK_FLIGHTS)[number]): FlightResult {
+  return {
+    id: flight.id,
+    slug: flight.slug,
+    carrierCode: flight.airlineCode,
+    airline: flight.airline,
+    departure: flight.departure,
+    departureCode: flight.departureCode,
+    arrival: flight.arrival,
+    arrivalCode: flight.arrivalCode,
+    departureTime: flight.departureDate
+      ? `${flight.departureDate}T${flight.departureTime}:00`
+      : flight.departureTime,
+    arrivalTime: flight.departureDate
+      ? `${flight.departureDate}T${flight.arrivalTime}:00`
+      : flight.arrivalTime,
+    durationMinutes: flight.durationMinutes,
+    stops: flight.stops,
+    stopCities: flight.stopCities,
+    price: flight.price,
+    originalPrice: flight.originalPrice,
+    cabin: flight.cabinClass,
+    baggage: flight.baggage,
+    aircraft: flight.aircraft,
+    availableSeats: flight.availableSeats,
+    refundable: flight.refundable,
+    co2Emissions: flight.co2Emissions,
+  };
+}
 
 // ─── Loading Skeleton ───────────────────────────────────────────────────────
 
@@ -68,6 +102,7 @@ function FlightCardSkeleton() {
 export default function FlightSearchClient() {
   const t = useTranslations('flights');
   const params = useParams();
+  const router = useRouter();
   const locale = (params?.locale as string) ?? 'tr';
 
   // ── State ─────────────────────────────────────────────────────────────
@@ -78,6 +113,13 @@ export default function FlightSearchClient() {
   const [sortBy, setSortBy] = useState<SortOption>('price-asc');
   const [viewMode, setViewMode] = useState<ViewMode>('list');
   const [compareIds, setCompareIds] = useState<string[]>([]);
+
+  // ── Load mock flights on mount ────────────────────────────────────────
+  useEffect(() => {
+    const mockResults = MOCK_FLIGHTS.map(toFlightResult);
+    setResults(mockResults);
+    setSearchState('success');
+  }, []);
 
   // ── Persist followed IDs ───────────────────────────────────────────────
   useEffect(() => {
@@ -173,11 +215,19 @@ export default function FlightSearchClient() {
 
   const compareFlights = results.filter((f) => compareIds.includes(f.id));
 
-  // ── Handle flight select ───────────────────────────────────────────────
+  // ── Handle flight select → checkout ──────────────────────────────────
   const handleSelect = useCallback((flight: FlightResult) => {
-    console.log('Selected flight:', flight.id);
-    // TODO: navigate to booking or open detail modal
-  }, []);
+    const params = new URLSearchParams({
+      flightId: flight.id,
+      price: String(flight.price),
+      airline: flight.airline,
+      from: flight.departureCode,
+      to: flight.arrivalCode,
+      departure: flight.departureTime,
+      arrival: flight.arrivalTime,
+    });
+    router.push(`/${locale}/checkout?${params.toString()}`);
+  }, [router, locale]);
 
   // ── Render ──────────────────────────────────────────────────────────────
   return (
@@ -262,7 +312,7 @@ export default function FlightSearchClient() {
           </div>
         )}
 
-        {/* Success */}
+        {/* Success (includes mock data on mount) */}
         {searchState === 'success' && (
           <div className="animate-fade-in">
             {/* Results Header */}
@@ -358,7 +408,7 @@ export default function FlightSearchClient() {
           </div>
         )}
 
-        {/* Idle — placeholder */}
+        {/* Idle — fallback */}
         {searchState === 'idle' && (
           <div className="animate-fade-in">
             <p className="text-center text-sm text-muted-foreground">
