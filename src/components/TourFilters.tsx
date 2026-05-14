@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { useTranslations } from 'next-intl';
 import { SlidersHorizontal, ChevronDown, X } from 'lucide-react';
 
 export type FilterState = {
@@ -33,7 +32,6 @@ const DURATIONS = [
 ];
 
 export default function TourFilters({ filters, onChange, priceRange, locale }: Props) {
-  const t = useTranslations('tours');
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleCategory = (cat: string) => {

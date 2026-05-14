@@ -10,11 +10,13 @@ import TourActiveFilters from '@/components/TourActiveFilters';
 import type { FilterState } from '@/components/TourFilters';
 import type { SortOption } from '@/components/TourSortSelect';
 import type { TourItem } from './page';
-import { SearchX } from 'lucide-react';
+import { SearchX, Columns2, Leaf } from 'lucide-react';
 
 type Props = {
   tours: TourItem[];
   locale: 'tr' | 'en';
+  compareIds?: string[];
+  onToggleCompare?: (id: string) => void;
 };
 
 const DEFAULT_FILTERS: FilterState = {
@@ -25,8 +27,8 @@ const DEFAULT_FILTERS: FilterState = {
   minRating: 0,
 };
 
-export default function TourFiltersWrapper({ tours, locale }: Props) {
-  const t = useTranslations('tours');
+export default function TourFiltersWrapper({ tours, locale, compareIds = [], onToggleCompare }: Props) {
+  const _t = useTranslations('tours');
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState<SortOption>('recommended');
   const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS);
@@ -129,6 +131,16 @@ export default function TourFiltersWrapper({ tours, locale }: Props) {
           priceRange={priceRange}
         />
 
+        {/* Compare badge hint */}
+        {onToggleCompare && compareIds.length > 0 && compareIds.length < 3 && (
+          <div className="mb-3 flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm text-emerald-700">
+            <Columns2 className="h-4 w-4" />
+            {locale === 'tr'
+              ? `Karşılaştırmak için ${3 - compareIds.length} tur daha seçin veya üstteki "Karşılaştır" butonuna tıklayın.`
+              : `Select ${3 - compareIds.length} more tours to compare or click "Compare" button above.`}
+          </div>
+        )}
+
         {/* Results */}
         {filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
@@ -149,7 +161,44 @@ export default function TourFiltersWrapper({ tours, locale }: Props) {
             </p>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {filtered.map((tour) => (
-                <TourCard key={tour.id} tour={tour} locale={locale} />
+                <div key={tour.id} className="relative">
+                  {/* Sustainability badge */}
+                  {tour.sustainabilityScore && (
+                    <div className="absolute left-2 top-2 z-10 flex items-center gap-1 rounded-full bg-emerald-50/90 px-2 py-1 text-xs font-medium text-emerald-700 shadow-sm backdrop-blur-sm">
+                      <Leaf className="h-3 w-3 text-emerald-500" />
+                      <span>{tour.sustainabilityScore}</span>
+                    </div>
+                  )}
+                  {/* Compare checkbox overlay */}
+                  {onToggleCompare && (
+                    <label
+                      className={`absolute right-2 top-2 z-10 flex cursor-pointer items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium shadow-sm transition-colors ${
+                        compareIds.includes(tour.id)
+                          ? 'bg-emerald-600 text-white'
+                          : 'bg-white/90 text-zinc-600 hover:bg-white'
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={compareIds.includes(tour.id)}
+                        onChange={() => onToggleCompare(tour.id)}
+                        className="sr-only"
+                      />
+                      {compareIds.includes(tour.id) ? (
+                        <span className="flex items-center gap-1">
+                          <Columns2 className="h-3 w-3" />
+                          {locale === 'tr' ? 'Seçildi' : 'Added'}
+                        </span>
+                      ) : (
+                        <span className="flex items-center gap-1">
+                          <Columns2 className="h-3 w-3" />
+                          {locale === 'tr' ? 'Karşılaştır' : 'Compare'}
+                        </span>
+                      )}
+                    </label>
+                  )}
+                  <TourCard tour={tour} locale={locale} />
+                </div>
               ))}
             </div>
           </>

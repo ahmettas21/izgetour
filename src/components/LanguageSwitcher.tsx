@@ -1,14 +1,20 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/navigation';
 import { Globe } from 'lucide-react';
 
+// Strip locale prefix from pathname so router.replace works correctly
+function useLocalePathname() {
+  const pathname = usePathname();
+  // remove leading locale segment (e.g. "/tr/tours" -> "/tours")
+  return pathname.replace(/^\/(tr|en)/, '') || '/';
+}
+
 export default function LanguageSwitcher() {
   const locale = useLocale();
-  const t = useTranslations('nav');
   const router = useRouter();
-  const pathname = usePathname();
+  const pathname = useLocalePathname();
 
   const switchLocale = (newLocale: string) => {
     router.replace(pathname, { locale: newLocale });

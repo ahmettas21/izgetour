@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata = (): Metadata => ({
   title: 'Giriş Yap',
@@ -34,7 +35,7 @@ export default async function LoginPage() {
           
           <div className="mt-6 text-center text-sm">
             <span className="text-gray-600">{t('no_account')}</span>
-            <a href="/register" className="text-[#0066CC] font-medium hover:underline ml-1">{t('register')}</a>
+            <Link href="/register" className="text-[#0066CC] font-medium hover:underline ml-1">{t('register')}</Link>
           </div>
         </div>
       </div>

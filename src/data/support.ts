@@ -19,6 +19,8 @@ export interface WorkingHours {
 export interface QuickAction {
   id: string;
   labelKey: string;
+  label: string;
+  labelEn: string;
   message: string;
   messageEn: string;
   icon: string;
@@ -62,6 +64,8 @@ export const QUICK_ACTIONS: QuickAction[] = [
   {
     id: 'ticket',
     labelKey: 'support.quickActions.bilet',
+    label: 'Bilet Sorgula',
+    labelEn: 'Check Ticket',
     message: 'Biletimi sorgulamak istiyorum.',
     messageEn: 'I want to check my ticket.',
     icon: 'Ticket',
@@ -75,6 +79,8 @@ export const QUICK_ACTIONS: QuickAction[] = [
   {
     id: 'cancel',
     labelKey: 'support.quickActions.iptal',
+    label: 'İptal ve İade',
+    labelEn: 'Cancellation & Refund',
     message: 'İptal ve iade koşullarını öğrenmek istiyorum.',
     messageEn: 'I want to learn about cancellation policies.',
     icon: 'FileX',
@@ -88,6 +94,8 @@ export const QUICK_ACTIONS: QuickAction[] = [
   {
     id: 'reservation',
     labelKey: 'support.quickActions.rezervasyon',
+    label: 'Rezervasyon Sorgula',
+    labelEn: 'Check Reservation',
     message: 'Rezervasyonumu kontrol etmek istiyorum.',
     messageEn: 'I want to check my reservation.',
     icon: 'Search',
@@ -101,10 +109,12 @@ export const QUICK_ACTIONS: QuickAction[] = [
   {
     id: 'visa',
     labelKey: 'support.quickActions.vize',
+    label: 'Vize İşlemleri',
+    labelEn: 'Visa Procedures',
     message: 'Vize işlemleri hakkında bilgi almak istiyorum.',
     messageEn: 'I want information about visa procedures.',
     icon: 'FileText',
-    triggerText: 'Vize işlemleri hakkında bilgi almak istiyorum.',
+    triggerText: 'Vize işşemleri hakkında bilgi almak istiyorum.',
     triggerTextEn: 'I want information about visa procedures.',
     responseText:
       'Vize işlemlerimiz için lütfen seyahat edeceğiniz ülkeyi paylaşın. Ekibimiz size özel check-list hazırlayacaktır.',
@@ -144,3 +154,10 @@ export function isWithinWorkingHours(hours?: WorkingHours): boolean {
 
 // Legacy shortcut
 export const isWithinWorkingHoursShort = isWithinWorkingHours;
+
+// Aliases for named imports
+export const SUPPORT_AGENT = supportAgent;
+
+// Welcome messages
+export const WELCOME_TR = WELCOME_MESSAGE_TR;
+export const WELCOME_EN = WELCOME_MESSAGE_EN;

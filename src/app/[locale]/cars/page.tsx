@@ -7,7 +7,7 @@ export default async function CarsPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  const { locale: _locale } = await params;
   const t = await getTranslations('cars');
 
   return (

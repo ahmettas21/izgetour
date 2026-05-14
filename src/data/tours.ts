@@ -11,6 +11,10 @@ export type Tour = {
   location: string;
   rating: number;
   category?: string;
+  lat: number;
+  lng: number;
+  co2Emissions?: number;
+  sustainabilityScore?: number;
 };
 
 export const MOCK_TOURS: Tour[] = [
@@ -27,6 +31,10 @@ export const MOCK_TOURS: Tour[] = [
     location: 'Nevşehir',
     rating: 4.9,
     category: 'culture',
+    lat: 38.6606,
+    lng: 34.8263,
+    co2Emissions: 35,
+    sustainabilityScore: 88,
   },
   {
     id: '2',
@@ -41,6 +49,10 @@ export const MOCK_TOURS: Tour[] = [
     location: 'İzmir',
     rating: 4.8,
     category: 'culture',
+    lat: 37.9395,
+    lng: 27.3409,
+    co2Emissions: 28,
+    sustainabilityScore: 92,
   },
   {
     id: '3',
@@ -55,6 +67,10 @@ export const MOCK_TOURS: Tour[] = [
     location: 'Denizli',
     rating: 4.9,
     category: 'nature',
+    lat: 37.9305,
+    lng: 29.1203,
+    co2Emissions: 25,
+    sustainabilityScore: 94,
   },
   {
     id: '4',
@@ -69,6 +85,10 @@ export const MOCK_TOURS: Tour[] = [
     location: 'İstanbul',
     rating: 4.7,
     category: 'city',
+    lat: 41.0082,
+    lng: 28.9784,
+    co2Emissions: 45,
+    sustainabilityScore: 75,
   },
   {
     id: '5',
@@ -83,6 +103,10 @@ export const MOCK_TOURS: Tour[] = [
     location: 'Antalya',
     rating: 4.6,
     category: 'sea',
+    lat: 36.7726,
+    lng: 30.5750,
+    co2Emissions: 55,
+    sustainabilityScore: 70,
   },
   {
     id: '6',
@@ -97,5 +121,9 @@ export const MOCK_TOURS: Tour[] = [
     location: 'Trabzon',
     rating: 4.8,
     category: 'nature',
+    lat: 40.9128,
+    lng: 40.3023,
+    co2Emissions: 30,
+    sustainabilityScore: 90,
   },
 ];

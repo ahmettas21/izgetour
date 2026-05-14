@@ -1,8 +1,7 @@
-import FlightSearch from '@/components/FlightSearch';
-import type { Metadata } from 'next';
+'use client';
 
-export const metadata = (): Metadata => ({ title: 'Uçuşlar' });
+import FlightSearchClient from '@/components/flights/FlightSearchClient';
 
 export default function FlightsPage() {
-  return <FlightSearch />;
+  return <FlightSearchClient />;
 }

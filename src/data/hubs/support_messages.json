@@ -1,0 +1,26 @@
+{
+  "bilet": {
+    "tr": "Bilet sorgulama işlemleriniz için lütfen rezervasyon numaranızı veya T.C. kimlik numaranızı paylaşın. En kısa sürede kontrol edip size dönüş yapacağız.",
+    "en": "To check your ticket, please share your reservation number or ID number. We'll check and get back to you shortly."
+  },
+  "iptal": {
+    "tr": "İptal şartları rezervasyon türüne göre değişiklik göstermektedir. Genel olarak: Uçak biletleri için hava yolu kuralları geçerlidir — çoğu durumda uçuştan 24 saat öncesine kadar %80, 3 saat öncesine kadar %50 iade yapılır. Tur rezervasyonları için ise turun başlamasına 7 gün kalaya kadar %90, 3 gün kalaya kadar %50 iade uygulanır. Detaylı bilgi için rezervasyon numaranızı paylaşabilirsiniz.",
+    "en": "Cancellation policies vary by reservation type. Generally: For flight tickets, airline rules apply — most cases allow 80% refund up to 24 hours before, 50% up to 3 hours before departure. For tour reservations, 90% refund up to 7 days before, 50% up to 3 days before. Please share your reservation number for details."
+  },
+  "rezervasyon": {
+    "tr": "Rezervasyonunuzu sorgulamak için rezervasyon numaranızı veya kayıt olurken kullandığınız e-posta adresinizi paylaşabilir misiniz? Bu bilgiyle rezervasyonunuzun durumunu hemen kontrol edebilirim.",
+    "en": "To check your reservation, could you please share your reservation number or the email address you used during booking? With this information, I can immediately check the status of your reservation."
+  },
+  "vize": {
+    "tr": "Vize işlemleri için öncelikle seyahat edeceğiniz ülkeyi ve pasaport türünüzü belirtmeniz gerekmektedir. Türk pasaportundan Schengen ülkelerine vize başvurusu için gerekli belgeler: başvuru formu, biyometrik fotoğraf, seyahat sağlık sigortası, finansal kanıt belgeleri ve uçak/otel rezervasyonlarıdır. Detaylı bilgi için seyahat danışmanlığımızla iletişime geçebilirsiniz.",
+    "en": "For visa procedures, you first need to specify the country you're traveling to and your passport type. For Turkish passport holders applying for Schengen visas, required documents include: application form, biometric photo, travel health insurance, financial proof, and flight/hotel reservations. For more details, you can contact our travel consultancy."
+  },
+  "offline": {
+    "tr": "Merhaba! Şu an mesai saatleri dışındayız. Hafta içi 09:00-18:00, Cumartesi 09:00-14:00 saatleri arasında bize ulaşabilirsiniz. Mesajınızı bırakın, en kısa sürede size dönüş yapalım.",
+    "en": "Hello! We're currently outside of working hours. You can reach us on weekdays 09:00-18:00, Saturday 09:00-14:00. Leave us a message and we'll get back to you shortly."
+  },
+  "welcome": {
+    "tr": "Merhaba! Size nasıl yardımcı olabilirim?",
+    "en": "Hello! How can I help you?"
+  }
+}

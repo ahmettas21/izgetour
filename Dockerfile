@@ -1,47 +1,46 @@
-# Stage 1: Install dependencies
-FROM node:22-alpine AS deps
-WORKDIR /app
-
-COPY package.json package-lock.json* ./
-RUN npm ci --only=production
-
-# Stage 2: Build the app
+# =====================
+# Builder Stage
+# =====================
 FROM node:22-alpine AS builder
+
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
-RUN npm ci
+# Copy package files
+COPY package.json package-lock.json* yarn.lock* pnpm-lock.yaml* ./
 
+RUN corepack enable && pnpm install --frozen-lockfile 2>/dev/null || npm install
+
+# Copy patches BEFORE build so patch-package postinstall runs
+COPY patches ./patches
 COPY . .
 
-ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build
+# Run postinstall to apply patches, then build
+RUN npm run postinstall 2>/dev/null; npm run build
 
-# Stage 3: Production runner
+# =====================
+# Runner Stage
+# =====================
 FROM node:22-alpine AS runner
+
 WORKDIR /app
 
 ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3000
+ENV NEXT_CACHE_IMAGES_DIR=/tmp/next-cache/images
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs && \
+    mkdir -p /tmp/next-cache/images && \
+    chmod -R 777 /tmp/next-cache
 
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
-
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
-# Automatically leverage output traces to reduce image size
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
+COPY --from=builder /app/next.config.ts ./
+COPY --from=builder /app/src ./src
 
 EXPOSE 3000
+USER nextjs
 
-ENV PORT=3000
-ENV HOSTNAME="0.0.0.0"
-
-CMD ["node", "server.js"]
+CMD npx next start -p $PORT

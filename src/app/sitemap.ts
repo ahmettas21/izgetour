@@ -1,4 +1,3 @@
-import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 
 const BASE_URL = 'https://izgetour.com';

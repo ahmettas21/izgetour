@@ -2,8 +2,8 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import {
-  MessageCircle, Send, X, Bot, User, Sparkles,
-  Plane, Hotel, Map, Loader2, ChevronDown,
+  MessageCircle, Send, X, Bot, Sparkles,
+  Loader2,
 } from 'lucide-react';
 
 /* ------------------------------------------------------------------ */

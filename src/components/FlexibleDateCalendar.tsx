@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import {
   Calendar, ChevronLeft, ChevronRight, Plane,
-  TrendingDown, TrendingUp, Info,
+  TrendingDown, Info,
 } from 'lucide-react';
 
 /* ------------------------------------------------------------------ */

@@ -2,7 +2,8 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { hotels } from '@/data/hotels';
-import { Check, MapPin, Star } from 'lucide-react';
+import { Check, MapPin, Star, Leaf } from 'lucide-react';
+import PredictiveTripBundler from '@/components/PredictiveTripBundler';
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -39,6 +40,12 @@ export default async function HotelDetailPage({ params }: Props) {
                 <MapPin className="h-4 w-4" />
                 {locale === 'tr' ? 'Türkiye' : 'Turkey'}
               </span>
+              {hotel.sustainabilityScore && (
+                <span className="flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700">
+                  <Leaf className="h-3.5 w-3.5 text-emerald-500" />
+                  {hotel.sustainabilityScore}
+                </span>
+              )}
             </div>
           </div>
         </div>
@@ -75,8 +82,40 @@ export default async function HotelDetailPage({ params }: Props) {
                         <div className="mt-1 flex flex-wrap gap-3 text-sm text-zinc-500">
                           <span>🧑 {room.maxGuests} {t('adults')}</span>
                           <span>🍽️ {board}</span>
-                        </div>
-                      </div>
+</div>
+
+            {/* Predictive Trip Bundler — hotel + transfer + tour bundle offers */}
+            <div className="mt-10">
+              <PredictiveTripBundler
+                flight={{
+                  id: hotel.id,
+                  slug: hotel.slug,
+                  airline: locale === 'tr' ? hotel.title : hotel.titleEn,
+                  airlineCode: hotel.title.substring(0, 2).toUpperCase(),
+                  departure: locale === 'tr' ? 'Havalimanı' : 'Airport',
+                  departureCode: 'APT',
+                  departureTime: '09:00',
+                  arrival: hotel.city,
+                  arrivalCode: hotel.city.substring(0, 3).toUpperCase(),
+                  arrivalTime: '12:00',
+                  price: hotel.price,
+                  originalPrice: Math.round(hotel.price * 1.25),
+                  duration: '3 saat',
+                  durationMinutes: 180,
+                  stops: 0,
+                  stopCities: [],
+                  aircraft: locale === 'tr' ? 'Konforlu Otel' : 'Comfortable Hotel',
+                  cabinClass: 'economy',
+                  departureDate: '2026-06-15',
+                  baggage: locale === 'tr' ? 'Hersey Dahil' : 'All Inclusive',
+                  refundable: true,
+                  availableSeats: 10,
+                  co2Emissions: 250,
+                }}
+                locale={locale as 'tr' | 'en'}
+              />
+            </div>
+          </div>
                       <div className="flex shrink-0 items-center gap-4">
                         <div className="text-right">
                           <div className="text-xl font-bold text-[#0066CC]">₺{room.price.toLocaleString()}</div>

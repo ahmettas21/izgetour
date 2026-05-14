@@ -3,12 +3,19 @@
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
+import ThemeToggle from './ThemeToggle';
 import { Menu, X, Globe } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
+// Strip locale prefix so pathname comparisons work correctly
+function useLocalePathname() {
+  const pathname = usePathname();
+  return pathname.replace(/^\/(tr|en)/, '') || '/';
+}
+
 export default function Header() {
   const t = useTranslations('nav');
-  const pathname = usePathname();
+  const pathname = useLocalePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -69,6 +76,7 @@ export default function Header() {
 
         {/* Right side */}
         <div className="flex items-center gap-3">
+          <ThemeToggle />
           <LanguageSwitcher />
           <Link
             href="/login"

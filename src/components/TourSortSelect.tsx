@@ -1,6 +1,5 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { ArrowUpDown } from 'lucide-react';
 
 export type SortOption = 'recommended' | 'price-asc' | 'price-desc' | 'rating-desc' | 'duration-asc';
@@ -20,8 +19,6 @@ const OPTIONS: { value: SortOption; tr: string; en: string }[] = [
 ];
 
 export default function TourSortSelect({ value, onChange, locale }: Props) {
-  const t = useTranslations('tours');
-
   return (
     <div className="flex items-center gap-2">
       <ArrowUpDown className="h-4 w-4 text-zinc-400" />

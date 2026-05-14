@@ -1,0 +1,1 @@
+2026-05-09 15:41 UTC - Hotel module components added (HotelCard, HotelFilters, listing and detail pages). PLAN.md updated with status ✅ Tamamlandı and new AI-powered Hotel Recommendation Engine added to Yeni Bulunan Modüller. Sync logged to NotebookLM wiki (placeholder).

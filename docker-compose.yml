@@ -1,26 +1,19 @@
+version: '3.8'
+
 services:
-  nextjs:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: izgetour-nextjs
+  izgetour:
+    build: .
+    container_name: izgetour
     restart: unless-stopped
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
+      - PORT=3000
       - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
-      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
-    env_file:
-      - .env.local
+    networks:
+      - izgetour-net
 
-  nginx:
-    image: nginx:alpine
-    container_name: izgetour-nginx
-    restart: unless-stopped
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-    depends_on:
-      - nextjs
+networks:
+  izgetour-net:
+    driver: bridge

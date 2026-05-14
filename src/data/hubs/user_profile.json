@@ -1,0 +1,110 @@
+{
+  "user": {
+    "name": "Ahmet Yılmaz",
+    "email": "ahmet@example.com",
+    "phone": "+90 532 123 4567",
+    "avatar": "/avatars/default.png",
+    "memberSince": "2025-03-15"
+  },
+  "points": {
+    "total": 2450,
+    "tlValue": 490,
+    "nextTier": "Gümüş",
+    "nextTierPoints": 3000,
+    "progress": 0.82,
+    "history": [
+      { "date": "2026-04-20", "action": "Kapadokya Turu", "points": 350 },
+      { "date": "2026-03-10", "action": "İstanbul-Paris Uçuşu", "points": 200 },
+      { "date": "2026-02-15", "action": "Hediye Puan Kullanımı", "points": -150 },
+      { "date": "2026-01-05", "action": "Antalya Otel Konaklama", "points": 500 }
+    ]
+  },
+  "bookings": [
+    {
+      "id": "BK-001",
+      "type": "flight",
+      "title": "İstanbul → Paris",
+      "date": "2026-06-15",
+      "status": "Bekliyor",
+      "amount": 4250,
+      "currency": "TL",
+      "passengers": 2
+    },
+    {
+      "id": "BK-002",
+      "type": "tour",
+      "title": "Kapadokya Balon Turu",
+      "date": "2026-05-28",
+      "status": "Bekliyor",
+      "amount": 3200,
+      "currency": "TL",
+      "passengers": 1
+    },
+    {
+      "id": "BK-003",
+      "type": "hotel",
+      "title": "Hilton Bodrum",
+      "date": "2026-05-10",
+      "status": "Tamamlandı",
+      "amount": 8750,
+      "currency": "TL",
+      "passengers": 2
+    },
+    {
+      "id": "BK-004",
+      "type": "flight",
+      "title": "Ankara → İzmir",
+      "date": "2026-04-01",
+      "status": "İptal Edildi",
+      "amount": 1200,
+      "currency": "TL",
+      "passengers": 1
+    },
+    {
+      "id": "BK-005",
+      "type": "tour",
+      "title": "Efes Antik Kent Turu",
+      "date": "2026-03-20",
+      "status": "Tamamlandı",
+      "amount": 1800,
+      "currency": "TL",
+      "passengers": 3
+    }
+  ],
+  "visas": [
+    {
+      "id": "VS-001",
+      "country": "Fransa",
+      "type": "Schengen",
+      "applicationDate": "2026-04-10",
+      "status": "İnceleniyor",
+      "steps": [
+        { "label": "Başvuru Alındı", "date": "2026-04-10", "completed": true },
+        { "label": "Evrak İncelemesi", "date": "2026-04-12", "completed": true },
+        { "label": "Mülakat", "date": "2026-04-18", "completed": true },
+        { "label": "Karar Aşaması", "date": "2026-04-22", "completed": false }
+      ],
+      "documents": {
+        "uploaded": ["Pasaport", "Banka Hesap Özeti", "Uçak Bileti"],
+        "pending": ["Otel Rezervasyonu"]
+      }
+    },
+    {
+      "id": "VS-002",
+      "country": "ABD",
+      "type": "B1/B2 Turist",
+      "applicationDate": "2026-02-01",
+      "status": "Onaylandı",
+      "steps": [
+        { "label": "Başvuru Alındı", "date": "2026-02-01", "completed": true },
+        { "label": "Evrak İncelemesi", "date": "2026-02-05", "completed": true },
+        { "label": "Mülakat", "date": "2026-02-15", "completed": true },
+        { "label": "Onaylandı", "date": "2026-02-20", "completed": true }
+      ],
+      "documents": {
+        "uploaded": ["Pasaport", "Banka Hesap Özeti", "İş Mektubu", "Seyahat Planı"],
+        "pending": []
+      }
+    }
+  ]
+}

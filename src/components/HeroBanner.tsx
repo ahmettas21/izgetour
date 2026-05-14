@@ -2,8 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/navigation';
-import { Search, Phone, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+import MoodDestinationPicker from '@/components/MoodDestinationPicker';
+
+interface HeroBannerProps {
+  locale?: string;
+}
 
 const HERO_IMAGES = [
   'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1920&q=80',
@@ -11,8 +15,9 @@ const HERO_IMAGES = [
   'https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?w=1920&q=80',
 ];
 
-export default function HeroBanner() {
+export default function HeroBanner({ locale = 'tr' }: HeroBannerProps) {
   const t = useTranslations('hero');
+  const isTr = locale === 'tr';
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -51,22 +56,9 @@ export default function HeroBanner() {
           {t('subtitle')}
         </p>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-wrap items-center gap-4">
-          <Link
-            href="/tours"
-            className="group flex items-center gap-2 rounded-full bg-blue-600 px-8 py-3 text-white shadow-lg transition-all hover:bg-blue-700 hover:shadow-xl"
-          >
-            <Search className="h-5 w-5" />
-            <span>{t('ctaTours')}</span>
-          </Link>
-          <a
-            href="tel:+905555555555"
-            className="flex items-center gap-2 rounded-full border-2 border-white/30 bg-white/10 px-8 py-3 text-white backdrop-blur-sm transition-all hover:bg-white/20"
-          >
-            <Phone className="h-5 w-5" />
-            <span>{t('ctaCall')}</span>
-          </a>
+        {/* MoodDestinationPicker — CTA */}
+        <div className="w-full max-w-3xl">
+          <MoodDestinationPicker locale={isTr ? 'tr' : 'en'} />
         </div>
 
         {/* Slide indicators */}
