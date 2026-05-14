@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "echo \"No tests configured yet\" && exit 0",
     "ci": "npm run lint && npm run typecheck && npm run build",
-    "postinstall": "patch-package"
+    "postinstall": "grep -q \"if (value == null) return false;\" node_modules/next/dist/esm/lib/client-and-server-references.js || sed -i \"s/export function isServerReference(value) {/export function isServerReference(value) {\\n    if (value == null) return false;/\" node_modules/next/dist/esm/lib/client-and-server-references.js; grep -q \"if (value == null) return false;\" node_modules/next/dist/lib/client-and-server-references.js || sed -i \"/function isServerReference(value) {/a\\    if (value == null) return false;\" node_modules/next/dist/lib/client-and-server-references.js"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",
