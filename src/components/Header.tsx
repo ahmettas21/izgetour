@@ -30,6 +30,8 @@ export default function Header() {
     { href: '/', key: 'home' },
     { href: '/tours', key: 'tours' },
     { href: '/flights', key: 'flights' },
+    { href: '/blog', key: 'blog' },
+    { href: '/docs', key: 'docs' },
     { href: '/about', key: 'about' },
     { href: '/contact', key: 'contact' },
   ];

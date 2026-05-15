@@ -79,7 +79,7 @@ export default function Footer() {
               {t('quickLinks')}
             </h3>
             <ul className="space-y-3">
-              {(['home', 'tours', 'flights', 'about', 'contact'] as const).map(
+              {(['home', 'tours', 'flights', 'blog', 'about', 'contact'] as const).map(
                 (key) => (
                   <li key={key}>
                     <Link

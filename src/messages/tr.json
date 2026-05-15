@@ -10,7 +10,9 @@
     "about": "Hakkımızda",
     "login": "Giriş Yap",
     "dashboard": "Panel",
-    "wishlist": "Favoriler"
+    "wishlist": "Favoriler",
+    "blog": "Blog",
+    "docs": "Döküman"
   },
   "hero": {
     "title": "Türkiye'yi Keşfedin",

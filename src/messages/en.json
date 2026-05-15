@@ -10,7 +10,9 @@
     "about": "About Us",
     "login": "Login",
     "dashboard": "Dashboard",
-    "wishlist": "Wishlist"
+    "wishlist": "Wishlist",
+    "blog": "Blog",
+    "docs": "Docs"
   },
   "hero": {
     "title": "Discover Turkey",
