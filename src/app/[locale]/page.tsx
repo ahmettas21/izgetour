@@ -1,7 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import HeroBanner from '@/components/HeroBanner';
-import SmartSearch from '@/components/SmartSearch';
 import TourCard from '@/components/TourCard';
 import HotelCard from '@/components/HotelCard';
 import FlightCard from '@/components/flights/FlightCard';
@@ -46,18 +45,7 @@ export default async function HomePage({
       <HeroBanner locale={locale as 'tr' | 'en'} />
 
       {/* ═══════════════════════════════════════════════════════
-         2. SEARCH MODULE — uçak / otel / tur arama
-         ═══════════════════════════════════════════════════════ */}
-      <div className="relative z-20">
-        {/* Hero'dan yumuşak geçiş */}
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/10 to-transparent pointer-events-none -mt-32" />
-        <section className="py-14 sm:py-20 lg:py-22">
-          <SmartSearch />
-        </section>
-      </div>
-
-      {/* ═══════════════════════════════════════════════════════
-         3. POPULAR TOURS — en çok satan turlar
+         2. POPULAR TOURS — en çok satan turlar
          ═══════════════════════════════════════════════════════ */}
       <section className="bg-gradient-to-b from-white via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800/50 py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -102,7 +90,7 @@ export default async function HomePage({
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-         4. POPULAR HOTELS
+         3. POPULAR HOTELS
          ═══════════════════════════════════════════════════════ */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
         {/* Header */}
@@ -147,7 +135,7 @@ export default async function HomePage({
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-         5. POPULAR FLIGHTS
+         4. POPULAR FLIGHTS
          ═══════════════════════════════════════════════════════ */}
       <section className="bg-gray-50 dark:bg-gray-800/50 py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -195,7 +183,7 @@ export default async function HomePage({
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-         6. MOOD DESTINATION PICKER — ilham ver
+         5. MOOD DESTINATION PICKER — ilham ver
          ═══════════════════════════════════════════════════════ */}
       <section className="bg-gradient-to-b from-[var(--brand-light)] via-white to-white dark:from-[var(--brand)]/10 dark:via-gray-900 dark:to-gray-900 py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -214,7 +202,7 @@ export default async function HomePage({
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-         7. AI TRAVEL CONCIERGE — canlı sohbet
+         6. AI TRAVEL CONCIERGE — canlı sohbet
          ═══════════════════════════════════════════════════════ */}
       <section className="py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -223,7 +211,7 @@ export default async function HomePage({
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-         8. TRUST FEATURES — güven / destek / kalite
+         7. TRUST FEATURES — güven / destek / kalite
          ═══════════════════════════════════════════════════════ */}
       <Features />
     </>

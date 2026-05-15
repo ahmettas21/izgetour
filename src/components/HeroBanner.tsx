@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { ChevronDown } from 'lucide-react';
+import SmartSearchContainer from '@/components/SmartSearchContainer';
 
 interface HeroBannerProps {
   locale?: string;
@@ -16,7 +16,6 @@ const HERO_IMAGES = [
 
 export default function HeroBanner({ locale = 'tr' }: HeroBannerProps) {
   const t = useTranslations('hero');
-  const isTr = locale === 'tr';
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -27,7 +26,7 @@ export default function HeroBanner({ locale = 'tr' }: HeroBannerProps) {
   }, []);
 
   return (
-    <section className="relative h-[70vh] min-h-[500px] overflow-hidden sm:h-[85vh] sm:min-h-[600px]">
+    <section className="relative min-h-[600px] overflow-hidden sm:min-h-[700px] lg:min-h-[750px]">
       {/* Background images */}
       {HERO_IMAGES.map((src, i) => (
         <div
@@ -43,20 +42,28 @@ export default function HeroBanner({ locale = 'tr' }: HeroBannerProps) {
       ))}
 
       {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 dark:from-black/80 dark:via-black/60 dark:to-black/80" />
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 to-transparent dark:from-blue-900/50" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80 dark:from-black/90 dark:via-black/70 dark:to-black/90" />
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-transparent dark:from-blue-900/40" />
 
       {/* Content */}
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
-        <h1 className="mb-4 text-4xl font-bold tracking-tight text-white md:text-6xl lg:text-7xl">
-          {t('title')}
-        </h1>
-        <p className="mb-8 max-w-2xl text-lg text-white/80 md:text-xl">
-          {t('subtitle')}
-        </p>
+      <div className="relative z-10 flex min-h-[600px] flex-col items-center justify-center px-4 sm:min-h-[700px] lg:min-h-[750px]">
+        {/* Text */}
+        <div className="mb-8 text-center sm:mb-10">
+          <h1 className="mb-3 text-3xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
+            {t('title')}
+          </h1>
+          <p className="mx-auto max-w-2xl text-base text-white/80 md:text-lg">
+            {t('subtitle')}
+          </p>
+        </div>
 
-        {/* Slide indicators */}
-        <div className="absolute bottom-6 flex gap-2">
+        {/* Search form — hero'nun göbeğinde */}
+        <div className="w-full max-w-4xl">
+          <SmartSearchContainer />
+        </div>
+
+        {/* Slide indicators — search'in altına */}
+        <div className="mt-10 flex gap-2">
           {HERO_IMAGES.map((_, i) => (
             <button
               key={i}
@@ -68,11 +75,6 @@ export default function HeroBanner({ locale = 'tr' }: HeroBannerProps) {
             />
           ))}
         </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-14 left-1/2 -translate-x-1/2 animate-bounce">
-        <ChevronDown className="h-6 w-6 text-white/60" />
       </div>
     </section>
   );
