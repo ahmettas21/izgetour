@@ -7,9 +7,10 @@ import MoodDestinationPickerClient from '@/components/MoodDestinationPickerClien
 import TourCard from '@/components/TourCard';
 import HotelCard from '@/components/HotelCard';
 import FlightCard from '@/components/flights/FlightCard';
+import type { FlightResult } from '@/components/flights/types';
 import { MOCK_TOURS } from '@/data/tours';
 import { hotels as MOCK_HOTELS } from '@/data/hotels';
-import { MOCK_FLIGHTS } from '@/data/flights';
+import { MOCK_FLIGHTS, type Flight } from '@/data/flights';
 import type { Metadata } from 'next';
 import { ArrowRight } from 'lucide-react';
 
@@ -17,6 +18,15 @@ export const metadata = (): Metadata => ({
   title: 'İzgetour – Türkiye Turizm Platformu',
   description: "Türkiye'nin önde gelen turizm platformu.",
 });
+
+/** Adapt Flight (legacy mock) → FlightResult (unified) */
+function toFlightResult(f: Flight): FlightResult {
+  return {
+    ...f,
+    carrierCode: f.airlineCode,
+    cabin: f.cabinClass as FlightResult['cabin'],
+  };
+}
 
 export default async function HomePage({
   params,
@@ -170,14 +180,10 @@ export default async function HomePage({
 
         {/* Flight grid */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {MOCK_FLIGHTS.slice(0, 3).map((flight) => (
-            <FlightCard
-              key={flight.id}
-              flight={flight}
-              isFollowed={false}
-              onToggleFollow={() => {}}
-            />
-          ))}
+          {MOCK_FLIGHTS.slice(0, 3).map((flight) => {
+              const adapted = toFlightResult(flight);
+              return <FlightCard key={flight.id} flight={adapted} isFollowed={false} onToggleFollow={() => {}} />;
+          })}
         </div>
 
         {/* Bottom CTA */}
