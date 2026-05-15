@@ -28,9 +28,9 @@ export default function Features() {
   const t = useTranslations('features');
 
   return (
-    <section className="bg-gray-50 py-16 dark:bg-gray-800/50">
+    <section className="bg-gray-50 py-14 sm:py-20 lg:py-24 dark:bg-gray-800/50">
       <div className="mx-auto max-w-6xl px-4">
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map(({ key, icon: Icon, color, bg }) => (
             <div
               key={key}
@@ -44,7 +44,7 @@ export default function Features() {
               <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
                 {t(`${key}.title`)}
               </h3>
-              <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+              <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">
                 {t(`${key}.desc`)}
               </p>
             </div>

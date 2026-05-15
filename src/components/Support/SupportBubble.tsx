@@ -6,7 +6,7 @@ import { useChatStore } from '@/store/useChatStore';
 
 const ChatWindow = dynamic(() => import('./ChatWindow'), {
   ssr: false,
-  loading: () => null,
+  loading: () => <div className="flex h-96 items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-4 border-[var(--brand)] border-t-transparent" /></div>,
 });
 
 export default function SupportBubble() {
@@ -37,7 +37,7 @@ export default function SupportBubble() {
       {isOpen && <ChatWindow locale="tr" onClose={closeChat as () => void} />}
       <button
         onClick={handleToggle}
-        aria-label="Canlı Yardım"
+        aria-label="Canli Yardim"
         className={`
           fixed z-50 flex items-center justify-center rounded-full
           shadow-[0_4px_20px_rgba(0,0,0,0.15)]
@@ -48,7 +48,7 @@ export default function SupportBubble() {
           ${
             isOpen
               ? 'bg-[var(--muted)] text-white rotate-0'
-              : 'bg-[var(--brand)] text-white'
+              : 'bg-[var(--brand)] dark:bg-[var(--turquoise-600)] text-white'
           }
         `}
       >

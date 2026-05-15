@@ -2,8 +2,9 @@
 
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
-import { MapPin, Star, Clock } from 'lucide-react';
+import { MapPin, Star, Clock, Heart } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { useWishlist } from '@/hooks/useWishlist';
 
 type Tour = {
   id: string;
@@ -26,8 +27,10 @@ type Props = {
 
 export default function TourCard({ tour, locale }: Props) {
   const t = useTranslations('tours');
+  const { isWishlisted, toggleWishlist } = useWishlist();
   const title = locale === 'tr' ? tour.title : tour.titleEn;
   const description = locale === 'tr' ? tour.description : tour.descriptionEn;
+  const saved = isWishlisted(tour.id, 'tour');
 
   return (
     <Link href={`/tours/${tour.slug}`} className="group block h-full">
@@ -58,7 +61,7 @@ export default function TourCard({ tour, locale }: Props) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
           {/* Rating badge */}
-          <div className="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-white/95 px-2.5 py-1 text-xs font-bold text-zinc-800 shadow-sm backdrop-blur-sm">
+          <div className="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-white/95 px-2.5 py-1 text-xs font-bold text-zinc-800 shadow-sm backdrop-blur-sm dark:bg-zinc-800/95 dark:text-zinc-200">
             <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
             {tour.rating.toFixed(1)}
           </div>
@@ -68,6 +71,19 @@ export default function TourCard({ tour, locale }: Props) {
             <Clock className="h-3 w-3" />
             {tour.duration} {t('days')}
           </div>
+
+          {/* Wishlist button */}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleWishlist({ id: tour.id, type: 'tour', title: tour.title, titleEn: tour.titleEn, image: tour.image, price: tour.price, slug: tour.slug });
+            }}
+            className="absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-sm backdrop-blur-sm transition-all hover:scale-110 dark:bg-zinc-800/90"
+            aria-label={saved ? 'Remove from wishlist' : 'Add to wishlist'}
+          >
+            <Heart className={`h-4 w-4 transition-colors ${saved ? 'fill-red-500 text-red-500' : 'text-zinc-400 dark:text-zinc-500'}`} />
+          </button>
         </div>
 
         {/* Content */}

@@ -1,11 +1,13 @@
-import { Suspense, lazy } from 'react';
+import dynamic from 'next/dynamic';
+import React from 'react';
 
-const SupportBubble = lazy(() => import('./Support/SupportBubble'));
+const SupportBubble = dynamic(
+  () => import('./Support/SupportBubble'),
+  {
+    loading: () => React.createElement('div', { className: 'fixed bottom-6 right-6 z-50' }, null),
+  }
+);
 
 export default function LiveSupportWrapper() {
-  return (
-    <Suspense fallback={null}>
-      <SupportBubble />
-    </Suspense>
-  );
+  return <SupportBubble />;
 }

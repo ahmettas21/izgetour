@@ -8,48 +8,47 @@
 
 ## Aktif Session
 OpenCode tmux: `izge-oc` (yuxor/claude-sonnet-4-6)
-Session: ses_1dbce246dffegTvPR6olX0vEgR (Build agent)
+Session: ses_1d6e69841ffeREwp94n7XyKpz0 (Build agent)
 
-## Kodlama Sırası
-1. Design System — CSS variables, Tailwind config, renk paleti, font
-2. FlightSearch komple yeniden yazma — yolcu seçimi, cabin class, trip type
-3. SmartSearch güncelleme — flight tab
-4. Filtre sayfaları — tours, hotels, flights (mock data)
-5. Bug fix'ler — INSUFFICIENT_PATH, $$typeof, SW cache
-6. Dark mode entegrasyonu
+## Build Status
+✅ TypeScript (tsc --noEmit): temiz
+✅ Next.js build: başarılı (27 route)
+✅ Docker: izgetour:latest çalışıyor (port 3000)
 
-## Mevcut Hatalar
-- INSUFFICIENT_PATH (browser console) → next-intl locale çözümlemesi
-- $$typeof digest 406916464 → SupportBubble/ChatWindow null render
-- SW.js "addAll failed" → service worker cache hatası
+## Yapılan İşler (✅)
+
+### Kritik Düzeltmeler (1-4)
+- ✅ `--brand`, `--brand-dark`, `--brand-light` globals.css:root'da tanımlı
+- ✅ Hero-SmartSearch-Features-MoodDestinationPicker sırası düzeltildi
+- ✅ SupportBubble/ChatWindow: loading spinner eklendi, null render fix
+- ✅ Footer linkleri locale-aware (next-intl Link ile)
+
+### Tasarım İyileştirmeleri (5-7)
+- ✅ Section spacing: `py-14 sm:py-20 lg:py-24` standardize
+- ✅ Features grid: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`
+- ✅ EN çevirileri düzeltildi (cabin_economy, cabin_business vb.)
+
+### Yeni Özellikler (8-11)
+- ✅ Wishlist sayfası: `/tr/wishlist`
+- ✅ Breadcrumb: tours/hotels/flights detay sayfalarında
+- ✅ Recently Viewed: Footer'da gösteriliyor (localStorage, 5 ürün)
+- ✅ Privacy & Terms sayfaları oluşturuldu
+- ✅ error.tsx özelleştirildi (brand renkleri, gradient bg)
+- ✅ not-found.tsx oluşturuldu (404)
+
+## Hala Yapılacaklar
+- ⬜ Dark mode tutarlılık: HeroBanner, MoodDestinationPickerClient, TourCard, HotelCard, FlightCard - `dark:` class'ları
+- ⬜ Social media linkleri: placeholder (#) varsa İzgetour profillerine yönlendir
+- ⬜ FlightCard/Breadcrumb entegrasyon kontrolü
+
+## Mevcut Hatalar (Takip)
+- INSUFFICIENT_PATH (browser console) → next-intl locale çözümlemesi (orta öncelik)
+- SW.js "addAll failed" → service worker cache hatası (düşük öncelik)
 
 ## Deploy
-Build: npm run build → sudo docker build → sudo docker run
 ```
 NODE_OPTIONS="--max-old-space-size=4096" npx next build
 sudo docker build -t izgetour:latest .
 sudo docker stop izgetour && sudo docker rm izgetour
 sudo docker run -d --name izgetour --restart unless-stopped -p 3000:3000 izgetour:latest
 ```
-
-## Kurallar
-- git push YOK
-- Secret/credential ASLA
-- Mock data kullan
-
-## Run 2026-05-14 23:40 UTC
-✅ TypeScript clean (0 errors)
-✅ Build successful (68 pages)
-✅ Docker container running (localhost:3000)
-✅ All pages return 200 (tr: /, /tours, /hotels, /flights)
-🔧 Fixes applied:
-  - Breadcrumb import added to flights/[slug]/page.tsx
-  - FlightResult type aligned (removed FlightOffer, seatsLeft → availableSeats)
-  - CabinClass import fixed in searchFlights.ts
-  - Duplicate properties removed (availableSeats x2)
-  - rawOffer removed from FlightResult
-  - flightNumber → airlineCode+slug construct
-  - seatsLeft removed from flights.ts mock data
-  - refundable restored after cleanup
-  - FlightComparePanel simplified to FlightResult only
-  - FlightCardClient rewritten with FlightResult type

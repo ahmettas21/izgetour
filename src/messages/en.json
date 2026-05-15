@@ -9,7 +9,8 @@
     "contact": "Contact",
     "about": "About Us",
     "login": "Login",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "wishlist": "Wishlist"
   },
   "hero": {
     "title": "Discover Turkey",
@@ -204,6 +205,8 @@
     "contactUs": "Contact Us",
     "email": "info@izgetour.com",
     "phone": "+90 212 555 0123",
+    "recentlyViewed": "Recently Viewed",
+    "noRecent": "No recently viewed items",
     "rights": "All rights reserved."
   },
   "contact": {
@@ -259,8 +262,8 @@
     "child": "Child",
     "infant": "Infant",
     "cabinClass": "Cabin Class",
-    "cabin_economy": "Economy",
-    "cabin_business": "Business",
+    "cabin_economy": "Economy Class",
+    "cabin_business": "Business Class",
     "cabin_first": "First Class",
     "done": "Done",
     "searchFlights": "Search Flights",
@@ -447,7 +450,7 @@
         "placeholderTitleTr": "e.g. Cappadocia Balloon Tour",
         "placeholderTitleEn": "e.g. Cappadocia Balloon Tour",
         "placeholderDescTr": "Detailed description of the tour...",
-        "placeholderDescEn": "Detailed description of the tour...",
+        "placeholderDescEn": "A detailed description of the tour...",
         "catCulture": "Culture",
         "catNature": "Nature",
         "catSea": "Sea",
@@ -462,7 +465,7 @@
         "noDays": "No days added yet",
         "dayLabel": "Day {n}",
         "placeholderDayTitleTr": "Day title (TR)",
-        "placeholderDayTitleEn": "Day title (EN)",
+        "placeholderDayTitleEn": "Day title (English)",
         "activities": "Activities",
         "placeholderActivity": "Activity description",
         "addActivity": "Add Activity",
@@ -509,7 +512,7 @@
       }
     },
     "adminDashboard": "Admin Dashboard",
-    "adminDashboardDesc": "İzge Tour admin control panel",
+    "adminDashboardDesc": "Izge Tour admin control panel",
     "quickActions": "Quick Actions",
     "newTourDesc": "Create a new tour step by step",
     "viewBookings": "View Bookings",
@@ -727,5 +730,46 @@
     "maxLegs": "Maximum 6 flights",
     "remove": "Remove",
     "perPerson": "per person"
+  },
+  "wishlist": {
+    "title": "My Wishlist",
+    "count": "{n} saved items",
+    "empty": "No favorites yet",
+    "emptyDesc": "Save tours, hotels, or flights you like here.",
+    "explore": "Explore Tours",
+    "view": "View",
+    "remove": "Remove",
+    "tour": "Tour",
+    "hotel": "Hotel",
+    "flight": "Flight"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "subtitle": "The page you are looking for does not exist or may have been moved.",
+    "goHome": "Go to Homepage"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "At Izgetour, we care about the privacy of your personal data. This policy explains what information we collect, how we use it, and how we protect it.",
+    "h1": "Information We Collect",
+    "p1": "We collect personal information such as your name, email address, phone number, travel preferences, and payment details. Technical data (IP address, browser type, cookies) may also be automatically collected during your use of our services.",
+    "h2": "Use of Information",
+    "p2": "We use the information we collect to process your travel reservations, provide customer support, offer personalized content and promotions, and improve our services.",
+    "h3": "Information Sharing",
+    "p3": "We do not share your personal information with third parties except for travel service providers (hotels, airlines, tour operators) and when required by law.",
+    "h4": "Data Security",
+    "p4": "We implement industry-standard security measures to protect your personal data. Payment transactions are secured with SSL encryption. We only retain your data for as long as necessary."
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "intro": "Please read these terms of service carefully before using Izgetour. By accessing or using our website and services, you agree to be bound by these terms.",
+    "h1": "Service Usage",
+    "p1": "Izgetour provides travel reservations, tour packages, hotel bookings, flight searches, and car rental services across Turkey. You may only use our services for lawful purposes.",
+    "h2": "Reservations and Payment",
+    "p2": "Reservations are subject to the policies and terms of the relevant providers (hotels, airlines, etc.). Payment transactions are processed through secure payment gateways.",
+    "h3": "Cancellation and Refunds",
+    "p3": "Cancellation and refund conditions are determined according to the policy of each provider. You can submit cancellation requests through our customer service.",
+    "h4": "Limitation of Liability",
+    "p4": "Izgetour is not responsible for the service quality, price changes, or force majeure situations of providers. We make reasonable efforts to ensure the accuracy of information on our website."
   }
 }

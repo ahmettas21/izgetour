@@ -9,7 +9,8 @@
     "contact": "İletişim",
     "about": "Hakkımızda",
     "login": "Giriş Yap",
-    "dashboard": "Panelim"
+    "dashboard": "Panel",
+    "wishlist": "Favoriler"
   },
   "hero": {
     "title": "Türkiye'yi Keşfedin",
@@ -204,6 +205,8 @@
     "contactUs": "Bize Ulaşın",
     "email": "info@izgetour.com",
     "phone": "+90 212 555 0123",
+    "recentlyViewed": "Son Gezilenler",
+    "noRecent": "Henüz gezilen öğe yok",
     "rights": "Tüm hakları saklıdır."
   },
   "contact": {
@@ -727,5 +730,46 @@
     "maxLegs": "Maksimum 6 uçuş",
     "remove": "Sil",
     "perPerson": "kişi başı"
+  },
+  "wishlist": {
+    "title": "Favorilerim",
+    "count": "{n} kayıtlı öğe",
+    "empty": "Henüz favorin yok",
+    "emptyDesc": "Beğendiğin turları, otelleri veya uçuşları buraya kaydet.",
+    "explore": "Turları Keşfet",
+    "view": "Görüntüle",
+    "remove": "Kaldır",
+    "tour": "Tur",
+    "hotel": "Otel",
+    "flight": "Uçuş"
+  },
+  "notFound": {
+    "title": "Sayfa bulunamadı",
+    "subtitle": "Aradığınız sayfa mevcut değil veya taşınmış olabilir.",
+    "goHome": "Ana Sayfaya Dön"
+  },
+  "privacy": {
+    "title": "Gizlilik Politikası",
+    "intro": "İzgetour olarak kişisel verilerinizin gizliliğine önem veriyoruz. Bu politika, hangi bilgileri topladığımızı, nasıl kullandığımızı ve koruduğumuzu açıklamaktadır.",
+    "h1": "Topladığımız Bilgiler",
+    "p1": "Ad, e-posta adresi, telefon numarası, seyahat tercihleri ve ödeme bilgileri gibi kişisel bilgilerinizi topluyoruz. Ayrıca, hizmetlerimizi kullanımınız sırasında otomatik olarak bazı teknik veriler (IP adresi, tarayıcı türü, çerezler) toplanabilir.",
+    "h2": "Bilgilerin Kullanımı",
+    "p2": "Topladığımız bilgileri, seyahat rezervasyonlarınızı gerçekleştirmek, müşteri hizmetleri sunmak, size kişiselleştirilmiş içerik ve teklifler sunmak ve hizmetlerimizi geliştirmek için kullanıyoruz.",
+    "h3": "Bilgi Paylaşımı",
+    "p3": "Kişisel bilgilerinizi, seyahat hizmeti sağlayıcıları (oteller, havayolları, turoperatörleri) ve yasal zorunluluklar dışında üçüncü taraflarla paylaşmıyoruz.",
+    "h4": "Veri Güvenliği",
+    "p4": "Kişisel verilerinizi korumak için endüstri standardı güvenlik önlemleri uyguluyoruz. Ödeme işlemleri SSL şifrelemesi ile korunmaktadır. Verilerinizi yalnızca gerekli süre boyunca saklıyoruz."
+  },
+  "terms": {
+    "title": "Kullanım Koşulları",
+    "intro": "İzgetour'u kullanmadan önce lütfen bu kullanım koşullarını dikkatlice okuyun. Web sitemize ve hizmetlerimize erişerek veya bunları kullanarak bu koşulları kabul etmiş sayılırsınız.",
+    "h1": "Hizmet Kullanımı",
+    "p1": "İzgetour, Türkiye genelinde seyahat rezervasyonları, tur paketleri, otel reservasyonları, uçuş aramaları ve araç kiralama hizmetleri sunmaktadır. Hizmetlerimizi yalnızca yasal amaçlarla kullanabilirsiniz.",
+    "h2": "Rezervasyon ve Ödeme",
+    "p2": "Rezervasyonlar, ilgili sağlayıcıların (oteller, havayolları vb.) politika ve koşullarına tabidir. Ödeme işlemleri güvenli ödeme ağ geçitleri üzerinden gerçekleştirilir.",
+    "h3": "İptal ve İade",
+    "p3": "İptal ve iade koşulları, her rezervasyon için ilgili sağlayıcının politikasına göre belirlenir. İptal taleplerinizi müşteri hizmetlerimiz aracılığıyla iletebilirsiniz.",
+    "h4": "Sorumluluk Sınırlaması",
+    "p4": "İzgetour, sağlayıcıların hizmet kalitesi, fiyat değişiklikleri veyaforce majeure durumlarından sorumlu değildir. Web sitemizdeki bilgilerin doğruluğunu sağlamak için makul çaba gösteriyoruz."
   }
 }

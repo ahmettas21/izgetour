@@ -103,15 +103,15 @@ export default function MoodDestinationPicker({ locale = 'tr' }: Props) {
   const [activeMood, setActiveMood] = useState<Mood | null>(null);
 
   return (
-    <section className="rounded-2xl border border-zinc-200 bg-white p-6">
+    <section className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-700 dark:bg-zinc-800">
       {/* Header */}
       <div className="mb-2 flex items-center gap-2">
         <Sparkles className="h-5 w-5 text-orange-500" />
-        <h2 className="text-lg font-bold text-zinc-900">
+        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">
           {isTr ? 'Moduna Göre Keşfet' : 'Discover by Mood'}
         </h2>
       </div>
-      <p className="mb-6 text-sm text-zinc-500">
+      <p className="mb-6 text-sm text-zinc-500 dark:text-zinc-400">
         {isTr ? 'Nasıl hissediyorsun? Sana en uygun destinasyonu bulalım.' : 'How do you feel? Let\'s find the perfect destination.'}
       </p>
 
@@ -123,9 +123,9 @@ export default function MoodDestinationPicker({ locale = 'tr' }: Props) {
             <button key={m.id} onClick={() => setActiveMood(active ? null : m)}
               className={`group flex flex-col items-center gap-2 rounded-xl border p-4 transition-all ${
                 active ? `border-transparent bg-gradient-to-br ${m.gradient} text-white shadow-lg scale-105`
-                  : 'border-zinc-100 hover:border-zinc-200 hover:shadow-sm'}`}>
+                  : 'border-zinc-100 dark:border-zinc-700 hover:border-zinc-200 dark:hover:border-zinc-600 hover:shadow-sm'}`}>
               <span className="text-2xl">{m.emoji}</span>
-              <span className={`text-xs font-semibold ${active ? 'text-white' : 'text-zinc-700'}`}>
+              <span className={`text-xs font-semibold ${active ? 'text-white' : 'text-zinc-700 dark:text-zinc-300'}`}>
                 {isTr ? m.name : m.nameEn}
               </span>
             </button>
@@ -136,26 +136,26 @@ export default function MoodDestinationPicker({ locale = 'tr' }: Props) {
       {/* Destination Results */}
       {activeMood && (
         <div className="space-y-3 animate-in slide-in-from-bottom-2 duration-300">
-          <h3 className="text-sm font-semibold text-zinc-500">
+          <h3 className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">
             {isTr ? `${activeMood.emoji} ${activeMood.name} için öneriler` : `${activeMood.emoji} Picks for ${activeMood.nameEn}`}
           </h3>
           {activeMood.destinations.map(d => (
             <button key={d.name}
-              className="flex w-full items-center gap-4 rounded-xl border border-zinc-100 p-4 text-left transition hover:border-zinc-200 hover:shadow-sm">
-              <div className="h-14 w-14 flex-shrink-0 overflow-hidden rounded-xl bg-zinc-100">
-                <Camera className="m-auto mt-4 h-6 w-6 text-zinc-300" />
+              className="flex w-full items-center gap-4 rounded-xl border border-zinc-100 dark:border-zinc-700 p-4 text-left transition hover:border-zinc-200 dark:hover:border-zinc-600 hover:shadow-sm">
+              <div className="h-14 w-14 flex-shrink-0 overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-700">
+                <Camera className="m-auto mt-4 h-6 w-6 text-zinc-300 dark:text-zinc-500" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-semibold text-zinc-800">{isTr ? d.name : d.nameEn}</div>
-                <div className="mt-0.5 text-xs text-zinc-400">{isTr ? d.tagline : d.taglineEn}</div>
+                <div className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{isTr ? d.name : d.nameEn}</div>
+                <div className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">{isTr ? d.tagline : d.taglineEn}</div>
               </div>
               <div className="text-right">
                 <div className={`text-lg font-bold bg-gradient-to-r ${activeMood.gradient} bg-clip-text text-transparent`}>
                   %{d.match}
                 </div>
-                <div className="text-[10px] text-zinc-400">{isTr ? 'eşleşme' : 'match'}</div>
+                <div className="text-[10px] text-zinc-400 dark:text-zinc-500">{isTr ? 'eşleşme' : 'match'}</div>
               </div>
-              <ChevronRight className="h-4 w-4 text-zinc-300" />
+              <ChevronRight className="h-4 w-4 text-zinc-300 dark:text-zinc-600" />
             </button>
           ))}
         </div>

@@ -1,7 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Bell, BellOff, Clock, Shield, Users, ArrowRight, ShoppingCart } from 'lucide-react';
+import { Bell, BellOff, Clock, Shield, Users, ArrowRight, ShoppingCart, Heart } from 'lucide-react';
+import { useWishlist } from '@/hooks/useWishlist';
 import type { FlightResult } from './types';
 
 interface FlightCardProps {
@@ -43,8 +44,10 @@ export default function FlightCard({
   className = '',
 }: FlightCardProps) {
   const t = useTranslations('flights');
+  const { isWishlisted, toggleWishlist } = useWishlist();
   const hasDiscount = flight.price < flight.originalPrice;
   const isDirect = flight.stops === 0;
+  const saved = isWishlisted(flight.id, 'flight');
 
   return (
     <div
@@ -116,6 +119,25 @@ export default function FlightCard({
               <BellOff className="h-3.5 w-3.5" />
             )}
             {isFollowed ? t('tracking') : t('track')}
+          </button>
+
+          {/* Wishlist button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleWishlist({
+                id: flight.id,
+                type: 'flight',
+                title: `${flight.departureCode} → ${flight.arrivalCode}`,
+                titleEn: `${flight.departureCode} → ${flight.arrivalCode}`,
+                price: flight.price,
+                slug: flight.slug,
+              });
+            }}
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-sm transition-all hover:scale-110 dark:bg-zinc-800"
+            aria-label={saved ? 'Remove from wishlist' : 'Add to wishlist'}
+          >
+            <Heart className={`h-4 w-4 transition-colors ${saved ? 'fill-red-500 text-red-500' : 'text-zinc-400'}`} />
           </button>
         </div>
       </div>

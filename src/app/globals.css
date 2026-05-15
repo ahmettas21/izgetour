@@ -67,6 +67,9 @@
   --border:       #e2e8f0;
   --border-muted: #f1f5f9;
   --ring:         var(--turquoise-300);
+  --brand: var(--turquoise-500);
+  --brand-dark: var(--turquoise-700);
+  --brand-light: var(--turquoise-100);
 
   /* Status colors */
   --success:      #10b981;

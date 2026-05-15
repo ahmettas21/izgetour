@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { ChevronDown } from 'lucide-react';
-import MoodDestinationPicker from '@/components/MoodDestinationPicker';
 
 interface HeroBannerProps {
   locale?: string;
@@ -28,7 +27,7 @@ export default function HeroBanner({ locale = 'tr' }: HeroBannerProps) {
   }, []);
 
   return (
-    <section className="relative h-[85vh] min-h-[600px] overflow-hidden">
+    <section className="relative h-[70vh] min-h-[500px] overflow-hidden sm:h-[85vh] sm:min-h-[600px]">
       {/* Background images */}
       {HERO_IMAGES.map((src, i) => (
         <div
@@ -44,8 +43,8 @@ export default function HeroBanner({ locale = 'tr' }: HeroBannerProps) {
       ))}
 
       {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 dark:from-black/80 dark:via-black/60 dark:to-black/80" />
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 to-transparent dark:from-blue-900/50" />
 
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
@@ -55,11 +54,6 @@ export default function HeroBanner({ locale = 'tr' }: HeroBannerProps) {
         <p className="mb-8 max-w-2xl text-lg text-white/80 md:text-xl">
           {t('subtitle')}
         </p>
-
-        {/* MoodDestinationPicker — CTA */}
-        <div className="w-full max-w-3xl">
-          <MoodDestinationPicker locale={isTr ? 'tr' : 'en'} />
-        </div>
 
         {/* Slide indicators */}
         <div className="absolute bottom-8 flex gap-2">

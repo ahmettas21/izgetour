@@ -28,17 +28,22 @@ export default async function HomePage({
       {/* ── Hero ─────────────────────────────────────────── */}
       <HeroBanner locale={locale as 'tr' | 'en'} />
 
-      {/* ── Search ───────────────────────────────────────── */}
-      <SmartSearch />
+      {/* ── Hero → Search transition ────────────────────── */}
+      <div className="relative">
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/10 to-transparent pointer-events-none -mt-32" />
+        <section className="py-10 sm:py-14">
+          <SmartSearch />
+        </section>
+      </div>
 
       {/* ── Features ─────────────────────────────────────── */}
       <Features />
 
       {/* ── Mood Destination Picker ──────────────────────── */}
-      <section className="bg-gradient-to-b from-amber-50 via-orange-50 to-white py-16 sm:py-24">
+      <section className="bg-gradient-to-b from-[var(--brand-light)] via-white to-white py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 sm:mb-12 text-center">
-            <span className="mb-2 inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-amber-700">
+            <span className="mb-2 inline-block rounded-full bg-[var(--brand-light)] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--brand)]">
               {locale === 'tr' ? 'İlham Ver' : 'Get Inspired'}
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[var(--foreground)]">
@@ -52,7 +57,7 @@ export default async function HomePage({
       </section>
 
       {/* ── Popular Tours ─────────────────────────────────── */}
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 sm:py-24">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 sm:py-20 lg:py-24">
         {/* Section header */}
         <div className="mb-8 sm:mb-14 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>

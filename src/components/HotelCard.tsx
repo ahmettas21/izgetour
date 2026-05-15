@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
-import { MapPin, Star, Leaf, Users } from 'lucide-react';
+import { MapPin, Star, Leaf, Users, Heart } from 'lucide-react';
+import { useWishlist } from '@/hooks/useWishlist';
 
 type Hotel = {
   id: string;
@@ -34,9 +35,11 @@ type Props = {
 };
 
 export default function HotelCard({ hotel, locale }: Props) {
+  const { isWishlisted, toggleWishlist } = useWishlist();
   const title = locale === 'tr' ? hotel.title : hotel.titleEn;
   const description = locale === 'tr' ? hotel.description : hotel.descriptionEn;
   const minPrice = Math.min(...hotel.rooms.map((r) => r.price));
+  const saved = isWishlisted(hotel.id, 'hotel');
 
   return (
     <Link href={`/hotels/${hotel.slug}`} className="group block h-full">
@@ -70,17 +73,30 @@ export default function HotelCard({ hotel, locale }: Props) {
 
           {/* Sustainability badge */}
           {hotel.sustainabilityScore && (
-            <div className="absolute left-3 top-3 z-10 flex items-center gap-1 rounded-full bg-emerald-50/90 px-2.5 py-1 text-xs font-medium text-emerald-700 shadow-sm backdrop-blur-sm">
+            <div className="absolute left-3 top-3 z-10 flex items-center gap-1 rounded-full bg-emerald-50/90 px-2.5 py-1 text-xs font-medium text-emerald-700 shadow-sm backdrop-blur-sm dark:bg-emerald-900/40 dark:text-emerald-300">
               <Leaf className="h-3 w-3 text-emerald-500" />
               <span>{hotel.sustainabilityScore}</span>
             </div>
           )}
 
           {/* Rating badge */}
-          <div className="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-white/95 px-2.5 py-1 text-xs font-bold text-zinc-800 shadow-sm backdrop-blur-sm">
+          <div className="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-white/95 px-2.5 py-1 text-xs font-bold text-zinc-800 shadow-sm backdrop-blur-sm dark:bg-zinc-800/95 dark:text-zinc-200">
             <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
             {hotel.rating.toFixed(1)}
           </div>
+
+          {/* Wishlist button */}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleWishlist({ id: hotel.id, type: 'hotel', title: hotel.title, titleEn: hotel.titleEn, image: hotel.image, price: minPrice, slug: hotel.slug });
+            }}
+            className="absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-sm backdrop-blur-sm transition-all hover:scale-110 dark:bg-zinc-800/90"
+            aria-label={saved ? 'Remove from wishlist' : 'Add to wishlist'}
+          >
+            <Heart className={`h-4 w-4 transition-colors ${saved ? 'fill-red-500 text-red-500' : 'text-zinc-400 dark:text-zinc-500'}`} />
+          </button>
         </div>
 
         {/* Content */}
