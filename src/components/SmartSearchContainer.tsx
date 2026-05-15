@@ -2,14 +2,21 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { Plane, Building2, Compass } from 'lucide-react';
-import FlightSearchClient from '@/components/flights/FlightSearchClient';
+import FlightSearchForm from '@/components/flights/FlightSearchForm';
+import type { SearchParams } from '@/components/flights/types';
 
 type Tab = 'flights' | 'tours' | 'hotels';
 
 export default function SmartSearchContainer() {
   const t = useTranslations('flights');
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<Tab>('flights');
+
+  const handleFlightSearch = async (_params: SearchParams) => {
+    router.push('/flights');
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -41,7 +48,11 @@ export default function SmartSearchContainer() {
       </div>
 
       {/* ── Tab Content ── */}
-      {activeTab === 'flights' && <FlightSearchClient />}
+      {activeTab === 'flights' && (
+        <div className="mx-auto max-w-3xl px-4 py-8">
+          <FlightSearchForm onSearch={handleFlightSearch} />
+        </div>
+      )}
 
       {activeTab === 'tours' && (
         <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">

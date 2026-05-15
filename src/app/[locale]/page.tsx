@@ -5,7 +5,11 @@ import SmartSearch from '@/components/SmartSearch';
 import Features from '@/components/Features';
 import MoodDestinationPickerClient from '@/components/MoodDestinationPickerClient';
 import TourCard from '@/components/TourCard';
+import HotelCard from '@/components/HotelCard';
+import FlightCard from '@/components/flights/FlightCard';
 import { MOCK_TOURS } from '@/data/tours';
+import { hotels as MOCK_HOTELS } from '@/data/hotels';
+import { MOCK_FLIGHTS } from '@/data/flights';
 import type { Metadata } from 'next';
 import { ArrowRight } from 'lucide-react';
 
@@ -31,7 +35,7 @@ export default async function HomePage({
       {/* ── Hero → Search transition ────────────────────── */}
       <div className="relative">
         <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/10 to-transparent pointer-events-none -mt-32" />
-        <section className="py-10 sm:py-14">
+        <section className="py-14 sm:py-20 lg:py-24">
           <SmartSearch />
         </section>
       </div>
@@ -92,6 +96,97 @@ export default async function HomePage({
             className="inline-flex items-center gap-2 rounded-full border-2 border-[var(--brand)] px-8 py-3 font-semibold text-[var(--brand)] transition-all duration-200 hover:bg-[var(--brand)] hover:text-white"
           >
             {tTours('viewAll')}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </section>
+
+      {/* ── Popular Hotels ────────────────────────────────── */}
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 sm:py-20 lg:py-24">
+        {/* Section header */}
+        <div className="mb-8 sm:mb-14 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <span className="mb-2 inline-block rounded-full bg-[var(--brand-light)] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--brand)]">
+              {locale === 'tr' ? 'Konaklama' : 'Accommodation'}
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[var(--foreground)]">
+              {locale === 'tr' ? 'Popüler Oteller' : 'Popular Hotels'}
+            </h2>
+            <p className="mt-2 text-[var(--muted)]">
+              {locale === 'tr' ? 'En iyi otellerde unutulmaz konaklama deneyimi' : 'Unforgettable stays at the best hotels'}
+            </p>
+          </div>
+          <Link
+            href="/hotels"
+            className="flex shrink-0 items-center gap-2 text-sm font-semibold text-[var(--brand)] hover:underline"
+          >
+            {locale === 'tr' ? 'Tümünü Gör' : 'View All'}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+        {/* Hotel grid */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {MOCK_HOTELS.slice(0, 3).map((hotel) => (
+            <HotelCard key={hotel.id} hotel={hotel} locale={locale as 'tr' | 'en'} />
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-10 sm:mt-14 text-center">
+          <Link
+            href="/hotels"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-[var(--brand)] px-8 py-3 font-semibold text-[var(--brand)] transition-all duration-200 hover:bg-[var(--brand)] hover:text-white"
+          >
+            {locale === 'tr' ? 'Tümünü Gör' : 'View All Hotels'}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </section>
+
+      {/* ── Popular Flights ──────────────────────────────── */}
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 sm:py-20 lg:py-24">
+        {/* Section header */}
+        <div className="mb-8 sm:mb-14 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <span className="mb-2 inline-block rounded-full bg-[var(--brand-light)] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--brand)]">
+              {locale === 'tr' ? 'Uçuşlar' : 'Flights'}
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[var(--foreground)]">
+              {locale === 'tr' ? 'Popüler Uçuşlar' : 'Popular Flights'}
+            </h2>
+            <p className="mt-2 text-[var(--muted)]">
+              {locale === 'tr' ? 'En uygun fiyatlarla dünyaya uçun' : 'Fly worldwide at the best prices'}
+            </p>
+          </div>
+          <Link
+            href="/flights"
+            className="flex shrink-0 items-center gap-2 text-sm font-semibold text-[var(--brand)] hover:underline"
+          >
+            {locale === 'tr' ? 'Tümünü Gör' : 'View All'}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+        {/* Flight grid */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {MOCK_FLIGHTS.slice(0, 3).map((flight) => (
+            <FlightCard
+              key={flight.id}
+              flight={flight}
+              isFollowed={false}
+              onToggleFollow={() => {}}
+            />
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-10 sm:mt-14 text-center">
+          <Link
+            href="/flights"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-[var(--brand)] px-8 py-3 font-semibold text-[var(--brand)] transition-all duration-200 hover:bg-[var(--brand)] hover:text-white"
+          >
+            {locale === 'tr' ? 'Tümünü Gör' : 'View All Flights'}
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
