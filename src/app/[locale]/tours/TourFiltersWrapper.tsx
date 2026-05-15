@@ -144,11 +144,11 @@ export default function TourFiltersWrapper({ tours, locale, compareIds = [], onT
         {/* Results */}
         {filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <SearchX className="mb-4 h-12 w-12 text-zinc-300" />
-            <h3 className="text-lg font-semibold text-zinc-700">
+            <SearchX className="mb-4 h-12 w-12 text-muted-foreground" />
+            <h3 className="text-lg font-semibold text-foreground">
               {locale === 'tr' ? 'Sonuç bulunamadı' : 'No results found'}
             </h3>
-            <p className="mt-1 text-sm text-zinc-500">
+            <p className="mt-1 text-sm text-muted-foreground">
               {locale === 'tr'
                 ? 'Filtreleri değiştirmeyi veya aramanızı daraltmayı deneyin.'
                 : 'Try changing filters or narrowing your search.'}
@@ -156,7 +156,7 @@ export default function TourFiltersWrapper({ tours, locale, compareIds = [], onT
           </div>
         ) : (
           <>
-            <p className="mb-4 text-sm text-zinc-500">
+            <p className="mb-4 text-sm text-muted-foreground">
               {filtered.length} {locale === 'tr' ? 'tur bulundu' : 'tours found'}
             </p>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
@@ -175,7 +175,7 @@ export default function TourFiltersWrapper({ tours, locale, compareIds = [], onT
                       className={`absolute right-2 top-2 z-10 flex cursor-pointer items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium shadow-sm transition-colors ${
                         compareIds.includes(tour.id)
                           ? 'bg-emerald-600 text-white'
-                          : 'bg-white/90 text-zinc-600 hover:bg-white'
+                          : 'bg-surface/90 text-muted-foreground hover:bg-surface'
                       }`}
                     >
                       <input

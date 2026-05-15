@@ -375,25 +375,26 @@ export function FlightCard({
   return (
     <div
       className={`
-        group flex flex-col gap-4 rounded-2xl border bg-white p-5
+        group flex flex-col gap-4 rounded-2xl border bg-surface p-5
         transition-all hover:shadow-xl hover:-translate-y-0.5
         sm:flex-row sm:items-center sm:gap-6
-        ${isFollowed ? 'border-turquoise-400 shadow-md ring-2 ring-turquoise-100' : 'border-slate-100'}
+        ${isFollowed ? 'border-primary shadow-md ring-2 ring-primary/10' : 'border-border'}
+        dark:bg-surface-elevated
       `}
     >
       {/* Airline */}
       <div className="flex items-center gap-3 sm:w-36 sm:flex-col sm:items-start">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-turquoise-50 text-xs font-bold text-turquoise-700 border border-turquoise-100 sm:h-12 sm:w-12 sm:rounded-full">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-muted text-xs font-bold text-primary border border-primary/20 sm:h-12 sm:w-12 sm:rounded-full">
           {flight.carrierCode}
         </div>
         <div>
-          <div className="text-sm font-semibold text-slate-800 leading-tight">{flight.airline}</div>
+          <div className="text-sm font-semibold text-foreground leading-tight">{flight.airline}</div>
           {flight.stops === 0 ? (
-            <div className="flex items-center gap-1 text-xs font-medium text-emerald-600 mt-0.5">
+            <div className="flex items-center gap-1 text-xs font-medium text-success mt-0.5">
               <Plane className="h-3 w-3" /> Direkt
             </div>
           ) : (
-            <div className="text-xs text-amber-600 font-medium mt-0.5">
+            <div className="text-xs text-warning font-medium mt-0.5">
               {flight.stops} aktarma
             </div>
           )}
@@ -403,25 +404,25 @@ export function FlightCard({
       {/* Times */}
       <div className="flex items-center gap-4 flex-1">
         <div className="text-center">
-          <div className="text-2xl font-bold text-slate-900 leading-tight">
+          <div className="text-2xl font-bold text-foreground leading-tight">
             {formatTimeFromISO(flight.departureAt)}
           </div>
-          <div className="text-xs text-slate-400 mt-0.5">{flight.departure}</div>
+          <div className="text-xs text-muted-foreground mt-0.5">{flight.departure}</div>
         </div>
 
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-1 text-xs text-slate-400 justify-center">
+          <div className="flex items-center gap-1 text-xs text-muted-foreground justify-center">
             <Clock className="h-3 w-3" />
             {formatDuration(flight.durationMinutes)}
           </div>
-          <div className="relative h-px bg-gradient-to-r from-turquoise-200 via-turquoise-400 to-turquoise-200 mt-1.5">
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-turquoise-500 p-1">
+          <div className="relative h-px bg-gradient-to-r from-primary/30 via-primary to-primary/30 mt-1.5">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary p-1">
               <Plane className="h-2.5 w-2.5 rotate-90 text-white" />
             </div>
           </div>
           {flight.stops > 0 && (
             <div className="text-center mt-1.5">
-              <span className="rounded-full bg-amber-50 border border-amber-100 px-2 py-0.5 text-xs text-amber-700 font-medium whitespace-nowrap">
+              <span className="rounded-full bg-warning/10 border border-warning/20 px-2 py-0.5 text-xs text-warning font-medium whitespace-nowrap">
                 {flight.stopCities.join(', ')}
               </span>
             </div>
@@ -429,36 +430,36 @@ export function FlightCard({
         </div>
 
         <div className="text-center">
-          <div className="text-2xl font-bold text-slate-900 leading-tight">
+          <div className="text-2xl font-bold text-foreground leading-tight">
             {formatTimeFromISO(flight.arrivalAt)}
           </div>
-          <div className="text-xs text-slate-400 mt-0.5">{flight.arrival}</div>
+          <div className="text-xs text-muted-foreground mt-0.5">{flight.arrival}</div>
         </div>
       </div>
 
       {/* Price + Actions */}
-      <div className="flex items-center justify-between gap-4 sm:flex-col sm:w-36 sm:items-end sm:justify-center border-t border-slate-100 pt-4 sm:border-t-0 sm:pt-0">
+      <div className="flex items-center justify-between gap-4 sm:flex-col sm:w-36 sm:items-end sm:justify-center border-t border-border pt-4 sm:border-t-0 sm:pt-0">
         <div className="text-right">
           {hasDiscount && (
             <div className="flex items-center justify-end gap-1.5 mb-0.5">
-              <span className="rounded-full bg-red-50 border border-red-100 px-1.5 py-0.5 text-xs font-bold text-red-600">
+              <span className="rounded-full bg-error/10 border border-error/20 px-1.5 py-0.5 text-xs font-bold text-error">
                 -{discountPct}%
               </span>
-              <span className="text-xs text-slate-400 line-through">
+              <span className="text-xs text-muted-foreground line-through">
                 ₺{parseFloat(flight.originalPrice).toLocaleString('tr-TR')}
               </span>
             </div>
           )}
-          <div className={`text-2xl font-extrabold ${hasDiscount ? 'text-red-600' : 'text-turquoise-600'}`}>
+          <div className={`text-2xl font-extrabold ${hasDiscount ? 'text-error' : 'text-primary'}`}>
             ₺{parseFloat(flight.price).toLocaleString('tr-TR')}
           </div>
-          <div className="text-xs text-slate-400">kişi başı</div>
+          <div className="text-xs text-muted-foreground">kişi başı</div>
         </div>
 
         <div className="flex flex-col gap-2 sm:items-end">
           <button
             onClick={() => onSelect?.(flight)}
-            className="rounded-xl bg-gradient-to-r from-turquoise-500 to-turquoise-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-lg hover:scale-105 active:scale-95 whitespace-nowrap"
+            className="rounded-xl bg-gradient-to-r from-primary to-primary-dark px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-lg hover:scale-105 active:scale-95 whitespace-nowrap"
           >
             Seç
           </button>
@@ -466,8 +467,8 @@ export function FlightCard({
             onClick={() => onToggleFollow(flight.id)}
             className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all ${
               isFollowed
-                ? 'border-turquoise-300 bg-turquoise-50 text-turquoise-600'
-                : 'border-slate-200 text-slate-400 hover:border-turquoise-300 hover:text-turquoise-600'
+                ? 'border-primary/30 bg-primary/5 text-primary'
+                : 'border-border text-muted-foreground hover:border-primary/30 hover:text-primary'
             }`}
           >
             {isFollowed ? <Bell className="h-3.5 w-3.5" /> : <BellOff className="h-3.5 w-3.5" />}
@@ -477,18 +478,18 @@ export function FlightCard({
       </div>
 
       {/* Meta badges */}
-      <div className="flex flex-wrap items-center gap-2 border-t border-slate-50 pt-3 -mt-1 sm:border-t-0 sm:pt-0">
+      <div className="flex flex-wrap items-center gap-2 border-t border-border pt-3 -mt-1 sm:border-t-0 sm:pt-0">
         {flight.refundable && (
-          <span className="flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700">
+          <span className="flex items-center gap-1 rounded-full border border-success/20 bg-success/5 px-2 py-0.5 text-xs font-medium text-success">
             <Shield className="h-3 w-3" /> İade var
           </span>
         )}
         {flight.seatsLeft <= 3 && (
-          <span className="rounded-full bg-red-50 border border-red-100 px-2 py-0.5 text-xs font-bold text-red-600">
+          <span className="rounded-full bg-error/5 border border-error/20 px-2 py-0.5 text-xs font-bold text-error">
             Son {flight.seatsLeft} koltuk!
           </span>
         )}
-        <span className="text-xs text-slate-400">{flight.baggage} included</span>
+        <span className="text-xs text-muted-foreground">{flight.baggage} included</span>
       </div>
     </div>
   );
@@ -498,39 +499,39 @@ export function FlightCard({
 
 export function FlightCardSkeleton() {
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-slate-100 bg-white p-5 sm:flex-row sm:items-center sm:gap-6 animate-pulse">
+    <div className="flex flex-col gap-4 rounded-2xl border border-border bg-surface p-5 sm:flex-row sm:items-center sm:gap-6 animate-pulse dark:bg-surface-elevated">
       {/* Airline */}
       <div className="flex items-center gap-3 sm:w-36 sm:flex-col sm:items-start">
-        <div className="h-10 w-10 rounded-xl bg-slate-100 sm:h-12 sm:w-12 sm:rounded-full" />
+        <div className="h-10 w-10 rounded-xl bg-muted sm:h-12 sm:w-12 sm:rounded-full" />
         <div className="space-y-1.5">
-          <div className="h-4 w-24 rounded bg-slate-100" />
-          <div className="h-3 w-16 rounded bg-slate-100" />
+          <div className="h-4 w-24 rounded bg-muted" />
+          <div className="h-3 w-16 rounded bg-muted" />
         </div>
       </div>
 
       {/* Times */}
       <div className="flex items-center gap-4 flex-1">
         <div className="space-y-1 text-center">
-          <div className="h-7 w-14 rounded bg-slate-100" />
-          <div className="h-3 w-10 rounded bg-slate-100 mx-auto" />
+          <div className="h-7 w-14 rounded bg-muted" />
+          <div className="h-3 w-10 rounded bg-muted mx-auto" />
         </div>
         <div className="flex-1 space-y-1">
-          <div className="h-3 w-full rounded bg-slate-100 mx-auto" />
-          <div className="h-px w-full bg-slate-100" />
+          <div className="h-3 w-full rounded bg-muted mx-auto" />
+          <div className="h-px w-full bg-muted" />
         </div>
         <div className="space-y-1 text-center">
-          <div className="h-7 w-14 rounded bg-slate-100" />
-          <div className="h-3 w-10 rounded bg-slate-100 mx-auto" />
+          <div className="h-7 w-14 rounded bg-muted" />
+          <div className="h-3 w-10 rounded bg-muted mx-auto" />
         </div>
       </div>
 
       {/* Price + CTA */}
-      <div className="flex items-center justify-between gap-4 sm:flex-col sm:w-36 sm:items-end sm:justify-center border-t border-slate-100 pt-4 sm:border-t-0 sm:pt-0">
+      <div className="flex items-center justify-between gap-4 sm:flex-col sm:w-36 sm:items-end sm:justify-center border-t border-border pt-4 sm:border-t-0 sm:pt-0">
         <div className="space-y-1 text-right">
-          <div className="h-7 w-20 rounded bg-slate-100 ml-auto" />
-          <div className="h-3 w-12 rounded bg-slate-100 ml-auto" />
+          <div className="h-7 w-20 rounded bg-muted ml-auto" />
+          <div className="h-3 w-12 rounded bg-muted ml-auto" />
         </div>
-        <div className="h-9 w-full rounded-xl bg-slate-100 sm:w-20" />
+        <div className="h-9 w-full rounded-xl bg-muted sm:w-20" />
       </div>
     </div>
   );
@@ -585,32 +586,33 @@ export function AirportInput({
   return (
     <div ref={ref} className="relative">
       {label && (
-        <label className="mb-1 block text-xs font-medium text-slate-400">{label}</label>
+        <label className="mb-1 block text-xs font-medium text-muted-foreground">{label}</label>
       )}
       <button
         type="button"
         onClick={() => setOpen(true)}
         className={`
-          flex w-full items-center gap-2 rounded-xl border bg-slate-50 px-3 py-3 text-left transition-all
+          flex w-full items-center gap-2 rounded-xl border bg-surface px-3 py-3 text-left transition-all
           ${open
-            ? 'border-turquoise-400 ring-2 ring-turquoise-100 shadow-md'
-            : 'border-slate-200 hover:border-turquoise-300'}
+            ? 'border-primary ring-2 ring-primary/20 shadow-md'
+            : 'border-border hover:border-primary/50'}
+          dark:bg-surface-elevated
         `}
       >
-        <MapPin className="h-4 w-4 shrink-0 text-turquoise-500" />
+        <MapPin className="h-4 w-4 shrink-0 text-primary" />
         <input
           value={query}
           onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
           onClick={(e) => { e.stopPropagation(); setOpen(true); }}
           placeholder={placeholder}
-          className="flex-1 bg-transparent text-sm font-medium text-slate-700 outline-none placeholder:text-slate-400 min-w-0"
+          className="flex-1 bg-transparent text-sm font-medium text-foreground outline-none placeholder:text-muted-foreground min-w-0"
           autoComplete="off"
         />
         {value && (
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); clear(); }}
-            className="shrink-0 rounded-full p-0.5 text-slate-400 hover:bg-slate-200 hover:text-slate-600 transition-colors"
+            className="shrink-0 rounded-full p-0.5 text-muted-foreground hover:bg-muted transition-colors"
           >
             <X className="h-3 w-3" />
           </button>
@@ -619,7 +621,7 @@ export function AirportInput({
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); onSwap?.(); }}
-            className="shrink-0 rounded-full bg-slate-100 p-1 text-slate-400 hover:bg-turquoise-100 hover:text-turquoise-600 transition-colors"
+            className="shrink-0 rounded-full bg-muted p-1 text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors"
           >
             <ArrowRight className="h-3 w-3 rotate-[-90deg]" />
           </button>
@@ -627,7 +629,7 @@ export function AirportInput({
       </button>
 
       {open && (
-        <div className="absolute z-50 mt-1 w-full rounded-xl border border-slate-200 bg-white shadow-xl animate-scale-in overflow-hidden">
+        <div className="absolute z-50 mt-1 w-full rounded-xl border border-border bg-surface shadow-xl animate-scale-in overflow-hidden dark:bg-surface-elevated">
           {results.length > 0 ? (
             <ul className="max-h-60 overflow-y-auto py-1">
               {results.map((a) => (
@@ -635,26 +637,26 @@ export function AirportInput({
                   <button
                     type="button"
                     onClick={() => select(a)}
-                    className={`flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition-colors hover:bg-turquoise-50 ${value?.iata === a.iata ? 'bg-turquoise-50' : ''}`}
+                    className={`flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition-colors hover:bg-primary-muted ${value?.iata === a.iata ? 'bg-primary-muted' : ''}`}
                   >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-turquoise-50 border border-turquoise-100 text-xs font-bold text-turquoise-700">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border bg-primary-muted text-xs font-bold text-primary dark:bg-primary/10">
                       {a.iata}
                     </span>
                     <div className="min-w-0 flex-1">
-                      <div className="font-medium text-slate-800 truncate">{a.cityNative}</div>
-                      <div className="text-xs text-slate-400 truncate">{a.country}</div>
+                      <div className="font-medium text-foreground truncate">{a.cityNative}</div>
+                      <div className="text-xs text-muted-foreground truncate">{a.country}</div>
                     </div>
                     {value?.iata === a.iata && (
-                      <Check className="h-4 w-4 shrink-0 text-turquoise-500" />
+                      <Check className="h-4 w-4 shrink-0 text-primary" />
                     )}
                   </button>
                 </li>
               ))}
             </ul>
           ) : query.length >= 2 ? (
-            <div className="px-4 py-6 text-center text-sm text-slate-400">Sonuç bulunamadı</div>
+            <div className="px-4 py-6 text-center text-sm text-muted-foreground">Sonuç bulunamadı</div>
           ) : (
-            <div className="px-4 py-3 text-xs text-slate-400">En az 2 karakter girin</div>
+            <div className="px-4 py-3 text-xs text-muted-foreground">En az 2 karakter girin</div>
           )}
         </div>
       )}
@@ -703,22 +705,23 @@ export function PassengerPanel({
         type="button"
         onClick={() => setOpen(!open)}
         className={`
-          flex w-full items-center gap-2 rounded-xl border bg-slate-50 px-3 py-3 text-left transition-all
+          flex w-full items-center gap-2 rounded-xl border bg-surface px-3 py-3 text-left transition-all
           ${open
-            ? 'border-turquoise-400 ring-2 ring-turquoise-100 shadow-md'
-            : 'border-slate-200 hover:border-turquoise-300'}
+            ? 'border-primary ring-2 ring-primary/20 shadow-md'
+            : 'border-border hover:border-primary/50'}
+          dark:bg-surface-elevated
         `}
       >
-        <Users className="h-4 w-4 shrink-0 text-turquoise-500" />
+        <Users className="h-4 w-4 shrink-0 text-primary" />
         <div className="flex-1 min-w-0">
-          <div className="text-sm font-medium text-slate-700 truncate">{label}</div>
-          <div className="text-xs text-slate-400">{CABIN_LABELS[cabin]}</div>
+          <div className="text-sm font-medium text-foreground truncate">{label}</div>
+          <div className="text-xs text-muted-foreground">{CABIN_LABELS[cabin]}</div>
         </div>
-        <ChevronDown className={`h-4 w-4 shrink-0 text-slate-400 transition-transform ${open ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
 
       {open && (
-        <div className="absolute z-50 mt-1 w-72 rounded-xl border border-slate-200 bg-white shadow-xl animate-scale-in overflow-hidden">
+        <div className="absolute z-50 mt-1 w-72 rounded-xl border border-border bg-surface shadow-xl animate-scale-in overflow-hidden dark:bg-surface-elevated">
           <div className="p-4 space-y-4">
 
             {(
@@ -729,11 +732,11 @@ export function PassengerPanel({
               ] as const
             ).map((item, idx) => (
               <div key={item.key}>
-                {idx > 0 && <div className="h-px bg-slate-100" />}
+                {idx > 0 && <div className="h-px bg-border" />}
                 <div className="flex items-center justify-between py-2">
                   <div>
-                    <div className="text-sm font-medium text-slate-800">{item.label}</div>
-                    <div className="text-xs text-slate-400">{item.sub}</div>
+                    <div className="text-sm font-medium text-foreground">{item.label}</div>
+                    <div className="text-xs text-muted-foreground">{item.sub}</div>
                   </div>
                   <div className="flex items-center gap-2">
                     <button
@@ -744,11 +747,11 @@ export function PassengerPanel({
                           ? passengers.adult <= 1
                           : passengers[item.key] <= 0
                       }
-                      className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-400 transition-all hover:border-turquoise-300 hover:text-turquoise-600 disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-surface text-muted-foreground transition-all hover:border-primary hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed dark:bg-surface-elevated"
                     >
                       <Minus className="h-3 w-3" />
                     </button>
-                    <span className="w-6 text-center text-sm font-semibold text-slate-800">
+                    <span className="w-6 text-center text-sm font-semibold text-foreground">
                       {passengers[item.key]}
                     </span>
                     <button
@@ -759,7 +762,7 @@ export function PassengerPanel({
                           ? passengers.infant >= passengers.adult || total >= MAX_TOTAL
                           : total >= MAX_TOTAL
                       }
-                      className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-400 transition-all hover:border-turquoise-300 hover:text-turquoise-600 disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-surface text-muted-foreground transition-all hover:border-primary hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed dark:bg-surface-elevated"
                     >
                       <Plus className="h-3 w-3" />
                     </button>
@@ -769,16 +772,16 @@ export function PassengerPanel({
             ))}
 
             {passengers.infant < passengers.adult && passengers.infant > 0 && (
-              <div className="flex items-start gap-2 rounded-lg bg-amber-50 p-2.5 text-xs text-amber-700">
+              <div className="flex items-start gap-2 rounded-lg bg-warning/10 p-2.5 text-xs text-warning">
                 <AlertCircle className="h-3.5 w-3.5 shrink-0 mt-0.5" />
                 Her yetişkin en fazla 1 bebek bağlayabilir
               </div>
             )}
 
-            <div className="h-px bg-slate-100" />
+            <div className="h-px bg-border" />
 
             <div>
-              <div className="mb-2 text-xs font-medium text-slate-400">Kabin Sınıfı</div>
+              <div className="mb-2 text-xs font-medium text-muted-foreground">Kabin Sınıfı</div>
               <div className="grid grid-cols-3 gap-1.5">
                 {(['economy', 'business', 'first'] as CabinClass[]).map((c) => (
                   <button
@@ -787,8 +790,8 @@ export function PassengerPanel({
                     onClick={() => onCabinChange(c)}
                     className={`rounded-lg border py-2 px-1 text-center text-xs font-medium transition-all ${
                       cabin === c
-                        ? 'border-turquoise-400 bg-turquoise-50 text-turquoise-700 font-semibold'
-                        : 'border-slate-200 text-slate-400 hover:border-turquoise-300 hover:text-slate-600'
+                        ? 'border-primary bg-primary/10 text-primary font-semibold'
+                        : 'border-border text-muted-foreground hover:border-primary/50 hover:text-foreground'
                     }`}
                   >
                     {CABIN_LABELS[c]}
@@ -800,7 +803,7 @@ export function PassengerPanel({
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="w-full rounded-xl bg-turquoise-500 py-2.5 text-sm font-semibold text-white transition-all hover:bg-turquoise-600"
+              className="w-full rounded-xl bg-primary py-2.5 text-sm font-semibold text-white transition-all hover:bg-primary/90"
             >
               Tamam
             </button>

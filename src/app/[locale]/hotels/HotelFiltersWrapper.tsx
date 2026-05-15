@@ -151,11 +151,11 @@ export default function HotelFiltersWrapper({ hotels, locale }: Props) {
         {/* Results */}
         {filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <SearchX className="mb-4 h-12 w-12 text-zinc-300" />
-            <h3 className="text-lg font-semibold text-zinc-700">
+            <SearchX className="mb-4 h-12 w-12 text-muted-foreground" />
+            <h3 className="text-lg font-semibold text-foreground">
               {locale === 'tr' ? 'Sonuç bulunamadı' : 'No results found'}
             </h3>
-            <p className="mt-1 text-sm text-zinc-500">
+            <p className="mt-1 text-sm text-muted-foreground">
               {locale === 'tr'
                 ? 'Filtreleri değiştirmeyi veya aramanızı daraltmayı deneyin.'
                 : 'Try changing filters or narrowing your search.'}
@@ -165,14 +165,14 @@ export default function HotelFiltersWrapper({ hotels, locale }: Props) {
                 setSearch('');
                 setFilters(DEFAULT_FILTERS);
               }}
-              className="mt-4 rounded-xl bg-[#0066CC] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0052a3]"
+              className="mt-4 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary/90"
             >
               {locale === 'tr' ? 'Filtreleri Temizle' : 'Clear Filters'}
             </button>
           </div>
         ) : (
           <>
-            <p className="mb-4 text-sm text-zinc-500">
+            <p className="mb-4 text-sm text-muted-foreground">
               {filtered.length} {locale === 'tr' ? 'otel bulundu' : 'hotels found'}
             </p>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">

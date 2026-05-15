@@ -85,7 +85,7 @@ export default async function HomePage({
           </div>
           <Link
             href="/tours"
-            className="flex shrink-0 items-center gap-2 text-sm font-semibold text-[var(--brand)] hover:underline"
+            className="flex shrink-0 items-center gap-2 text-sm font-semibold text-[var(--brand)] transition-transform duration-200 hover:scale-105 hover:underline"
           >
             {tTours('viewAll')}
             <ArrowRight className="h-4 w-4" />
@@ -103,7 +103,7 @@ export default async function HomePage({
         <div className="mt-10 sm:mt-14 text-center">
           <Link
             href="/tours"
-            className="inline-flex items-center gap-2 rounded-full border-2 border-[var(--brand)] px-8 py-3 font-semibold text-[var(--brand)] transition-all duration-200 hover:bg-[var(--brand)] hover:text-white"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-[var(--brand)] px-8 py-3 font-semibold text-[var(--brand)] transition-all duration-200 hover:scale-105 hover:bg-[var(--brand)] hover:text-white"
           >
             {tTours('viewAll')}
             <ArrowRight className="h-4 w-4" />
@@ -128,7 +128,7 @@ export default async function HomePage({
           </div>
           <Link
             href="/hotels"
-            className="flex shrink-0 items-center gap-2 text-sm font-semibold text-[var(--brand)] hover:underline"
+            className="flex shrink-0 items-center gap-2 text-sm font-semibold text-[var(--brand)] transition-transform duration-200 hover:scale-105 hover:underline"
           >
             {locale === 'tr' ? 'Tümünü Gör' : 'View All'}
             <ArrowRight className="h-4 w-4" />
@@ -146,7 +146,7 @@ export default async function HomePage({
         <div className="mt-10 sm:mt-14 text-center">
           <Link
             href="/hotels"
-            className="inline-flex items-center gap-2 rounded-full border-2 border-[var(--brand)] px-8 py-3 font-semibold text-[var(--brand)] transition-all duration-200 hover:bg-[var(--brand)] hover:text-white"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-[var(--brand)] px-8 py-3 font-semibold text-[var(--brand)] transition-all duration-200 hover:scale-105 hover:bg-[var(--brand)] hover:text-white"
           >
             {locale === 'tr' ? 'Tümünü Gör' : 'View All Hotels'}
             <ArrowRight className="h-4 w-4" />
@@ -171,7 +171,7 @@ export default async function HomePage({
           </div>
           <Link
             href="/flights"
-            className="flex shrink-0 items-center gap-2 text-sm font-semibold text-[var(--brand)] hover:underline"
+            className="flex shrink-0 items-center gap-2 text-sm font-semibold text-[var(--brand)] transition-transform duration-200 hover:scale-105 hover:underline"
           >
             {locale === 'tr' ? 'Tümünü Gör' : 'View All'}
             <ArrowRight className="h-4 w-4" />
@@ -190,7 +190,7 @@ export default async function HomePage({
         <div className="mt-10 sm:mt-14 text-center">
           <Link
             href="/flights"
-            className="inline-flex items-center gap-2 rounded-full border-2 border-[var(--brand)] px-8 py-3 font-semibold text-[var(--brand)] transition-all duration-200 hover:bg-[var(--brand)] hover:text-white"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-[var(--brand)] px-8 py-3 font-semibold text-[var(--brand)] transition-all duration-200 hover:scale-105 hover:bg-[var(--brand)] hover:text-white"
           >
             {locale === 'tr' ? 'Tümünü Gör' : 'View All Flights'}
             <ArrowRight className="h-4 w-4" />

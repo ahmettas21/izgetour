@@ -79,10 +79,10 @@ function CityAutocomplete({
 
   return (
     <div ref={ref} className="relative flex-1">
-      <label className="mb-1 block text-xs font-medium text-zinc-500">{label}</label>
-      <div className="flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2.5">
+      <label className="mb-1 block text-xs font-medium text-muted-foreground">{label}</label>
+      <div className="flex items-center gap-1.5 rounded-xl border border-border bg-muted px-3 py-2.5">
         <Plane
-          className={`h-4 w-4 shrink-0 text-[#0066CC] ${type === 'destination' ? 'rotate-90' : ''}`}
+          className={`h-4 w-4 shrink-0 text-primary ${type === 'destination' ? 'rotate-90' : ''}`}
         />
         <input
           id={inputId}
@@ -96,22 +96,22 @@ function CityAutocomplete({
           onFocus={() => setOpen(true)}
           placeholder={placeholder}
           autoComplete="off"
-          className="flex-1 bg-transparent text-sm font-medium text-zinc-900 outline-none placeholder:text-zinc-400"
+          className="flex-1 bg-transparent text-sm font-medium text-foreground outline-none placeholder:text-muted-foreground"
         />
-        <ChevronDown className="h-3.5 w-3.5 shrink-0 text-zinc-400" />
+        <ChevronDown className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
       </div>
 
       {open && results.length > 0 && (
-        <ul className="absolute z-50 mt-1 w-full rounded-xl border border-zinc-200 bg-white py-1 shadow-lg">
+        <ul className="absolute z-50 mt-1 w-full rounded-xl border border-border bg-surface py-1 shadow-lg">
           {results.map((city) => (
             <li key={city.code}>
               <button
                 type="button"
                 onClick={() => select(city)}
-                className="flex w-full items-center justify-between px-3 py-2 text-left text-sm hover:bg-zinc-50"
+                className="flex w-full items-center justify-between px-3 py-2 text-left text-sm hover:bg-muted"
               >
-                <span className="font-medium text-zinc-900">{city.city}</span>
-                <span className="rounded bg-zinc-100 px-1.5 py-0.5 text-xs font-semibold text-zinc-600">
+                <span className="font-medium text-foreground">{city.city}</span>
+                <span className="rounded bg-muted px-1.5 py-0.5 text-xs font-semibold text-muted-foreground">
                   {city.code}
                 </span>
               </button>
@@ -144,18 +144,18 @@ function MiniFlightCard({
       onClick={onSelect}
       className={`w-full rounded-xl border-2 p-3 text-left transition-all ${
         isSelected
-          ? 'border-[#0066CC] bg-[#0066CC]/5 shadow-sm'
-          : 'border-zinc-200 bg-white hover:border-zinc-300'
+          ? 'border-primary bg-primary/5 shadow-sm'
+          : 'border-border bg-surface hover:border-border/80'
       }`}
     >
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-100 text-[10px] font-bold text-zinc-700">
+          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-muted text-[10px] font-bold text-foreground">
             {flight.airlineCode}
           </div>
           <div>
-            <div className="text-xs font-semibold text-zinc-900">{flight.airline}</div>
-            <div className="flex items-center gap-1 text-[11px] text-zinc-400">
+            <div className="text-xs font-semibold text-foreground">{flight.airline}</div>
+            <div className="flex items-center gap-1 text-[11px] text-muted-foreground">
               <span>{flight.departureTime}</span>
               <span>→</span>
               <span>{flight.arrivalTime}</span>
@@ -169,11 +169,11 @@ function MiniFlightCard({
           </div>
         </div>
         <div className="text-right">
-          <div className={`text-sm font-bold ${isSelected ? 'text-[#0066CC]' : 'text-zinc-900'}`}>
+          <div className={`text-sm font-bold ${isSelected ? 'text-primary' : 'text-foreground'}`}>
             ₺{flight.price.toLocaleString('tr-TR')}
           </div>
           {isSelected && (
-            <span className="text-[10px] font-medium text-[#0066CC]">✓ {lt('Seçildi', 'Selected')}</span>
+            <span className="text-[10px] font-medium text-primary">✓ {lt('Seçildi', 'Selected')}</span>
           )}
         </div>
       </div>
@@ -214,14 +214,14 @@ export default function MultiCitySearchForm({
         const flights = result?.flights ?? [];
 
         return (
-          <div key={leg.id} className="rounded-2xl border border-zinc-200 bg-white p-4">
+          <div key={leg.id} className="rounded-2xl border border-border bg-surface p-4">
             {/* Leg header */}
             <div className="mb-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#0066CC] text-[10px] font-bold text-white">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
                   {index + 1}
                 </div>
-                <span className="text-sm font-semibold text-zinc-700">
+                <span className="text-sm font-semibold text-foreground">
                   {lt('Uçuş Ayağı', 'Flight Leg')} {index + 1}
                 </span>
               </div>
@@ -230,7 +230,7 @@ export default function MultiCitySearchForm({
                   type="button"
                   onClick={() => onMoveLeg(leg.id, 'up')}
                   disabled={index === 0}
-                  className="rounded p-1 text-zinc-400 hover:bg-zinc-100 disabled:opacity-30"
+                  className="rounded p-1 text-muted-foreground hover:bg-muted disabled:opacity-30"
                   title={lt('Yukarı Taşı', 'Move Up')}
                 >
                   <ArrowUp className="h-3.5 w-3.5" />
@@ -239,7 +239,7 @@ export default function MultiCitySearchForm({
                   type="button"
                   onClick={() => onMoveLeg(leg.id, 'down')}
                   disabled={index === legs.length - 1}
-                  className="rounded p-1 text-zinc-400 hover:bg-zinc-100 disabled:opacity-30"
+                  className="rounded p-1 text-muted-foreground hover:bg-muted disabled:opacity-30"
                   title={lt('Aşağı Taşı', 'Move Down')}
                 >
                   <ArrowDown className="h-3.5 w-3.5" />
@@ -248,7 +248,7 @@ export default function MultiCitySearchForm({
                   <button
                     type="button"
                     onClick={() => onRemoveLeg(leg.id)}
-                    className="rounded p-1 text-zinc-400 hover:bg-red-50 hover:text-red-500"
+                    className="rounded p-1 text-muted-foreground hover:bg-red-50 hover:text-red-500"
                     title={lt('Kaldır', 'Remove')}
                   >
                     <Trash2 className="h-3.5 w-3.5" />
@@ -270,8 +270,8 @@ export default function MultiCitySearchForm({
                 locale={locale}
               />
               <div className="flex shrink-0 items-center justify-center py-2 sm:py-0">
-                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-100">
-                  <Plane className="h-3.5 w-3.5 rotate-90 text-zinc-500" />
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-muted">
+                  <Plane className="h-3.5 w-3.5 rotate-90 text-muted-foreground" />
                 </div>
               </div>
               <CityAutocomplete
@@ -288,17 +288,17 @@ export default function MultiCitySearchForm({
 
             {/* Date */}
             <div className="mb-2">
-              <label className="mb-1 block text-xs font-medium text-zinc-500">
+              <label className="mb-1 block text-xs font-medium text-muted-foreground">
                 {lt('Kalkış Tarihi', 'Departure Date')}
               </label>
-              <div className="flex items-center gap-2 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2.5">
-                <Calendar className="h-4 w-4 shrink-0 text-zinc-400" />
+              <div className="flex items-center gap-2 rounded-xl border border-border bg-muted px-3 py-2.5">
+                <Calendar className="h-4 w-4 shrink-0 text-muted-foreground" />
                 <input
                   type="date"
                   value={leg.date}
                   min={today}
                   onChange={(e) => onUpdateLeg(leg.id, { date: e.target.value })}
-                  className="flex-1 bg-transparent text-sm font-medium text-zinc-900 outline-none"
+                  className="flex-1 bg-transparent text-sm font-medium text-foreground outline-none"
                 />
               </div>
               {err && <p className="mt-1 text-xs text-red-500">{err.message}</p>}
@@ -307,11 +307,11 @@ export default function MultiCitySearchForm({
             {/* Per-leg flight results */}
             {phase === 'results' && (
               <div className="mt-3 space-y-1.5">
-                <div className="text-xs font-medium text-zinc-400">
+                <div className="text-xs font-medium text-muted-foreground">
                   {lt('Bu ayak için uçuş seç:', 'Select flight for this leg:')}
                 </div>
                 {flights.length === 0 ? (
-                  <p className="rounded-lg bg-zinc-50 p-3 text-center text-sm text-zinc-400">
+                  <p className="rounded-lg bg-muted p-3 text-center text-sm text-muted-foreground">
                     {lt('Bu rotada uçuş bulunamadı', 'No flights found for this route')}
                   </p>
                 ) : (
@@ -336,24 +336,24 @@ export default function MultiCitySearchForm({
         <button
           type="button"
           onClick={onAddLeg}
-          className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-zinc-300 py-3 text-sm font-medium text-zinc-500 transition-colors hover:border-[#0066CC] hover:text-[#0066CC]"
+          className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border py-3 text-sm font-medium text-muted-foreground transition-colors hover:border-primary hover:text-primary"
         >
           <Plus className="h-4 w-4" />
           {lt('Yeni Uçuş Ayağı Ekle', 'Add Flight Leg')}
-          <span className="rounded bg-zinc-100 px-1.5 py-0.5 text-[10px] font-semibold text-zinc-400">
+          <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">
             {legs.length}/6
           </span>
         </button>
       )}
 
       {/* Passengers */}
-      <div className="flex items-center gap-3 rounded-2xl border border-zinc-200 bg-white px-4 py-3">
-        <span className="text-sm font-medium text-zinc-700">{lt('Yolcu', 'Passengers')}</span>
+      <div className="flex items-center gap-3 rounded-2xl border border-border bg-surface px-4 py-3">
+        <span className="text-sm font-medium text-foreground">{lt('Yolcu', 'Passengers')}</span>
         <div className="ml-auto flex items-center gap-2">
           <button
             type="button"
             onClick={() => onSetPassengers(Math.max(1, passengers - 1))}
-            className="flex h-7 w-7 items-center justify-center rounded-full border border-zinc-200 text-sm font-bold text-zinc-600 hover:bg-zinc-50"
+            className="flex h-7 w-7 items-center justify-center rounded-full border border-border text-sm font-bold text-foreground hover:bg-muted"
           >
             −
           </button>
@@ -361,7 +361,7 @@ export default function MultiCitySearchForm({
           <button
             type="button"
             onClick={() => onSetPassengers(Math.min(6, passengers + 1))}
-            className="flex h-7 w-7 items-center justify-center rounded-full border border-zinc-200 text-sm font-bold text-zinc-600 hover:bg-zinc-50"
+            className="flex h-7 w-7 items-center justify-center rounded-full border border-border text-sm font-bold text-foreground hover:bg-muted"
           >
             +
           </button>
@@ -375,14 +375,14 @@ export default function MultiCitySearchForm({
             <button
               type="button"
               onClick={onClearResults}
-              className="flex-1 rounded-xl border border-zinc-200 py-3 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-50"
+              className="flex-1 rounded-xl border border-border py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
             >
               {lt('Yeniden Ara', 'New Search')}
             </button>
             <button
               type="button"
               onClick={onSearch}
-              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#0066CC] py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0052a3]"
+              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
             >
               <Search className="h-4 w-4" />
               {lt('Fiyatları Yenile', 'Refresh Prices')}
@@ -393,7 +393,7 @@ export default function MultiCitySearchForm({
             type="button"
             onClick={onSearch}
             disabled={hasErrors || phase === 'searching'}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#0066CC] py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0052a3] disabled:opacity-50"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-white transition-colors hover:bg-primary/90 disabled:opacity-50"
           >
             {phase === 'searching' ? (
               <>

@@ -3,8 +3,11 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
-import { Heart, Trash2, Plane, MapPin, Hotel, ArrowRight } from 'lucide-react';
+import { Heart, Trash2, Plane, MapPin, Hotel, ArrowRight, Star } from 'lucide-react';
 import { useWishlist } from '@/hooks/useWishlist';
+import { MOCK_TOURS } from '@/data/tours';
+import { hotels as MOCK_HOTELS } from '@/data/hotels';
+import { MOCK_FLIGHTS } from '@/data/flights';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -64,7 +67,7 @@ export default function WishlistPage({ params }: Props) {
 
         {/* Empty state */}
         {wishlist.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-center">
+          <div className="flex flex-col items-center justify-center py-12 text-center">
             <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-zinc-100">
               <Heart className="h-8 w-8 text-zinc-300" />
             </div>
@@ -76,13 +79,130 @@ export default function WishlistPage({ params }: Props) {
                 ? 'Beğendiğin turları, otelleri veya uçuşları buraya kaydet.'
                 : 'Save tours, hotels, or flights you like here.'}
             </p>
-            <Link
-              href="/tours"
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--brand)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)]"
-            >
-              {locale === 'tr' ? 'Turları Keşfet' : 'Explore Tours'}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+
+            {/* Suggested items from mock data */}
+            <div className="mt-10 w-full">
+              <h3 className="mb-4 text-left text-lg font-bold text-[var(--foreground)]">
+                {locale === 'tr' ? 'Önerilen Turlar' : 'Suggested Tours'}
+              </h3>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {MOCK_TOURS.slice(0, 3).map((tour) => {
+                  const title = locale === 'tr' ? tour.title : tour.titleEn;
+                  return (
+                    <Link
+                      key={tour.id}
+                      href={`/tours/${tour.slug}`}
+                      className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-white shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-lg"
+                    >
+                      <div className="relative h-36 w-full overflow-hidden">
+                        <Image
+                          src={tour.image}
+                          alt={title}
+                          fill
+                          className="object-cover transition-transform duration-300 group-hover:scale-110"
+                          sizes="300px"
+                        />
+                        <div className="absolute top-2 right-2 flex items-center gap-1 rounded-full bg-white/90 px-2 py-1 text-xs font-semibold">
+                          <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                          {tour.rating}
+                        </div>
+                      </div>
+                      <div className="flex flex-1 flex-col p-4">
+                        <span className="mb-1 inline-flex items-center gap-1 rounded-full bg-[var(--brand-light)] px-2 py-0.5 text-[10px] font-semibold text-[var(--brand)]">
+                          <MapPin className="h-3 w-3" />
+                          {tour.location}
+                        </span>
+                        <h4 className="text-sm font-semibold text-[var(--foreground)]">{title}</h4>
+                        <p className="mt-2 text-lg font-extrabold text-[var(--brand)]">
+                          ₺{tour.price.toLocaleString('tr-TR')}
+                        </p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              <h3 className="mb-4 mt-8 text-left text-lg font-bold text-[var(--foreground)]">
+                {locale === 'tr' ? 'Önerilen Oteller' : 'Suggested Hotels'}
+              </h3>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {MOCK_HOTELS.slice(0, 3).map((hotel) => {
+                  const title = locale === 'tr' ? hotel.title : hotel.titleEn;
+                  return (
+                    <Link
+                      key={hotel.id}
+                      href={`/hotels/${hotel.slug}`}
+                      className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-white shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-lg"
+                    >
+                      <div className="relative h-36 w-full overflow-hidden">
+                        <Image
+                          src={hotel.image}
+                          alt={title}
+                          fill
+                          className="object-cover transition-transform duration-300 group-hover:scale-110"
+                          sizes="300px"
+                        />
+                        <div className="absolute top-2 right-2 flex items-center gap-1 rounded-full bg-white/90 px-2 py-1 text-xs font-semibold">
+                          <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                          {hotel.rating}
+                        </div>
+                      </div>
+                      <div className="flex flex-1 flex-col p-4">
+                        <span className="mb-1 inline-flex items-center gap-1 rounded-full bg-[var(--brand-light)] px-2 py-0.5 text-[10px] font-semibold text-[var(--brand)]">
+                          <Hotel className="h-3 w-3" />
+                          {hotel.city}
+                        </span>
+                        <h4 className="text-sm font-semibold text-[var(--foreground)]">{title}</h4>
+                        <p className="mt-2 text-lg font-extrabold text-[var(--brand)]">
+                          ₺{hotel.price.toLocaleString('tr-TR')}
+                        </p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              <h3 className="mb-4 mt-8 text-left text-lg font-bold text-[var(--foreground)]">
+                {locale === 'tr' ? 'Önerilen Uçuşlar' : 'Suggested Flights'}
+              </h3>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {MOCK_FLIGHTS.slice(0, 3).map((flight) => {
+                  const title = `${flight.departure} → ${flight.arrival}`;
+                  return (
+                    <Link
+                      key={flight.id}
+                      href={`/flights/${flight.slug}`}
+                      className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-white p-4 shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-lg"
+                    >
+                      <div className="mb-3 flex items-center justify-between">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-[var(--brand-light)] px-2 py-0.5 text-[10px] font-semibold text-[var(--brand)]">
+                          <Plane className="h-3 w-3" />
+                          {flight.airline}
+                        </span>
+                        <span className="text-xs text-[var(--muted)]">{flight.duration}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="text-center">
+                          <p className="text-lg font-bold text-[var(--foreground)]">{flight.departureTime}</p>
+                          <p className="text-xs text-[var(--muted)]">{flight.departureCode}</p>
+                        </div>
+                        <div className="flex flex-1 flex-col items-center">
+                          <span className="text-[10px] text-[var(--muted)]">{flight.stops === 0 ? 'Direkt' : `${flight.stops} aktarma`}</span>
+                          <div className="w-full border-t border-dashed border-[var(--border)]" />
+                        </div>
+                        <div className="text-center">
+                          <p className="text-lg font-bold text-[var(--foreground)]">{flight.arrivalTime}</p>
+                          <p className="text-xs text-[var(--muted)]">{flight.arrivalCode}</p>
+                        </div>
+                      </div>
+                      <p className="mt-3 text-lg font-extrabold text-[var(--brand)]">
+                        ₺{flight.price.toLocaleString('tr-TR')}
+                      </p>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         ) : (
           <div className="space-y-4">
