@@ -182,7 +182,7 @@ export default async function HomePage({
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {MOCK_FLIGHTS.slice(0, 3).map((flight) => {
               const adapted = toFlightResult(flight);
-              return <FlightCard key={flight.id} flight={adapted} isFollowed={false} onToggleFollow={() => {}} />;
+              return <FlightCard key={flight.id} flight={adapted} />;
           })}
         </div>
 

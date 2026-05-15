@@ -7,8 +7,8 @@ import type { FlightResult } from './types';
 
 interface FlightCardProps {
   flight: FlightResult;
-  isFollowed: boolean;
-  onToggleFollow: (id: string) => void;
+  isFollowed?: boolean;
+  onToggleFollow?: (id: string) => void;
   isCompareSelected?: boolean;
   onToggleCompare?: (id: string) => void;
   showCompareCheckbox?: boolean;
@@ -105,7 +105,7 @@ export default function FlightCard({
 
           {/* Track button */}
           <button
-            onClick={() => onToggleFollow(flight.id)}
+            onClick={() => onToggleFollow?.(flight.id)}
             className={`
               flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 text-xs font-medium transition-colors
               ${isFollowed
