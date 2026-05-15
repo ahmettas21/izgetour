@@ -30,8 +30,8 @@ ENV NEXT_CACHE_IMAGES_DIR=/tmp/next-cache/images
 
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs && \
-    mkdir -p /tmp/next-cache/images && \
-    chmod -R 777 /tmp/next-cache
+    mkdir -p /tmp/next-cache/images /app/.next/cache/images && \
+    chown -R nextjs:nodejs /tmp/next-cache /app/.next
 
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/node_modules ./node_modules
