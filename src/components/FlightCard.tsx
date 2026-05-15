@@ -56,7 +56,7 @@ export default function FlightCard({ flight, isFollowed, onToggleFollow, locale,
           <div>
             <span className="flex items-center gap-2 text-sm font-medium text-zinc-900 dark:text-white">
               {flight.airline}
-              <span className={`text-xs font-semibold ${isDirect ? 'text-emerald-600' : 'text-amber-600'}`}>
+              <span className={`text-xs font-semibold ${isDirect ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`}>
                 {isDirect ? '🟢' : '🟡'} {stopLabel}
               </span>
             </span>
@@ -85,7 +85,7 @@ export default function FlightCard({ flight, isFollowed, onToggleFollow, locale,
             className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-200 bg-white shadow-sm transition-all hover:scale-110 dark:border-zinc-700 dark:bg-zinc-800 dark:shadow-zinc-900/50"
             aria-label={saved ? 'Remove from wishlist' : 'Add to wishlist'}
           >
-            <Heart className={`h-3.5 w-3.5 transition-colors ${saved ? 'fill-red-500 text-red-500' : 'text-zinc-400'}`} />
+            <Heart className={`h-3.5 w-3.5 transition-colors ${saved ? 'fill-red-500 text-red-500 dark:fill-red-500 dark:text-red-500' : 'text-zinc-400 dark:text-zinc-500'}`} />
           </button>
         </div>
       </div>
@@ -111,7 +111,7 @@ export default function FlightCard({ flight, isFollowed, onToggleFollow, locale,
             {flight.stopCities.map((city) => (
               <div key={city} className="relative mx-px">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-amber-50 px-1.5 py-0.5 text-[10px] text-amber-600 dark:bg-amber-900/30 dark:text-amber-400">{city}</div>
-                <div className="h-2 w-2 rounded-full border-2 border-amber-400 bg-white dark:bg-zinc-800" />
+                <div className="h-2 w-2 rounded-full border-2 border-amber-400 bg-white dark:border-amber-400 dark:bg-zinc-800" />
               </div>
             ))}
             <div className={`${isDirect ? 'mx-auto' : ''} rounded-full bg-[#0066CC] p-1`}>
@@ -131,11 +131,11 @@ export default function FlightCard({ flight, isFollowed, onToggleFollow, locale,
         {/* Fiyat + Detay */}
         <div className="ml-auto w-[110px] text-right">
           {priceChanged && (
-            <div className="text-[11px] font-medium text-emerald-600">
+            <div className="text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
               ▼ %{Math.round((1 - flight.price / flight.originalPrice) * 100)} {t('dustu', 'off')}
             </div>
           )}
-          <div className={`text-2xl font-bold ${priceChanged ? 'text-emerald-600' : 'text-[#0066CC]'}`}>
+          <div className={`text-2xl font-bold ${priceChanged ? 'text-emerald-600 dark:text-emerald-400' : 'text-[#0066CC] dark:text-[#3399ff]'}`}>
             ₺{formatPrice(flight.price)}
           </div>
           <div className="text-[11px] text-zinc-400 dark:text-zinc-500">{t('kisi basi', 'per person')}</div>

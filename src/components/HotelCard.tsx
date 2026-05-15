@@ -44,7 +44,7 @@ export default function HotelCard({ hotel, locale }: Props) {
   return (
     <Link href={`/hotels/${hotel.slug}`} className="group block h-full">
       <article
-        className="flex h-full flex-col overflow-hidden rounded-2xl bg-white transition-all duration-300"
+        className="flex h-full flex-col overflow-hidden rounded-2xl bg-[var(--surface)] transition-all duration-300"
         style={{
           boxShadow: 'var(--shadow-card)',
         }}
@@ -122,13 +122,13 @@ export default function HotelCard({ hotel, locale }: Props) {
             {hotel.amenities.slice(0, 3).map((amenity) => (
               <span
                 key={amenity}
-                className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] text-zinc-600"
+                className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] text-zinc-600 dark:bg-zinc-700 dark:text-zinc-400"
               >
                 {amenity}
               </span>
             ))}
             {hotel.amenities.length > 3 && (
-              <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] text-zinc-500">
+              <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] text-zinc-500 dark:bg-zinc-700 dark:text-zinc-400">
                 +{hotel.amenities.length - 3}
               </span>
             )}
