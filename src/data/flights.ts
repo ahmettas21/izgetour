@@ -36,9 +36,9 @@ export const MOCK_FLIGHTS: Flight[] = [
     price: 2849, originalPrice: 3200,
     cabinClass: 'economy', baggage: '2x23kg',
     aircraft: 'Airbus A350', availableSeats: 12,
-  seatsLeft: 12, refundable: true,
     departureDate: '2026-05-15',
     co2Emissions: 390,
+    refundable: true,
   },
   {
     id: 'pc1', slug: 'pc-istanbul-londra-0815',
@@ -51,9 +51,9 @@ export const MOCK_FLIGHTS: Flight[] = [
     price: 1849, originalPrice: 2100,
     cabinClass: 'economy', baggage: '20kg',
     aircraft: 'Boeing 737', availableSeats: 28,
-  seatsLeft: 28, refundable: false,
     departureDate: '2026-05-15',
     co2Emissions: 380,
+    refundable: true,
   },
   {
     id: 'xq1', slug: 'xq-istanbul-londra-1100',
@@ -66,9 +66,9 @@ export const MOCK_FLIGHTS: Flight[] = [
     price: 2199, originalPrice: 2199,
     cabinClass: 'economy', baggage: '20kg',
     aircraft: 'Boeing 737 MAX', availableSeats: 15,
-  seatsLeft: 15, refundable: true,
     departureDate: '2026-05-15',
     co2Emissions: 460,
+    refundable: true,
   },
   {
     id: 'tk2', slug: 'tk-istanbul-dubai-0700',
@@ -81,9 +81,9 @@ export const MOCK_FLIGHTS: Flight[] = [
     price: 4499, originalPrice: 4800,
     cabinClass: 'economy', baggage: '2x23kg',
     aircraft: 'Boeing 777', availableSeats: 8,
-  seatsLeft: 8, refundable: true,
     departureDate: '2026-05-16',
     co2Emissions: 680,
+    refundable: true,
   },
   {
     id: 'ba1', slug: 'ba-istanbul-londra-1420',
@@ -96,9 +96,9 @@ export const MOCK_FLIGHTS: Flight[] = [
     price: 3499, originalPrice: 3800,
     cabinClass: 'economy', baggage: '1x23kg',
     aircraft: 'Airbus A321', availableSeats: 5,
-  seatsLeft: 5, refundable: true,
     departureDate: '2026-05-15',
     co2Emissions: 390,
+    refundable: true,
   },
   {
     id: 'lh1', slug: 'lh-istanbul-londra-1845',
@@ -111,9 +111,9 @@ export const MOCK_FLIGHTS: Flight[] = [
     price: 2599, originalPrice: 2599,
     cabinClass: 'economy', baggage: '1x23kg',
     aircraft: 'Airbus A320', availableSeats: 22,
-  seatsLeft: 22, refundable: false,
     departureDate: '2026-05-15',
     co2Emissions: 470,
+    refundable: true,
   },
   {
     id: 'tk3', slug: 'tk-istanbul-newyork-0130',
@@ -126,9 +126,9 @@ export const MOCK_FLIGHTS: Flight[] = [
     price: 12999, originalPrice: 14500,
     cabinClass: 'economy', baggage: '2x23kg',
     aircraft: 'Airbus A350', availableSeats: 3,
-  seatsLeft: 3, refundable: true,
     departureDate: '2026-05-17',
     co2Emissions: 1050,
+    refundable: true,
   },
   {
     id: 'pc2', slug: 'pc-ankara-berlin-1000',
@@ -141,9 +141,9 @@ export const MOCK_FLIGHTS: Flight[] = [
     price: 2499, originalPrice: 2499,
     cabinClass: 'economy', baggage: '20kg',
     aircraft: 'Boeing 737', availableSeats: 18,
-  seatsLeft: 18, refundable: false,
     departureDate: '2026-05-18',
     co2Emissions: 290,
+    refundable: true,
   },
 ];
 

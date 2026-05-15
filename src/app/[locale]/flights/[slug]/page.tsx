@@ -12,6 +12,7 @@ import DynamicPriceChart from '@/components/DynamicPriceChart';
 import AncillaryManager from '@/components/Ancillary/AncillaryManager';
 import DynamicCuisineRecommender from '@/components/DynamicCuisineRecommender';
 import SustainabilityScore from '@/components/SustainabilityScore';
+import Breadcrumb from '@/components/Breadcrumb';
 import LuggageArSizer from '@/components/LuggageArSizer';
 
 export default function FlightDetailPage() {
@@ -53,7 +54,7 @@ export default function FlightDetailPage() {
       <Breadcrumb
         items={[
           { label: 'Uçuşlar', href: '/flights' },
-          { label: `${flight.airline} - ${flight.flightNumber}` },
+          { label: `${flight.airline} - ${flight.airlineCode}${flight.slug.split('-').slice(1).join('').toUpperCase()}` },
         ]}
       />
       <div className="min-h-screen bg-zinc-50">

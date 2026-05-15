@@ -2,16 +2,16 @@
 
 import { useTranslations } from 'next-intl';
 import { Bell, BellOff, Clock, Shield, Users, ArrowRight } from 'lucide-react';
-import type { FlightOffer } from '@/actions/searchFlights';
+import type { FlightResult } from '@/actions/searchFlights';
 
 interface FlightCardClientProps {
-  flight: FlightOffer;
+  flight: FlightResult;
   isFollowed: boolean;
   onToggleFollow: (id: string) => void;
   isCompareSelected?: boolean;
   onToggleCompare?: (id: string) => void;
   showCompareCheckbox?: boolean;
-  onSelect?: (flight: FlightOffer) => void;
+  onSelect?: (flight: FlightResult) => void;
 }
 
 function formatTime(iso: string): string {
@@ -38,6 +38,7 @@ export default function FlightCardClient({
   const priceChanged = flight.price < flight.originalPrice;
   const formatPrice = (p: number) => p.toLocaleString('tr-TR');
   const isDirect = flight.stops === 0;
+  const seatsLeft = flight.availableSeats;
 
   return (
     <div
@@ -78,9 +79,9 @@ export default function FlightCardClient({
           </div>
         </div>
         <div className="flex items-center gap-2">
-          {flight.seatsLeft <= 5 && (
+          {seatsLeft <= 5 && (
             <span className="rounded-full bg-error/10 px-2.5 py-0.5 text-[11px] font-semibold text-error">
-              {t('lastSeats', { count: flight.seatsLeft })}
+              {t('lastSeats', { count: seatsLeft })}
             </span>
           )}
           <button
@@ -102,7 +103,7 @@ export default function FlightCardClient({
       <div className="flex items-center gap-4">
         <div className="min-w-[80px] text-center">
           <div className="text-2xl font-bold text-foreground">
-            {formatTime(flight.departureAt)}
+            {formatTime(flight.departureTime)}
           </div>
           <div className="text-xs font-semibold text-muted-foreground">{flight.departureCode}</div>
           <div className="truncate text-[11px] text-muted-foreground">{flight.departure}</div>
@@ -115,7 +116,7 @@ export default function FlightCardClient({
           </div>
           <div className="relative mt-1 flex w-full items-center">
             <div className="h-px flex-1 bg-gradient-to-r from-primary/30 to-primary/30" />
-            {flight.stopCities.map((city) => (
+            {flight.stopCities.map((city: string) => (
               <div key={city} className="relative mx-px">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-warning/10 px-1.5 py-0.5 text-[10px] text-warning">
                   {city}
@@ -132,7 +133,7 @@ export default function FlightCardClient({
 
         <div className="min-w-[80px] text-center">
           <div className="text-2xl font-bold text-foreground">
-            {formatTime(flight.arrivalAt)}
+            {formatTime(flight.arrivalTime)}
           </div>
           <div className="text-xs font-semibold text-muted-foreground">{flight.arrivalCode}</div>
           <div className="truncate text-[11px] text-muted-foreground">{flight.arrival}</div>
@@ -151,7 +152,7 @@ export default function FlightCardClient({
           <div className="text-[11px] text-muted-foreground">{t('perPerson')}</div>
           <div className="mt-2 flex items-center justify-end gap-1 text-[11px] text-muted-foreground">
             <Users className="h-3 w-3" />
-            {flight.seatsLeft} {t('seats')}
+            {seatsLeft} {t('seats')}
           </div>
           <button
             onClick={() => onSelect?.(flight)}

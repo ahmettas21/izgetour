@@ -1,11 +1,10 @@
 'use server';
 
 import { Airport } from '@/data/airports';
-import type { FlightResult, SearchParams } from '@/components/flights/types';
+import type { FlightResult, SearchParams, CabinClass } from '@/components/flights/types';
 
 // Re-export types for consumers
-export type { FlightResult, SearchParams } from '@/components/flights/types';
-export type { CabinClass } from '@/components/flights/types';
+export type { FlightResult, SearchParams, CabinClass } from '@/components/flights/types';
 
 // ─── Amadeus API Types ───────────────────────────────────────────────────────
 
@@ -199,12 +198,11 @@ function normalizeAmadeusOffer(
     originalPrice: Math.round(parseFloat(offer.price.grandTotal) * 100) / 100,
     cabin: cabinMap[segDetail?.cabin ?? 'ECONOMY'] ?? 'economy',
     refundable: offer.pricingOptions.fareType.includes('REFUNDABLE'),
-    seatsLeft: offer.numberOfBookableSeats,
     availableSeats: offer.numberOfBookableSeats,
     baggage,
     aircraft: firstSeg?.aircraft?.code ?? '',
     co2Emissions: 0,
-    rawOffer: offer as unknown as Record<string, unknown>,
+    // rawOffer omitted - not in FlightResult type
   };
 }
 
@@ -255,7 +253,6 @@ function generateMockResults(from: Airport, to: Airport, cabin: import('@/compon
       originalPrice: orig,
       cabin,
       refundable: i % 2 === 0,
-      seatsLeft: 2 + Math.floor(Math.random() * 20),
       availableSeats: 2 + Math.floor(Math.random() * 20),
       baggage: cabin === 'economy' ? '20kg' : '2x32kg',
       aircraft: i % 2 === 0 ? 'Airbus A350' : 'Boeing 737',

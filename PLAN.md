@@ -36,3 +36,20 @@ sudo docker run -d --name izgetour --restart unless-stopped -p 3000:3000 izgetou
 - git push YOK
 - Secret/credential ASLA
 - Mock data kullan
+
+## Run 2026-05-14 23:40 UTC
+✅ TypeScript clean (0 errors)
+✅ Build successful (68 pages)
+✅ Docker container running (localhost:3000)
+✅ All pages return 200 (tr: /, /tours, /hotels, /flights)
+🔧 Fixes applied:
+  - Breadcrumb import added to flights/[slug]/page.tsx
+  - FlightResult type aligned (removed FlightOffer, seatsLeft → availableSeats)
+  - CabinClass import fixed in searchFlights.ts
+  - Duplicate properties removed (availableSeats x2)
+  - rawOffer removed from FlightResult
+  - flightNumber → airlineCode+slug construct
+  - seatsLeft removed from flights.ts mock data
+  - refundable restored after cleanup
+  - FlightComparePanel simplified to FlightResult only
+  - FlightCardClient rewritten with FlightResult type

@@ -6,12 +6,11 @@ import {
   ArrowRight, Columns2, Leaf,
 } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
-import type { Flight } from '@/data/flights';
-import type { FlightOffer } from '@/actions/searchFlights';
+import type { FlightResult } from '@/actions/searchFlights';
 import SustainabilityScore from '@/components/SustainabilityScore';
 
 interface Props {
-  flights: Flight[] | FlightOffer[];
+  flights: FlightResult[];
   locale?: 'tr' | 'en';
   onClose?: () => void;
 }
@@ -24,7 +23,7 @@ const FEATURES = [
 ] as const;
 
 export default function FlightComparePanel({ flights, locale = 'tr', onClose }: Props) {
-  const [items, setItems] = useState<(Flight | FlightOffer)[]>(flights.slice(0, 3));
+  const [items, setItems] = useState<FlightResult[]>(flights.slice(0, 3));
   const isTr = locale === 'tr';
 
   const remove = (id: string) =>
@@ -32,15 +31,15 @@ export default function FlightComparePanel({ flights, locale = 'tr', onClose }: 
 
   if (items.length === 0) return null;
 
-  const prices = items.map((f) => 'price' in f ? f.price : (f as FlightOffer).price).filter(Boolean);
-  const durations = items.map((f) => 'durationMinutes' in f ? f.durationMinutes : (f as FlightOffer).durationMinutes).filter(Boolean);
+  const prices = items.map((f) => f.price).filter(Boolean);
+  const durations = items.map((f) => f.durationMinutes).filter(Boolean);
   const ecos = items.map((f) => 'co2Emissions' in f ? f.co2Emissions : 0).filter(Boolean);
 
   const bestPrice = prices.length ? Math.min(...prices) : 0;
   const bestDuration = durations.length ? Math.min(...durations) : 0;
   const bestEco = ecos.length ? Math.min(...ecos) : 0;
 
-  const getFieldValue = (f: Flight | FlightOffer, key: string) => {
+  const getFieldValue = (f: FlightResult, key: string) => {
     switch (key) {
       case 'baggage': return f.baggage;
       case 'refundable': return f.refundable ? (isTr ? 'İade Edilir' : 'Refundable') : (isTr ? 'İadesiz' : 'Non-refund');
@@ -180,7 +179,7 @@ export default function FlightComparePanel({ flights, locale = 'tr', onClose }: 
                 <td key={f.id} className="px-3 py-3 text-center">
                   <div className={`inline-flex items-center gap-1 font-medium ${f.durationMinutes === bestDuration ? 'text-emerald-600' : 'text-zinc-700'}`}>
                     <Clock className="h-3.5 w-3.5" />
-                    {f.duration}
+                    {`${Math.floor(f.durationMinutes / 60)}s ${f.durationMinutes % 60}dk`}
                     {f.durationMinutes === bestDuration && (
                       <span className="ml-1 rounded-full bg-emerald-100 px-1.5 py-0.5 text-[10px] font-semibold text-emerald-700">
                         {isTr ? 'En Kısa' : 'Shortest'}
