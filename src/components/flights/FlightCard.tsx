@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Bell, BellOff, Clock, Shield, Users, ArrowRight, ShoppingCart, Heart } from 'lucide-react';
+import { Bell, BellOff, Clock, Shield, Users, ArrowRight, ShoppingCart, Heart, Plane, PlaneLanding, Luggage, Armchair } from 'lucide-react';
 import { useWishlist } from '@/hooks/useWishlist';
 import type { FlightResult } from './types';
 
@@ -87,7 +87,11 @@ export default function FlightCard({
               <span
                 className={`text-xs font-semibold ${isDirect ? 'text-success' : 'text-warning'}`}
               >
-                {isDirect ? '🛫' : '🛬'}{' '}
+                {isDirect ? (
+                  <Plane className="inline h-3 w-3" />
+                ) : (
+                  <PlaneLanding className="inline h-3 w-3" />
+                )}{' '}
                 {isDirect ? t('nonstop') : `${flight.stops} ${t('stop')}`}
               </span>
             </div>
@@ -228,14 +232,14 @@ export default function FlightCard({
       {/* ── Footer ───────────────────────────────────────────── */}
       <div className="flex items-center justify-between border-t border-border pt-3 dark:border-border">
         <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
-          <span>🧳 {flight.baggage}</span>
-          <span>🛩️ {flight.aircraft}</span>
-          <span>
+          <span className="flex items-center gap-1"><Luggage className="h-3 w-3" /> {flight.baggage}</span>
+          <span className="flex items-center gap-1"><Plane className="h-3 w-3" /> {flight.aircraft}</span>
+          <span className="flex items-center gap-1"><Armchair className="h-3 w-3" />
             {flight.cabin === 'business'
-              ? '💼 Business'
+              ? 'Business'
               : flight.cabin === 'premium'
-                ? '✨ Premium'
-                : '💺 Economy'}
+                ? 'Premium'
+                : 'Economy'}
           </span>
         </div>
         <div className="flex items-center gap-2">

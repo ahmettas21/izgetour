@@ -56,7 +56,7 @@ export default function HeroBanner({ locale = 'tr' }: HeroBannerProps) {
         </p>
 
         {/* Slide indicators */}
-        <div className="absolute bottom-8 flex gap-2">
+        <div className="absolute bottom-6 flex gap-2">
           {HERO_IMAGES.map((_, i) => (
             <button
               key={i}
@@ -71,7 +71,7 @@ export default function HeroBanner({ locale = 'tr' }: HeroBannerProps) {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-32 left-1/2 -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-14 left-1/2 -translate-x-1/2 animate-bounce">
         <ChevronDown className="h-6 w-6 text-white/60" />
       </div>
     </section>

@@ -61,7 +61,7 @@ export default function HotelFilters({ filters, onChange, priceRange, availableC
       {activeCount > 0 && (
         <button
           onClick={clearAll}
-          className="flex items-center gap-1 text-sm font-medium text-red-500 hover:text-red-600"
+          className="flex items-center gap-1 text-sm font-medium text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300"
         >
           <X className="h-3.5 w-3.5" />
           {locale === 'tr' ? 'Temizle' : 'Clear All'}
@@ -70,20 +70,20 @@ export default function HotelFilters({ filters, onChange, priceRange, availableC
 
       {/* Şehir */}
       <div>
-        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500">
+        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
           {locale === 'tr' ? 'Şehir' : 'City'}
         </h4>
         <div className="space-y-2 max-h-40 overflow-y-auto">
           {availableCities.map((city) => (
             <label
               key={city}
-              className="flex cursor-pointer items-center gap-2.5 text-sm text-zinc-700 hover:text-zinc-900"
+              className="flex cursor-pointer items-center gap-2.5 text-sm text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
             >
               <input
                 type="checkbox"
                 checked={filters.cities.includes(city)}
                 onChange={() => toggleCity(city)}
-                className="h-4 w-4 rounded border-zinc-300 text-[#0066CC] focus:ring-[#0066CC]/20"
+                className="h-4 w-4 rounded border-zinc-300 text-[#0066CC] focus:ring-[#0066CC]/20 dark:border-zinc-600"
               />
               {city}
             </label>
@@ -93,7 +93,7 @@ export default function HotelFilters({ filters, onChange, priceRange, availableC
 
       {/* Fiyat Aralığı */}
       <div>
-        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500">
+        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
           {locale === 'tr' ? 'Fiyat Aralığı' : 'Price Range'}
         </h4>
         <div className="flex items-center gap-2">
@@ -103,17 +103,17 @@ export default function HotelFilters({ filters, onChange, priceRange, availableC
             onChange={(e) =>
               onChange({ ...filters, minPrice: Number(e.target.value) })
             }
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/10"
+            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/10 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
             placeholder={String(priceRange.min)}
           />
-          <span className="text-zinc-400">—</span>
+          <span className="text-zinc-400 dark:text-zinc-500">—</span>
           <input
             type="number"
             value={filters.maxPrice}
             onChange={(e) =>
               onChange({ ...filters, maxPrice: Number(e.target.value) })
             }
-            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/10"
+            className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/10 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
             placeholder={String(priceRange.max)}
           />
         </div>
@@ -121,7 +121,7 @@ export default function HotelFilters({ filters, onChange, priceRange, availableC
 
       {/* Yıldız / Puan */}
       <div>
-        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500">
+        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
           {locale === 'tr' ? 'Minimum Puan' : 'Minimum Rating'}
         </h4>
         <div className="flex flex-wrap items-center gap-2">
@@ -132,7 +132,7 @@ export default function HotelFilters({ filters, onChange, priceRange, availableC
               className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
                 filters.minRating === rating
                   ? 'border-[#0066CC] bg-[#0066CC]/10 text-[#0066CC]'
-                  : 'border-zinc-200 text-zinc-600 hover:border-zinc-300'
+                  : 'border-zinc-200 text-zinc-600 hover:border-zinc-300 dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-zinc-600'
               }`}
             >
               {rating === 0 ? (locale === 'tr' ? 'Hepsi' : 'All') : `⭐ ${rating}+`}
@@ -143,20 +143,20 @@ export default function HotelFilters({ filters, onChange, priceRange, availableC
 
       {/* Olanaklar */}
       <div>
-        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500">
+        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
           {locale === 'tr' ? 'Olanaklar' : 'Amenities'}
         </h4>
         <div className="space-y-2 max-h-48 overflow-y-auto">
           {availableAmenities.map((amenity) => (
             <label
               key={amenity}
-              className="flex cursor-pointer items-center gap-2.5 text-sm text-zinc-700 hover:text-zinc-900"
+              className="flex cursor-pointer items-center gap-2.5 text-sm text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
             >
               <input
                 type="checkbox"
                 checked={filters.amenities.includes(amenity)}
                 onChange={() => toggleAmenity(amenity)}
-                className="h-4 w-4 rounded border-zinc-300 text-[#0066CC] focus:ring-[#0066CC]/20"
+                className="h-4 w-4 rounded border-zinc-300 text-[#0066CC] focus:ring-[#0066CC]/20 dark:border-zinc-600"
               />
               {amenity}
             </label>

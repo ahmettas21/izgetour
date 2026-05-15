@@ -48,7 +48,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2">
               <Globe className="h-7 w-7 text-[var(--brand)]" />
-              <span className="text-xl font-bold tracking-tight text-white">
+              <span className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white">
                 İzgetour
               </span>
             </Link>
@@ -75,7 +75,7 @@ export default function Footer() {
 
           {/* ── Quick Links ───────────────────────────── */}
           <div>
-            <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-white">
+            <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-zinc-900 dark:text-white">
               {t('quickLinks')}
             </h3>
             <ul className="space-y-3">

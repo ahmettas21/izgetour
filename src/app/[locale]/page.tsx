@@ -71,7 +71,7 @@ export default async function HomePage({
       </section>
 
       {/* ── Popular Tours ─────────────────────────────────── */}
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 sm:py-20 lg:py-24">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
         {/* Section header */}
         <div className="mb-8 sm:mb-14 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -112,7 +112,7 @@ export default async function HomePage({
       </section>
 
       {/* ── Popular Hotels ────────────────────────────────── */}
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 sm:py-20 lg:py-24">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
         {/* Section header */}
         <div className="mb-8 sm:mb-14 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -155,7 +155,7 @@ export default async function HomePage({
       </section>
 
       {/* ── Popular Flights ──────────────────────────────── */}
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 sm:py-20 lg:py-24">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
         {/* Section header */}
         <div className="mb-8 sm:mb-14 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>

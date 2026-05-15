@@ -19,9 +19,9 @@ export default function SmartSearchContainer() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background">
       {/* ── Tab Bar ── */}
-      <div className="border-b border-border bg-surface dark:bg-surface-elevated">
+      <div className="border-b border-border dark:border-white/20 bg-surface-elevated">
         <div className="mx-auto max-w-5xl px-4">
           <div className="flex gap-1">
             {([
@@ -55,18 +55,18 @@ export default function SmartSearchContainer() {
       )}
 
       {activeTab === 'tours' && (
-        <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+        <div className="flex flex-col items-center justify-center py-16 text-center px-4">
           <div className="text-6xl mb-6">🏛️</div>
-          <h2 className="text-2xl font-bold text-foreground mb-2">{t('comingSoon')}</h2>
-          <p className="text-muted-foreground max-w-sm">{t('toursComingSoon')}</p>
+          <h2 className="text-2xl font-bold text-foreground dark:text-foreground mb-2">{t('comingSoon')}</h2>
+          <p className="text-muted-foreground dark:text-muted-foreground max-w-sm">{t('toursComingSoon')}</p>
         </div>
       )}
 
       {activeTab === 'hotels' && (
-        <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+        <div className="flex flex-col items-center justify-center py-16 text-center px-4">
           <div className="text-6xl mb-6">🏨</div>
-          <h2 className="text-2xl font-bold text-foreground mb-2">{t('comingSoon')}</h2>
-          <p className="text-muted-foreground max-w-sm">{t('hotelsComingSoon')}</p>
+          <h2 className="text-2xl font-bold text-foreground dark:text-foreground mb-2">{t('comingSoon')}</h2>
+          <p className="text-muted-foreground dark:text-muted-foreground max-w-sm">{t('hotelsComingSoon')}</p>
         </div>
       )}
     </div>
