@@ -186,10 +186,10 @@ export default function Footer() {
             © {year} İzgetour. {t('rights')}
           </p>
           <div className="flex gap-5 text-xs text-zinc-500 dark:text-zinc-400">
-            <Link href={`/${locale}/privacy`} className="hover:text-zinc-900 dark:hover:text-white transition-colors">
+            <Link href="/privacy" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
               Gizlilik Politikası
             </Link>
-            <Link href={`/${locale}/terms`} className="hover:text-zinc-900 dark:hover:text-white transition-colors">
+            <Link href="/terms" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
               Kullanım Şartları
             </Link>
           </div>
