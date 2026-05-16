@@ -43,9 +43,9 @@ export default function Footer() {
       />
 
       <div className="mx-auto max-w-7xl px-4 pb-10 pt-14 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5">
           {/* ── Brand ─────────────────────────────────── */}
-          <div className="lg:col-span-1">
+          <div>
             <Link href="/" className="flex items-center gap-2">
               <Globe className="h-7 w-7 text-[var(--brand)]" />
               <span className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white">

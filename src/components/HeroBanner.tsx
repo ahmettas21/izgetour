@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import SmartSearchContainer from '@/components/SmartSearchContainer';
 
 interface HeroBannerProps {
   locale?: string;
@@ -55,11 +54,6 @@ export default function HeroBanner({ locale = 'tr' }: HeroBannerProps) {
           <p className="mx-auto max-w-2xl text-base text-white/80 md:text-lg">
             {t('subtitle')}
           </p>
-        </div>
-
-        {/* Search form — hero'nun göbeğinde */}
-        <div className="w-full max-w-4xl">
-          <SmartSearchContainer />
         </div>
 
         {/* Slide indicators — search'in altına */}

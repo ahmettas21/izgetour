@@ -7,19 +7,19 @@ const FEATURES = [
   {
     key: 'secure',
     icon: Shield,
-    color: 'text-blue-500',
+    color: 'text-blue-500 dark:text-blue-400',
     bg: 'bg-blue-50 dark:bg-blue-900/20',
   },
   {
     key: 'support',
     icon: Headphones,
-    color: 'text-emerald-500',
+    color: 'text-emerald-500 dark:text-emerald-400',
     bg: 'bg-emerald-50 dark:bg-emerald-900/20',
   },
   {
     key: 'quality',
     icon: Award,
-    color: 'text-amber-500',
+    color: 'text-amber-500 dark:text-amber-400',
     bg: 'bg-amber-50 dark:bg-amber-900/20',
   },
 ];

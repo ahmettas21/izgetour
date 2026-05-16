@@ -35,7 +35,7 @@ export default function TourCard({ tour, locale }: Props) {
   return (
     <Link href={`/tours/${tour.slug}`} className="group block h-full">
       <article
-        className="flex h-full flex-col overflow-hidden rounded-2xl bg-[var(--surface)] transition-all duration-300"
+        className="flex h-full flex-col overflow-hidden rounded-2xl bg-[var(--surface)] dark:bg-gray-800/90 transition-all duration-300"
         style={{
           boxShadow: 'var(--shadow-card)',
         }}
@@ -67,7 +67,7 @@ export default function TourCard({ tour, locale }: Props) {
           </div>
 
           {/* Duration badge */}
-          <div className="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-black/50 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+          <div className="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-black/50 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm dark:bg-black/70">
             <Clock className="h-3 w-3" />
             {tour.duration} {t('days')}
           </div>
@@ -89,8 +89,8 @@ export default function TourCard({ tour, locale }: Props) {
         {/* Content */}
         <div className="flex flex-1 flex-col p-5">
           {/* Location */}
-          <div className="mb-2 flex items-center gap-1.5 text-xs font-medium text-[var(--muted)]">
-            <MapPin className="h-3.5 w-3.5 shrink-0 text-[var(--brand)]" />
+          <div className="mb-2 flex items-center gap-1.5 text-xs font-medium text-[var(--muted)] dark:text-gray-400">
+            <MapPin className="h-3.5 w-3.5 shrink-0 text-[var(--brand)] dark:text-[var(--brand)]" />
             {tour.location}
           </div>
 
@@ -100,24 +100,24 @@ export default function TourCard({ tour, locale }: Props) {
           </h3>
 
           {/* Description */}
-          <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--muted)] line-clamp-2">
+          <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--muted)] dark:text-gray-400 line-clamp-2">
             {description}
           </p>
 
           {/* Divider */}
-          <div className="my-4 h-px bg-[var(--border)]" />
+          <div className="my-4 h-px bg-[var(--border)] dark:bg-gray-700" />
 
           {/* Price row */}
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
-              <span className="text-[10px] uppercase tracking-wide text-[var(--muted)]">
+              <span className="text-[10px] uppercase tracking-wide text-[var(--muted)] dark:text-gray-400">
                 {t('perPerson')}
               </span>
               <span className="text-xl font-extrabold text-[var(--brand)]">
                 ₺{tour.price.toLocaleString('tr-TR')}
               </span>
             </div>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 group-hover:bg-[var(--brand-dark)]">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--brand)] dark:bg-[var(--brand)] px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 group-hover:bg-[var(--brand-dark)]">
               {t('bookNow') ?? 'Rezervasyon'}
             </span>
           </div>

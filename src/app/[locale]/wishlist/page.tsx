@@ -8,13 +8,11 @@ import { useWishlist } from '@/hooks/useWishlist';
 import { MOCK_TOURS } from '@/data/tours';
 import { hotels as MOCK_HOTELS } from '@/data/hotels';
 import { MOCK_FLIGHTS } from '@/data/flights';
+import { useParams } from 'next/navigation';
 
-type Props = {
-  params: Promise<{ locale: string }>;
-};
-
-export default function WishlistPage({ params }: Props) {
-  const { locale } = { locale: 'tr' as const };
+export default function WishlistPage() {
+  const params = useParams();
+  const locale = (params?.locale as string) ?? 'tr';
   const t = useTranslations('wishlist');
   const { wishlist, toggleWishlist } = useWishlist();
 

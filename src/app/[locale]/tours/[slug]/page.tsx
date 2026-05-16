@@ -12,7 +12,8 @@ import AncillaryManager from '@/components/Ancillary/AncillaryManager';
 import VoiceInteractiveMap from '@/components/VoiceInteractiveMap';
 import DynamicCuisineRecommender from '@/components/DynamicCuisineRecommender';
 import SustainabilityScore from '@/components/SustainabilityScore';
-import Breadcrumb from '@/components/Breadcrumb';
+import BreadcrumbNav from '@/components/ui/BreadcrumbNav';
+import TourDetailClient from '@/components/TourDetailClient';
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -227,14 +228,22 @@ export default async function TourDetailPage({ params }: Props) {
   const highlights = locale === 'tr' ? tour.highlights : tour.highlightsEn;
 
   return (
-    <>
+    <TourDetailClient
+      item={{
+        id: tour.id,
+        type: 'tour',
+        title: tour.title,
+        titleEn: tour.titleEn,
+        slug: tour.slug,
+      }}
+      locale={locale}
+    >
       {/* Breadcrumb */}
-      <Breadcrumb
+      <BreadcrumbNav
         items={[
           { label: t('title'), href: '/tours' },
           { label: title },
         ]}
-        locale={locale as 'tr' | 'en'}
       />
       <div className="mx-auto max-w-5xl px-4 py-8 pb-24 lg:pb-12">
         {/* Main content grid: content + sidebar */}
@@ -366,6 +375,6 @@ export default async function TourDetailPage({ params }: Props) {
 
       {/* Social Proof Toast */}
       <SocialProofToastWrapper />
-    </>
+    </TourDetailClient>
   );
 }

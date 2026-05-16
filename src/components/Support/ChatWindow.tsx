@@ -49,11 +49,19 @@ const WIRE_STATUS_COLORS: Record<string, string> = {
   completed: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
 };
 
-export default function ChatWindow({ locale: unusedLocale }: Props) {
-  void unusedLocale;
+export default function ChatWindow({ locale }: Props) {
   const t = useTranslations('support');
-  let params: {locale?: string} = {}; try { params = useParams() as {locale?: string}; } catch { params = {}; }
-  const l = (params?.locale as string) ?? 'tr';
+  // Use the locale prop directly with fallback to try useParams if prop not provided
+  let effectiveLocale = locale;
+  if (!effectiveLocale) {
+    try {
+      const params = useParams() as { locale?: string };
+      effectiveLocale = (params?.locale as string) ?? 'tr';
+    } catch {
+      effectiveLocale = 'tr';
+    }
+  }
+  const l = effectiveLocale;
   const online = isOpenHours();
   const chatStore = useChatStore();
   const messages = useMemo(() => chatStore.messages ?? [], [chatStore.messages]);

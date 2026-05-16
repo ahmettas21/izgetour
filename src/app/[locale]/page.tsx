@@ -1,12 +1,13 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import HeroBanner from '@/components/HeroBanner';
+import SmartSearchContainer from '@/components/SmartSearchContainer';
+import Features from '@/components/Features';
+import MoodDestinationPickerClient from '@/components/MoodDestinationPickerClient';
 import TourCard from '@/components/TourCard';
 import HotelCard from '@/components/HotelCard';
 import FlightCard from '@/components/flights/FlightCard';
-import MoodDestinationPickerClient from '@/components/MoodDestinationPickerClient';
 import AIChatConciergeWrapper from '@/components/AIChatConciergeWrapper';
-import Features from '@/components/Features';
 import type { FlightResult } from '@/components/flights/types';
 import { MOCK_TOURS } from '@/data/tours';
 import { hotels as MOCK_HOTELS } from '@/data/hotels';
@@ -44,8 +45,47 @@ export default async function HomePage({
          ═══════════════════════════════════════════════════════ */}
       <HeroBanner locale={locale as 'tr' | 'en'} />
 
+      {/* Hero → SmartSearch transition gradient */}
+      <div className="relative -mt-16 sm:-mt-20">
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/50 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--background)] to-transparent" />
+      </div>
+
       {/* ═══════════════════════════════════════════════════════
-         2. POPULAR TOURS — en çok satan turlar
+         2. SMART SEARCH — tüm arama işlemleri
+         ═══════════════════════════════════════════════════════ */}
+      <section className="py-14 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-6xl px-4">
+          <SmartSearchContainer />
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════
+         3. TRUST FEATURES — güven / destek / kalite
+         ═══════════════════════════════════════════════════════ */}
+      <Features />
+
+      {/* ═══════════════════════════════════════════════════════
+         4. MOOD DESTINATION PICKER — ilham ver
+         ═══════════════════════════════════════════════════════ */}
+      <section className="bg-gradient-to-b from-[var(--brand-light)] via-white to-white dark:from-[var(--brand)]/10 dark:via-gray-900 dark:to-gray-900 py-14 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 sm:mb-12 text-center">
+            <span className="mb-2 inline-block rounded-full bg-[var(--brand-light)] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--brand)]">
+              {locale === 'tr' ? 'İlham Ver' : 'Get Inspired'}
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[var(--foreground)]">
+              {locale === 'tr' ? 'Ruh Haline Göre Keşfet' : 'Explore by Mood'}
+            </h2>
+            <p className="mt-2 text-[var(--muted)]">{tHome('moodPicker.subtitle')}</p>
+          </div>
+
+          <MoodDestinationPickerClient locale={locale as 'tr' | 'en'} />
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════
+         5. POPULAR TOURS — en çok satan turlar
          ═══════════════════════════════════════════════════════ */}
       <section className="bg-gradient-to-b from-white via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800/50 py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -90,7 +130,7 @@ export default async function HomePage({
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-         3. POPULAR HOTELS
+         6. POPULAR HOTELS
          ═══════════════════════════════════════════════════════ */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
         {/* Header */}
@@ -135,7 +175,7 @@ export default async function HomePage({
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-         4. POPULAR FLIGHTS
+         7. POPULAR FLIGHTS
          ═══════════════════════════════════════════════════════ */}
       <section className="bg-gray-50 dark:bg-gray-800/50 py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -183,37 +223,13 @@ export default async function HomePage({
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-         5. MOOD DESTINATION PICKER — ilham ver
-         ═══════════════════════════════════════════════════════ */}
-      <section className="bg-gradient-to-b from-[var(--brand-light)] via-white to-white dark:from-[var(--brand)]/10 dark:via-gray-900 dark:to-gray-900 py-14 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 sm:mb-12 text-center">
-            <span className="mb-2 inline-block rounded-full bg-[var(--brand-light)] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--brand)]">
-              {locale === 'tr' ? 'İlham Ver' : 'Get Inspired'}
-            </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[var(--foreground)]">
-              {locale === 'tr' ? 'Ruh Haline Göre Keşfet' : 'Explore by Mood'}
-            </h2>
-            <p className="mt-2 text-[var(--muted)]">{tHome('moodPicker.subtitle')}</p>
-          </div>
-
-          <MoodDestinationPickerClient locale={locale as 'tr' | 'en'} />
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════
-         6. AI TRAVEL CONCIERGE — canlı sohbet
+         8. AI TRAVEL CONCIERGE — canlı sohbet
          ═══════════════════════════════════════════════════════ */}
       <section className="py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <AIChatConciergeWrapper locale={locale as 'tr' | 'en'} />
         </div>
       </section>
-
-      {/* ═══════════════════════════════════════════════════════
-         7. TRUST FEATURES — güven / destek / kalite
-         ═══════════════════════════════════════════════════════ */}
-      <Features />
     </>
   );
 }

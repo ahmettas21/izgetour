@@ -30,7 +30,7 @@ interface Destination {
 const MOODS: Mood[] = [
   {
     id: 'adventure', name: 'Macera', nameEn: 'Adventure',
-    emoji: '🏔️', icon: Mountain, color: 'text-orange-600', bg: 'bg-orange-50',
+    emoji: '🏔️', icon: Mountain, color: 'text-orange-600 dark:text-orange-400', bg: 'bg-orange-50 dark:bg-orange-900/30',
     gradient: 'from-orange-500 to-amber-500',
     destinations: [
       { name: 'Kapadokya', nameEn: 'Cappadocia', image: '/images/cappadocia.jpg',
@@ -41,7 +41,7 @@ const MOODS: Mood[] = [
   },
   {
     id: 'romantic', name: 'Romantik', nameEn: 'Romantic',
-    emoji: '💕', icon: Heart, color: 'text-rose-500', bg: 'bg-rose-50',
+    emoji: '💕', icon: Heart, color: 'text-rose-500 dark:text-rose-400', bg: 'bg-rose-50 dark:bg-rose-900/30',
     gradient: 'from-rose-500 to-pink-500',
     destinations: [
       { name: 'Santorini', nameEn: 'Santorini', image: '/images/santorini.jpg',
@@ -52,7 +52,7 @@ const MOODS: Mood[] = [
   },
   {
     id: 'relax', name: 'Huzur', nameEn: 'Relaxation',
-    emoji: '🌴', icon: Palmtree, color: 'text-teal-500', bg: 'bg-teal-50',
+    emoji: '🌴', icon: Palmtree, color: 'text-teal-500 dark:text-teal-400', bg: 'bg-teal-50 dark:bg-teal-900/30',
     gradient: 'from-teal-500 to-cyan-500',
     destinations: [
       { name: 'Maldivler', nameEn: 'Maldives', image: '/images/maldives.jpg',
@@ -63,7 +63,7 @@ const MOODS: Mood[] = [
   },
   {
     id: 'culture', name: 'Kültür', nameEn: 'Culture',
-    emoji: '🏛️', icon: Landmark, color: 'text-purple-600', bg: 'bg-purple-50',
+    emoji: '🏛️', icon: Landmark, color: 'text-purple-600 dark:text-purple-400', bg: 'bg-purple-50 dark:bg-purple-900/30',
     gradient: 'from-purple-500 to-indigo-500',
     destinations: [
       { name: 'Roma', nameEn: 'Rome', image: '/images/rome.jpg',
@@ -74,7 +74,7 @@ const MOODS: Mood[] = [
   },
   {
     id: 'gastro', name: 'Gastronomi', nameEn: 'Gastronomy',
-    emoji: '🍷', icon: Wine, color: 'text-red-600', bg: 'bg-red-50',
+    emoji: '🍷', icon: Wine, color: 'text-red-600 dark:text-red-400', bg: 'bg-red-50 dark:bg-red-900/30',
     gradient: 'from-red-500 to-rose-500',
     destinations: [
       { name: 'Gaziantep', nameEn: 'Gaziantep', image: '/images/gaziantep.jpg',
@@ -85,7 +85,7 @@ const MOODS: Mood[] = [
   },
   {
     id: 'wild', name: 'Doğa & Kamp', nameEn: 'Nature & Camp',
-    emoji: '⛺', icon: Tent, color: 'text-green-600', bg: 'bg-green-50',
+    emoji: '⛺', icon: Tent, color: 'text-green-600 dark:text-green-400', bg: 'bg-green-50 dark:bg-green-900/30',
     gradient: 'from-green-500 to-emerald-500',
     destinations: [
       { name: 'Olympos', nameEn: 'Olympos', image: '/images/olympos.jpg',
@@ -103,10 +103,10 @@ export default function MoodDestinationPicker({ locale = 'tr' }: Props) {
   const [activeMood, setActiveMood] = useState<Mood | null>(null);
 
   return (
-    <section className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-700 dark:bg-zinc-800">
+    <section className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-700 dark:bg-zinc-900">
       {/* Header */}
       <div className="mb-2 flex items-center gap-2">
-        <Sparkles className="h-5 w-5 text-orange-500" />
+        <Sparkles className="h-5 w-5 text-orange-500 dark:text-orange-400" />
         <h2 className="text-lg font-bold text-zinc-900 dark:text-white">
           {isTr ? 'Moduna Göre Keşfet' : 'Discover by Mood'}
         </h2>

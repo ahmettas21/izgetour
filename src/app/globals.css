@@ -139,7 +139,7 @@
   --primary-muted:       rgba(14, 165, 233, 0.15);
   --brand:                var(--turquoise-500);
   --brand-dark:           var(--turquoise-700);
-  --brand-light:          var(--turquoise-800);
+  --brand-light:          var(--turquoise-300);
   --gradient-hero:       linear-gradient(160deg, #0f2540 0%, #0c4a6e 100%);
   --gradient-glass:      linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
   --gradient-overlay:    linear-gradient(180deg, transparent 0%, rgba(8,18,40,0.8) 100%);

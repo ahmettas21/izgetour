@@ -1,19 +1,19 @@
-import { Link } from '@/i18n/navigation';
+import Link from 'next/link';
 import { Home, Map, Hotel, Plane } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-[70vh] flex-col items-center justify-center px-4 text-center">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[var(--background)] px-4 text-center">
       <div className="mb-8">
-        <h1 className="text-[10rem] font-black leading-none text-[var(--brand)] opacity-10 sm:text-[12rem]">
+        <div className="mb-6 text-[10rem] font-black leading-none text-[var(--brand)] opacity-10 sm:text-[12rem]">
           404
-        </h1>
-        <div className="-mt-12">
-          <h2 className="text-2xl font-bold text-[var(--foreground)] sm:text-3xl">
+        </div>
+        <div className="-mt-16">
+          <h1 className="text-3xl font-bold text-[var(--foreground)] sm:text-4xl">
             Sayfa Bulunamadı
-          </h2>
+          </h1>
           <p className="mt-3 max-w-md text-[var(--muted)]">
-            Aradığınız sayfa mevcut değil veya taşınmış olabilir.
+            Aradığın sayfa taşınmış, kaldırılmış veya hiç var olmamış olabilir.
           </p>
         </div>
       </div>
@@ -45,7 +45,7 @@ export default function NotFound() {
 
       <Link
         href="/"
-        className="inline-flex items-center gap-2 rounded-xl bg-[var(--brand)] px-6 py-3 text-sm font-semibold text-white shadow transition-all hover:bg-[var(--brand-dark)]"
+        className="inline-flex items-center gap-2 rounded-full bg-[var(--brand)] px-8 py-3 font-semibold text-white transition-all duration-200 hover:scale-105 hover:brightness-110"
       >
         <Home className="h-4 w-4" />
         Ana Sayfaya Dön
