@@ -132,9 +132,10 @@ export default async function HomePage({
       {/* ═══════════════════════════════════════════════════════
          6. POPULAR HOTELS
          ═══════════════════════════════════════════════════════ */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
-        {/* Header */}
-        <div className="mb-8 sm:mb-14 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <section className="py-14 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="mb-8 sm:mb-14 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <span className="mb-2 inline-block rounded-full bg-[var(--brand-light)] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--brand)]">
               {locale === 'tr' ? 'Konaklama' : 'Accommodation'}
@@ -171,6 +172,7 @@ export default async function HomePage({
             {locale === 'tr' ? 'Tümünü Gör' : 'View All Hotels'}
             <ArrowRight className="h-4 w-4" />
           </Link>
+        </div>
         </div>
       </section>
 
