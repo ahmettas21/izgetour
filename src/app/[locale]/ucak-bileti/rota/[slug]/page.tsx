@@ -27,18 +27,26 @@ function SummaryStat({
   icon,
   label,
   value,
+  highlight = false,
 }: {
   icon: ReactNode;
   label: string;
   value: string;
+  highlight?: boolean;
 }) {
   return (
-    <div className="flex flex-col items-center gap-1 py-4 text-center">
-      <span className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-zinc-400">
+    <div className="flex flex-col items-center gap-1 py-4 text-center sm:py-5">
+      <span className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-zinc-400 sm:text-xs">
         {icon}
         {label}
       </span>
-      <span className="text-base font-bold text-zinc-900 dark:text-white sm:text-lg">
+      <span
+        className={`text-lg font-extrabold sm:text-xl ${
+          highlight
+            ? 'text-[#0066CC] dark:text-[#3399ff]'
+            : 'text-zinc-900 dark:text-white'
+        }`}
+      >
         {value}
       </span>
     </div>
@@ -183,6 +191,7 @@ export default async function RotaLandingPage({ params }: Props) {
               icon={<Tag className="h-4 w-4" />}
               label={isTR ? 'En ucuz' : 'Cheapest'}
               value={cheapestPriceTRY ?? '—'}
+              highlight
             />
             <SummaryStat
               icon={<Plane className="h-4 w-4" />}
