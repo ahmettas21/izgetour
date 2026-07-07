@@ -46,6 +46,14 @@ const AFFILIATES: AffiliateSeed[] = [
     commissionNote: 'Placeholder — aid bekleniyor.',
     enabled: false,
   },
+  {
+    // İkincil sağlayıcı: Skiplagged 0 dönen rotalarda Google Flights fallback'i.
+    bookingSource: 'GoogleFlights',
+    affiliateUrlTemplate:
+      'https://www.google.com/travel/flights?curr=USD&q=Flights%20from%20{origin}%20to%20{destination}%20on%20{date}%20oneway',
+    commissionNote: 'Google Flights doğrudan arama (affiliate değil; kullanıcıyı uçuşa götürür).',
+    enabled: false,
+  },
 ];
 
 function main() {

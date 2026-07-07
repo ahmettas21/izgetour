@@ -28,14 +28,24 @@ export function fallbackUrl(params: {
   origin: string;
   destination: string;
   date?: string;
+  source?: string;
 }): string {
   const base = process.env.AFFILIATE_FALLBACK_URL;
   if (base) {
     // env fallback da template olabilir; placeholder'ları doldur.
     return fillTemplate(base, params);
   }
-  // Skiplagged arama URL (affiliate değil, sadece kullanıcıyı uçuşa götürür)
+
+  // Kaynağa göre doğru siteye yönlendir. İkincil sağlayıcıdan gelen uçuşları
+  // (ör. GoogleFlights) Skiplagged'e göndermek yanlış olur — Skiplagged o rotayı
+  // indekslemiyor olabilir (Trabzon durumu). Bu yüzden kaynak-bilinçli fallback.
   const depart = params.date ?? '';
+  if (params.source === 'GoogleFlights') {
+    const q = `Flights from ${params.origin} to ${params.destination} on ${depart} oneway`;
+    return `https://www.google.com/travel/flights?curr=USD&q=${encodeURIComponent(q)}`;
+  }
+
+  // Varsayılan: Skiplagged arama URL (affiliate değil, kullanıcıyı uçuşa götürür)
   return `https://skiplagged.com/flights/${encodeURIComponent(params.origin)}/${encodeURIComponent(
     params.destination,
   )}/${encodeURIComponent(depart)}`;
@@ -82,7 +92,7 @@ export function buildAffiliateUrl(
     }
   }
   return {
-    url: fallbackUrl(params),
+    url: fallbackUrl({ ...params, source }),
     source: null,
     fallback: true,
   };

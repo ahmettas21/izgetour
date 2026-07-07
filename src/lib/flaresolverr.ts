@@ -45,20 +45,20 @@ function extractJsonPayload(html: string): string {
 }
 
 /**
- * FlareSolverr üzerinden verilen URL'i GET ile çeker ve JSON olarak parse eder.
- * @throws FlareSolverr erişilemezse, challenge çözülemezse veya JSON parse edilemezse.
+ * FlareSolverr üzerinden verilen URL'in HAM HTML gövdesini döndürür.
+ * (JSON parse etmez; HTML kazıyan sağlayıcılar için — ör. Google Flights.)
+ * @throws FlareSolverr erişilemezse veya challenge çözülemezse.
  */
-export async function fetchViaFlareSolverr<T = unknown>(
+export async function fetchHtmlViaFlareSolverr(
   url: string,
-  maxTimeout = 45000,
-): Promise<T> {
+  maxTimeout = 60000,
+): Promise<string> {
   let res: Response;
   try {
     res = await fetch(FLARESOLVERR_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cmd: 'request.get', url, maxTimeout }),
-      // FlareSolverr yavaş olabilir; fetch timeout'u maxTimeout'tan biraz uzun
       signal: AbortSignal.timeout(maxTimeout + 15000),
       cache: 'no-store',
     });
@@ -80,7 +80,19 @@ export async function fetchViaFlareSolverr<T = unknown>(
     throw new Error(`Hedef endpoint hatası: HTTP ${data.solution.status}`);
   }
 
-  const payload = extractJsonPayload(data.solution.response);
+  return data.solution.response;
+}
+
+/**
+ * FlareSolverr üzerinden verilen URL'i GET ile çeker ve JSON olarak parse eder.
+ * @throws FlareSolverr erişilemezse, challenge çözülemezse veya JSON parse edilemezse.
+ */
+export async function fetchViaFlareSolverr<T = unknown>(
+  url: string,
+  maxTimeout = 45000,
+): Promise<T> {
+  const response = await fetchHtmlViaFlareSolverr(url, maxTimeout);
+  const payload = extractJsonPayload(response);
 
   try {
     return JSON.parse(payload) as T;
