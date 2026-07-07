@@ -2,6 +2,7 @@
 
 import { Airport } from '@/data/airports';
 import type { FlightResult, SearchParams, CabinClass } from '@/components/flights/types';
+import { searchSkiplaggedFlights } from './skiplagged';
 
 // Re-export types for consumers
 export type { FlightResult, SearchParams, CabinClass } from '@/components/flights/types';
@@ -367,15 +368,33 @@ export async function searchFlights(params: SearchParams): Promise<{
       return { success: false, error: 'Bebek sayısı yetişkin sayısını aşamaz' };
     }
 
-    // Check if Amadeus credentials are configured
+    // ─── Sağlayıcı zinciri: Amadeus → Skiplagged → mock ──────────────────────
     const hasCredentials = !!(process.env.AMADEUS_CLIENT_ID && process.env.AMADEUS_CLIENT_SECRET);
 
-    let results: FlightResult[];
+    let results: FlightResult[] = [];
 
+    // 1) Amadeus (yalnızca credential varsa)
     if (hasCredentials) {
-      results = await searchAmadeusFlights(params);
-    } else {
-      // Fallback to mock data for development
+      try {
+        results = await searchAmadeusFlights(params);
+      } catch (err) {
+        console.warn('Amadeus arama başarısız, Skiplagged deneniyor:', err);
+        results = [];
+      }
+    }
+
+    // 2) Skiplagged (Amadeus boş/başarısız ise)
+    if (results.length === 0) {
+      try {
+        results = await searchSkiplaggedFlights(params);
+      } catch (err) {
+        console.warn('Skiplagged arama başarısız, mock veriye düşülüyor:', err);
+        results = [];
+      }
+    }
+
+    // 3) Mock (son çare)
+    if (results.length === 0) {
       await new Promise((r) => setTimeout(r, 800 + Math.random() * 600));
       results = generateMockResults(params.from, params.to, params.cabinClass);
     }

@@ -46,4 +46,5 @@ export interface FlightResult {
   availableSeats: number; // unified name
   refundable: boolean;
   co2Emissions: number;
+  bookingSource?: string; // Skiplagged: en ucuz rezervasyon sitesi (opsiyonel)
 }

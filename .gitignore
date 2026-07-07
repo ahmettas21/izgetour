@@ -40,3 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .screenshots/
+
+# SQLite (yerel DB — commit edilmez)
+/data/*.db
+/data/*.db-shm
+/data/*.db-wal

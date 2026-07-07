@@ -1,5 +1,5 @@
 // SupabaseProvider.tsx – Wrap your app with Supabase auth context
-import { supabase } from "../../lib/supabaseClient";
+import { supabase } from "@/lib/supabase";
 import { Session, User } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 

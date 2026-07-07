@@ -9,6 +9,9 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test": "echo \"No tests configured yet\" && exit 0",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "tsx src/db/seed.ts",
     "ci": "npm run lint && npm run typecheck && npm run build",
     "postinstall": "grep -q \"if (value == null) return false;\" node_modules/next/dist/esm/lib/client-and-server-references.js || sed -i \"s/export function isServerReference(value) {/export function isServerReference(value) {\\n    if (value == null) return false;/\" node_modules/next/dist/esm/lib/client-and-server-references.js; grep -q \"if (value == null) return false;\" node_modules/next/dist/lib/client-and-server-references.js || sed -i \"/function isServerReference(value) {/a\\    if (value == null) return false;\" node_modules/next/dist/lib/client-and-server-references.js"
   },
@@ -18,6 +21,8 @@
     "@swc/helpers": "^0.5.21",
     "@types/leaflet": "^1.9.21",
     "axios": "^1.16.0",
+    "better-sqlite3": "^12.11.1",
+    "drizzle-orm": "^0.45.2",
     "framer-motion": "^12.38.0",
     "i18next": "^26.1.0",
     "leaflet": "^1.9.4",
@@ -37,12 +42,15 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.10",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.10"
   }
 }
