@@ -42,8 +42,8 @@ function futureDate(offsetDays: number): string {
 }
 
 /** IATA kodundan minimal Airport nesnesi (searchSkiplaggedFlights yalnızca iata kullanır) */
-function toAirport(code: string): Airport {
-  const a = getAirport(code);
+async function toAirport(code: string): Promise<Airport> {
+  const a = await getAirport(code);
   return {
     iata: code,
     city: a?.city ?? code,
@@ -55,11 +55,12 @@ function toAirport(code: string): Airport {
 }
 
 /** Rota + tarih → SearchParams (oneway, 1 yetişkin, economy) */
-function buildParams(route: Route, departDate: string): SearchParams {
+async function buildParams(route: Route, departDate: string): Promise<SearchParams> {
+  const [from, to] = await Promise.all([toAirport(route.origin), toAirport(route.destination)]);
   return {
     tripType: 'oneway',
-    from: toAirport(route.origin),
-    to: toAirport(route.destination),
+    from,
+    to,
     departDate,
     returnDate: '',
     passengers: { adult: 1, child: 0, infant: 0 },
@@ -77,7 +78,7 @@ export interface WorkerSummary {
 }
 
 export async function runFetchRoutes(): Promise<WorkerSummary> {
-  const routeList = getEnabledRoutes();
+  const routeList = await getEnabledRoutes();
   console.log(`[worker] ${routeList.length} aktif rota bulundu.`);
 
   const summary: WorkerSummary = {
@@ -96,18 +97,18 @@ export async function runFetchRoutes(): Promise<WorkerSummary> {
       summary.fetchAttempts += 1;
 
       try {
-        const params = buildParams(route, departDate);
+        const params = await buildParams(route, departDate);
         // Sağlayıcı zinciri: Skiplagged → (Kiwi) → Google Flights.
         // Birincil 0 dönerse ikincil kaynak otomatik denenir.
         const outcome = await searchFlightsWithFallback(params);
-        const saved = saveFlights(route.id, departDate, outcome.flights);
+        const saved = await saveFlights(route.id, departDate, outcome.flights);
         const durationMs = Date.now() - started;
 
         // Provider ve deneme özeti loglansın (0 sonuçta da fallback izlenebilsin)
         const attemptsStr = outcome.attempts
           .map((a) => `${a.provider}=${a.error ? `ERR(${a.error.slice(0, 40)})` : a.count}`)
           .join(', ');
-        logFetch(route.id, 'success', saved, null, durationMs);
+        await logFetch(route.id, 'success', saved, null, durationMs);
         summary.totalFlights += saved;
         console.log(
           `[worker] ${label} ${departDate}: ${saved} uçuş via ${outcome.provider} ` +
@@ -116,7 +117,7 @@ export async function runFetchRoutes(): Promise<WorkerSummary> {
       } catch (err) {
         const durationMs = Date.now() - started;
         const msg = err instanceof Error ? err.message : String(err);
-        logFetch(route.id, 'error', 0, msg, durationMs);
+        await logFetch(route.id, 'error', 0, msg, durationMs);
         summary.errors += 1;
         console.warn(`[worker] ${label} ${departDate}: HATA — ${msg}`);
       }

@@ -42,7 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // ─── Dinamik rota landing sayfaları (programmatic SEO) ────────────────────
   // localePrefix: 'as-needed' → TR prefix'siz, EN prefix'li (routeUrl helper).
-  const routes = getEnabledRoutes();
+  const routes = await getEnabledRoutes();
   for (const route of routes) {
     if (!route.slug) continue;
     for (const locale of localesFlat) {

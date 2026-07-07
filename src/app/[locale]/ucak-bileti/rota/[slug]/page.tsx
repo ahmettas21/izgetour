@@ -58,7 +58,7 @@ export const dynamicParams = true;
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-  const routes = getEnabledRoutes();
+  const routes = await getEnabledRoutes();
   const params: { locale: string; slug: string }[] = [];
   for (const r of routes) {
     if (!r.slug) continue;
@@ -70,7 +70,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const route = getRouteBySlug(slug);
+  const route = await getRouteBySlug(slug);
   if (!route) return { title: 'Sayfa Bulunamadı' };
 
   const isTR = locale === 'tr';
@@ -105,7 +105,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function RotaLandingPage({ params }: Props) {
   const { locale, slug } = await params;
-  const route = getRouteBySlug(slug);
+  const route = await getRouteBySlug(slug);
   if (!route) notFound();
 
   const isTR = locale === 'tr';
@@ -113,7 +113,7 @@ export default async function RotaLandingPage({ params }: Props) {
   const description = (isTR ? route.descriptionTr : route.descriptionEn) ?? title;
 
   // Cache'ten en yakın tarih snapshot'ı. Geçersiz fiyatlıları en baştan ele.
-  const snapshot = getNearestCachedFlights(route.id);
+  const snapshot = await getNearestCachedFlights(route.id);
   const validFlights = snapshot.flights.filter((f) => isValidPrice(f.price));
   const cheapest = cheapestFlight(validFlights);
   const cheapestPriceTRY = cheapest ? formatPriceTRY(cheapest.price) : null;
@@ -137,7 +137,7 @@ export default async function RotaLandingPage({ params }: Props) {
     : null;
 
   // İç linkleme: diğer popüler rotalar
-  const otherRoutes = getEnabledRoutes()
+  const otherRoutes = (await getEnabledRoutes())
     .filter((r) => r.slug && r.slug !== slug && r.popular)
     .slice(0, 8);
 

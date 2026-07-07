@@ -144,7 +144,7 @@ insert into public.airports (code, name, city, country, lat, lng) values
   ('ESB', 'Ankara Esenboğa Havalimanı',         'Ankara',    'Türkiye', 40.1281, 32.9951),
   ('TZX', 'Trabzon Havalimanı',                 'Trabzon',   'Türkiye', 40.9951, 39.7897),
   ('BJV', 'Bodrum-Milas Havalimanı',            'Bodrum',    'Türkiye', 37.2506, 27.6644),
-  ('ADA', 'Adana Şakirpaşa Havalimanı',         'Adana',     'Türkiye', 36.9822, 35.2804),
+  ('COV', 'Adana Çukurova Havalimanı',            'Adana',     'Türkiye', 36.9086, 35.2794),
   ('GZT', 'Gaziantep Havalimanı',               'Gaziantep', 'Türkiye', 36.9472, 37.4787)
 on conflict (code) do nothing;
 
@@ -189,7 +189,7 @@ values
     'Izmir to Antalya Flights',
     'İzmir Antalya arası uygun uçuş seçenekleri.',
     'Affordable flight options from Izmir to Antalya.'),
-  ('IST', 'ADA', true, true, 'istanbul-adana',
+  ('IST', 'COV', true, true, 'istanbul-adana',
     'İstanbul - Adana Uçak Bileti',
     'Istanbul to Adana Flights',
     'İstanbul Adana arası en iyi bilet fiyatları.',

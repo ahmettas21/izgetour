@@ -88,12 +88,12 @@ export interface ResolvedAffiliate {
  * - Yoksa VEYA enabled=false ise: fallback URL.
  * /go endpoint'i içinde kullanılır.
  */
-export function buildAffiliateUrl(
+export async function buildAffiliateUrl(
   source: string | undefined,
   params: { origin: string; destination: string; date?: string; price?: number },
-): ResolvedAffiliate {
+): Promise<ResolvedAffiliate> {
   if (source) {
-    const link = getAffiliateLink(source); // getAffiliateLink zaten enabled=true filtreler
+    const link = await getAffiliateLink(source); // getAffiliateLink zaten enabled=true filtreler
     if (link) {
       return {
         url: fillTemplate(link.affiliateUrlTemplate, params),

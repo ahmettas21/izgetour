@@ -1,5 +1,5 @@
 /**
- * İzgeTour — Affiliate placeholder seed (idempotent).
+ * İzgeTour — Affiliate placeholder seed (idempotent) — Supabase sürümü.
  *
  * Çalıştırma: npm run db:seed:affiliate
  *
@@ -8,75 +8,85 @@
  * için /go endpoint'i bunları görmezden gelip fallback URL'ye yönlendirir.
  *
  * Template placeholder'ları: {origin} {destination} {date} {price}
- * bookingSource değerleri price_cache'teki booking_source ile birebir eşleşmeli
- * (FAST, Kiwi, Skyscanner, Gotogate...).
+ * booking_source değerleri price_cache'teki booking_source ile birebir eşleşmeli
+ * (FAST, Kiwi, Skyscanner, Gotogate, GoogleFlights...).
+ *
+ * booking_source UNIQUE → upsert(onConflict='booking_source', ignoreDuplicates)
+ * ile tekrar çalıştırılabilir (idempotent, mevcut kayıtları ezmez).
  */
-import { randomUUID } from 'node:crypto';
-import { getDb, getRawSqlite } from './index';
-import { affiliateLinks, type NewAffiliateLink } from './schema';
+import { getSupabaseAdmin } from './supabase-admin';
 
-type AffiliateSeed = Omit<NewAffiliateLink, 'id'>;
+interface AffiliateSeed {
+  booking_source: string;
+  affiliate_url_template: string;
+  commission_note: string;
+  enabled: boolean;
+}
 
 const AFFILIATES: AffiliateSeed[] = [
   {
-    bookingSource: 'Kiwi',
-    affiliateUrlTemplate:
+    booking_source: 'Kiwi',
+    affiliate_url_template:
       'https://www.kiwi.com/en/search/results/{origin}/{destination}/{date}?affilid=PLACEHOLDER',
-    commissionNote: 'Placeholder — İlker gerçek affilid girecek.',
+    commission_note: 'Placeholder — İlker gerçek affilid girecek.',
     enabled: false,
   },
   {
-    bookingSource: 'Skyscanner',
-    affiliateUrlTemplate:
+    booking_source: 'Skyscanner',
+    affiliate_url_template:
       'https://www.skyscanner.net/transport/flights/{origin}/{destination}/{date}/?associateid=PLACEHOLDER',
-    commissionNote: 'Placeholder — associateid bekleniyor.',
+    commission_note: 'Placeholder — associateid bekleniyor.',
     enabled: false,
   },
   {
-    bookingSource: 'FAST',
-    affiliateUrlTemplate:
+    booking_source: 'FAST',
+    affiliate_url_template:
       'https://skiplagged.com/flights/{origin}/{destination}/{date}?ref=PLACEHOLDER',
-    commissionNote: 'Placeholder — Skiplagged/FAST ref bekleniyor.',
+    commission_note: 'Placeholder — Skiplagged/FAST ref bekleniyor.',
     enabled: false,
   },
   {
-    bookingSource: 'Gotogate',
-    affiliateUrlTemplate:
+    booking_source: 'Gotogate',
+    affiliate_url_template:
       'https://www.gotogate.com/rf/search?origin={origin}&destination={destination}&outbound={date}&aid=PLACEHOLDER',
-    commissionNote: 'Placeholder — aid bekleniyor.',
+    commission_note: 'Placeholder — aid bekleniyor.',
     enabled: false,
   },
   {
     // İkincil sağlayıcı: Skiplagged 0 dönen rotalarda Google Flights fallback'i.
-    bookingSource: 'GoogleFlights',
-    affiliateUrlTemplate:
+    booking_source: 'GoogleFlights',
+    affiliate_url_template:
       'https://www.google.com/travel/flights?curr=USD&q=Flights%20from%20{origin}%20to%20{destination}%20on%20{date}%20oneway',
-    commissionNote: 'Google Flights doğrudan arama (affiliate değil; kullanıcıyı uçuşa götürür).',
+    commission_note: 'Google Flights doğrudan arama (affiliate değil; kullanıcıyı uçuşa götürür).',
     enabled: false,
   },
 ];
 
-function main() {
-  const db = getDb();
+async function main(): Promise<void> {
+  const sb = getSupabaseAdmin();
 
-  const rows: NewAffiliateLink[] = AFFILIATES.map((a) => ({ id: randomUUID(), ...a }));
-  // bookingSource unique → onConflictDoNothing ile tekrar çalıştırılabilir (idempotent).
-  db.insert(affiliateLinks).values(rows).onConflictDoNothing().run();
+  const { error } = await sb
+    .from('affiliate_links')
+    .upsert(AFFILIATES, { onConflict: 'booking_source', ignoreDuplicates: true });
+  if (error) throw new Error(`upsert: ${error.message}`);
 
-  const raw = getRawSqlite();
-  const total = (raw.prepare('SELECT COUNT(*) AS c FROM affiliate_links').get() as { c: number }).c;
-  const enabled = (
-    raw.prepare('SELECT COUNT(*) AS c FROM affiliate_links WHERE enabled = 1').get() as { c: number }
-  ).c;
+  const { count: total } = await sb
+    .from('affiliate_links')
+    .select('*', { count: 'exact', head: true });
+  const { count: enabled } = await sb
+    .from('affiliate_links')
+    .select('*', { count: 'exact', head: true })
+    .eq('enabled', true);
 
-  console.log(`[seed-affiliate] affiliate_links: ${total} (aktif: ${enabled})`);
+  console.log(`[seed-affiliate] affiliate_links: ${total ?? 0} (aktif: ${enabled ?? 0})`);
 }
 
-try {
-  main();
-  console.log('[seed-affiliate] tamamlandı.');
-  process.exit(0);
-} catch (err) {
-  console.error('[seed-affiliate] hata:', err);
-  process.exit(1);
-}
+main()
+  .then(() => {
+    console.log('[seed-affiliate] tamamlandı.');
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.error('[seed-affiliate] hata:', err);
+    process.exit(1);
+  });

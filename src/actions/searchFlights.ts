@@ -388,9 +388,9 @@ export async function searchFlights(params: SearchParams): Promise<{
     // 2) DB cache (worker'ın FlareSolverr ile doldurduğu price_cache)
     if (results.length === 0) {
       try {
-        const route = getRouteByOriginDest(params.from.iata, params.to.iata);
+        const route = await getRouteByOriginDest(params.from.iata, params.to.iata);
         if (route) {
-          results = getCachedFlights(route.id, params.departDate);
+          results = await getCachedFlights(route.id, params.departDate);
         }
       } catch (err) {
         console.warn('DB cache okuma başarısız, mock veriye düşülüyor:', err);

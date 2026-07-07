@@ -10,7 +10,7 @@
  *  3. Basit tıklama logla (console.log — ileride click_log tablosu).
  *  4. 302 redirect.
  *
- * NOT: node runtime gerekir (better-sqlite3 buildAffiliateUrl içinde DB okur).
+ * NOT: node runtime gerekir (buildAffiliateUrl içinde Supabase service_role ile DB okur).
  */
 import { NextResponse, type NextRequest } from 'next/server';
 import { buildAffiliateUrl } from '@/lib/affiliate';
@@ -22,7 +22,7 @@ export const dynamic = 'force-dynamic';
 const IATA_RE = /^[A-Za-z]{3}$/;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
-export function GET(request: NextRequest) {
+export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
 
   const source = searchParams.get('source') ?? undefined;
@@ -43,7 +43,7 @@ export function GET(request: NextRequest) {
   const price = Number.isFinite(priceNum) && (priceNum as number) >= 0 ? priceNum : undefined;
 
   // ── Çöz ──
-  const resolved = buildAffiliateUrl(source, {
+  const resolved = await buildAffiliateUrl(source, {
     origin,
     destination: dest,
     date,
