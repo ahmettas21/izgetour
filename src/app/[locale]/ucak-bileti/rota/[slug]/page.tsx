@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Link } from '@/i18n/navigation';
-import { Plane, Clock, ArrowRight, Info } from 'lucide-react';
+import { Plane, Tag, Building2 } from 'lucide-react';
+import type { ReactNode } from 'react';
 import {
   getRouteBySlug,
   getEnabledRoutes,
@@ -13,12 +14,36 @@ import {
   formatPriceTRY,
   cheapestFlight,
   routeUrl,
+  isValidPrice,
 } from '@/lib/seo';
-import { buildGoLink } from '@/lib/affiliate';
+import { resolveAirline } from '@/lib/airlines';
+import RouteFlightList from '@/components/flights/RouteFlightList';
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
+
+function SummaryStat({
+  icon,
+  label,
+  value,
+}: {
+  icon: ReactNode;
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="flex flex-col items-center gap-1 py-4 text-center">
+      <span className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-zinc-400">
+        {icon}
+        {label}
+      </span>
+      <span className="text-base font-bold text-zinc-900 dark:text-white sm:text-lg">
+        {value}
+      </span>
+    </div>
+  );
+}
 
 // ISR: popüler rotalar build'de, gerisi on-demand; saatte bir tazele.
 export const dynamicParams = true;
@@ -79,11 +104,17 @@ export default async function RotaLandingPage({ params }: Props) {
   const title = (isTR ? route.titleTr : route.titleEn) ?? `${route.origin} - ${route.destination}`;
   const description = (isTR ? route.descriptionTr : route.descriptionEn) ?? title;
 
-  // Cache'ten en yakın tarih snapshot'ı
+  // Cache'ten en yakın tarih snapshot'ı. Geçersiz fiyatlıları en baştan ele.
   const snapshot = getNearestCachedFlights(route.id);
-  const flights = [...snapshot.flights].sort((a, b) => a.price - b.price).slice(0, 10);
-  const cheapest = cheapestFlight(snapshot.flights);
+  const validFlights = snapshot.flights.filter((f) => isValidPrice(f.price));
+  const cheapest = cheapestFlight(validFlights);
   const cheapestPriceTRY = cheapest ? formatPriceTRY(cheapest.price) : null;
+
+  // Özet bar metrikleri
+  const flightCount = validFlights.length;
+  const airlineCount = new Set(
+    validFlights.map((f) => resolveAirline(f.carrierCode, f.airline).name),
+  ).size;
 
   // FAQ + JSON-LD
   const faq = buildFaq(route, snapshot.flights, locale);
@@ -144,126 +175,50 @@ export default async function RotaLandingPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Flight Listings */}
-      <section className="mx-auto max-w-7xl px-4 py-12">
-        {flights.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-zinc-200 p-12 text-center dark:border-zinc-700">
-            <Plane className="mx-auto mb-4 h-12 w-12 text-zinc-300 dark:text-zinc-600" />
-            <p className="text-lg font-medium text-zinc-500 dark:text-zinc-400">
-              {isTR
-                ? 'Bu rota için fiyatlar güncelleniyor. Lütfen kısa süre sonra tekrar deneyin.'
-                : 'Prices for this route are being updated. Please check back shortly.'}
-            </p>
+      {/* Özet bar */}
+      {flightCount > 0 && (
+        <section className="border-b border-zinc-100 bg-white dark:border-zinc-800 dark:bg-zinc-950">
+          <div className="mx-auto grid max-w-7xl grid-cols-3 divide-x divide-zinc-100 px-4 dark:divide-zinc-800">
+            <SummaryStat
+              icon={<Tag className="h-4 w-4" />}
+              label={isTR ? 'En ucuz' : 'Cheapest'}
+              value={cheapestPriceTRY ?? '—'}
+            />
+            <SummaryStat
+              icon={<Plane className="h-4 w-4" />}
+              label={isTR ? 'Uçuş' : 'Flights'}
+              value={String(flightCount)}
+            />
+            <SummaryStat
+              icon={<Building2 className="h-4 w-4" />}
+              label={isTR ? 'Havayolu' : 'Airlines'}
+              value={String(airlineCount)}
+            />
           </div>
-        ) : (
-          <>
-            <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">
-                {isTR ? 'En Uygun Uçuşlar' : 'Best Flight Deals'}
-              </h2>
-              {snapshot.departDate && (
-                <span className="text-sm text-zinc-500 dark:text-zinc-400">
-                  {isTR ? 'Tarih: ' : 'Date: '}
-                  {snapshot.departDate}
-                </span>
-              )}
-            </div>
-            <div className="space-y-4">
-              {flights.map((flight) => {
-                const priceTRY = formatPriceTRY(flight.price);
-                const goHref = buildGoLink({
-                  source: flight.bookingSource,
-                  origin: flight.departureCode || route.origin,
-                  destination: flight.arrivalCode || route.destination,
-                  date: snapshot.departDate ?? undefined,
-                  price: flight.price,
-                });
-                return (
-                  <div
-                    key={flight.slug}
-                    className="group rounded-xl border border-zinc-200 bg-white p-5 shadow-sm transition-all hover:shadow-md dark:border-zinc-700 dark:bg-zinc-800/80"
-                  >
-                    <div className="flex flex-wrap items-center justify-between gap-4">
-                      <div className="flex items-center gap-4">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-100 text-xs font-bold text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300">
-                          {flight.carrierCode || '✈'}
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-semibold text-zinc-900 dark:text-white">
-                              {flight.airline || flight.carrierCode}
-                            </span>
-                            <span
-                              className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
-                                flight.stops === 0
-                                  ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400'
-                                  : 'bg-amber-50 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400'
-                              }`}
-                            >
-                              {flight.stops === 0
-                                ? isTR
-                                  ? 'Direkt'
-                                  : 'Non-stop'
-                                : `${flight.stops} ${isTR ? 'aktarma' : 'stops'}`}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-1 text-xs text-zinc-500 dark:text-zinc-400">
-                            <span className="font-medium">{flight.departureCode}</span>
-                            <ArrowRight className="h-3 w-3" />
-                            <span className="font-medium">{flight.arrivalCode}</span>
-                            {flight.bookingSource && (
-                              <span className="ml-2 rounded bg-zinc-100 px-1.5 py-0.5 text-[10px] text-zinc-500 dark:bg-zinc-700 dark:text-zinc-400">
-                                {flight.bookingSource}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      </div>
+        </section>
+      )}
 
-                      {flight.durationMinutes > 0 && (
-                        <div className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
-                          <Clock className="h-4 w-4" />
-                          <span>
-                            {Math.floor(flight.durationMinutes / 60)}s {flight.durationMinutes % 60}dk
-                          </span>
-                        </div>
-                      )}
+      {/* Flight Listings */}
+      <section className="mx-auto max-w-7xl px-4 py-10 sm:py-12">
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+          <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">
+            {isTR ? 'En Uygun Uçuşlar' : 'Best Flight Deals'}
+          </h2>
+          {snapshot.departDate && (
+            <span className="text-sm text-zinc-500 dark:text-zinc-400">
+              {isTR ? 'Tarih: ' : 'Date: '}
+              {snapshot.departDate}
+            </span>
+          )}
+        </div>
 
-                      <div className="flex items-center gap-4">
-                        <div className="text-right">
-                          <div className="text-2xl font-bold text-[#0066CC] dark:text-[#3399ff]">
-                            {priceTRY}
-                          </div>
-                          <div className="text-[10px] text-zinc-400">
-                            {isTR ? 'yaklaşık' : 'approx.'}
-                          </div>
-                        </div>
-                        <a
-                          href={goHref}
-                          target="_blank"
-                          rel="nofollow sponsored noopener"
-                          className="rounded-lg bg-[#0066CC] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#0052a3] dark:bg-[#3399ff] dark:hover:bg-[#1a8cff]"
-                        >
-                          {isTR ? 'Bileti Al' : 'Book Ticket'}
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Fiyat teyit ibaresi */}
-            <div className="mt-6 flex items-start gap-2 rounded-lg bg-zinc-50 p-4 text-xs text-zinc-500 dark:bg-zinc-900 dark:text-zinc-400">
-              <Info className="mt-0.5 h-4 w-4 shrink-0" />
-              <p>
-                {isTR
-                  ? 'Fiyatlar bilgilendirme amaçlıdır ve döviz kuru ile müsaitliğe göre değişebilir. Kesin fiyat için rezervasyon sayfasında teyit ediniz.'
-                  : 'Prices are indicative and may vary based on exchange rate and availability. Please confirm the exact price on the booking page.'}
-              </p>
-            </div>
-          </>
-        )}
+        <RouteFlightList
+          flights={validFlights}
+          routeOrigin={route.origin}
+          routeDestination={route.destination}
+          departDate={snapshot.departDate}
+          locale={locale}
+        />
       </section>
 
       {/* SEO içerik bloğu */}

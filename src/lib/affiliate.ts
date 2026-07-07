@@ -11,14 +11,7 @@
  * İlker gerçek affiliate linklerini sonra girecek — sistem şimdiden hazır.
  */
 import { getAffiliateLink } from '@/db/repository';
-
-export interface GoLinkParams {
-  source?: string;      // bookingSource (FAST, Kiwi, Skyscanner...)
-  origin: string;       // IATA (IST)
-  destination: string;  // IATA (AYT)
-  date?: string;        // YYYY-MM-DD
-  price?: number;       // USD (ham cache fiyatı)
-}
+export { buildGoLink, type GoLinkParams } from '@/lib/go-link';
 
 /**
  * Genel fallback URL. Belirli bir affiliate yoksa veya kaynak pasifse buraya yönlendirilir.
@@ -36,19 +29,37 @@ export function fallbackUrl(params: {
     return fillTemplate(base, params);
   }
 
-  // Kaynağa göre doğru siteye yönlendir. İkincil sağlayıcıdan gelen uçuşları
-  // (ör. GoogleFlights) Skiplagged'e göndermek yanlış olur — Skiplagged o rotayı
-  // indekslemiyor olabilir (Trabzon durumu). Bu yüzden kaynak-bilinçli fallback.
+  // Kaynağa göre doğru siteye yönlendir. Kaynak çeşitliliğini koru: her uçuşu
+  // FAST/Skiplagged'e göndermek yanlış — bazı rotaları indekslemiyor olabilir
+  // (ör. Trabzon). Bu yüzden kaynak-bilinçli fallback.
   const depart = params.date ?? '';
-  if (params.source === 'GoogleFlights') {
-    const q = `Flights from ${params.origin} to ${params.destination} on ${depart} oneway`;
-    return `https://www.google.com/travel/flights?curr=USD&q=${encodeURIComponent(q)}`;
-  }
+  const o = encodeURIComponent(params.origin);
+  const d = encodeURIComponent(params.destination);
+  const date = encodeURIComponent(depart);
 
-  // Varsayılan: Skiplagged arama URL (affiliate değil, kullanıcıyı uçuşa götürür)
-  return `https://skiplagged.com/flights/${encodeURIComponent(params.origin)}/${encodeURIComponent(
-    params.destination,
-  )}/${encodeURIComponent(depart)}`;
+  switch (params.source) {
+    case 'GoogleFlights': {
+      const q = `Flights from ${params.origin} to ${params.destination} on ${depart} oneway`;
+      return `https://www.google.com/travel/flights?curr=TRY&hl=tr&q=${encodeURIComponent(q)}`;
+    }
+    case 'Kiwi':
+      return `https://www.kiwi.com/en/search/results/${o}/${d}/${date}`;
+    case 'FlightNetwork': {
+      const q = new URLSearchParams({
+        adults: '1',
+        origin: params.origin,
+        destination: params.destination,
+        departure: depart,
+        tripType: 'oneway',
+      });
+      return `https://www.flightnetwork.com/en/search?${q.toString()}`;
+    }
+    case 'Skiplagged':
+    case 'FAST':
+    default:
+      // Skiplagged arama URL (affiliate değil, kullanıcıyı uçuşa götürür)
+      return `https://skiplagged.com/flights/${o}/${d}/${date}`;
+  }
 }
 
 /**
@@ -98,16 +109,4 @@ export function buildAffiliateUrl(
   };
 }
 
-/**
- * Landing sayfası butonunun href'i: iç /go linki.
- * Tıklama endpoint'ten geçsin ki loglayıp gerçek affiliate'e yönlendirebilelim.
- */
-export function buildGoLink(params: GoLinkParams): string {
-  const q = new URLSearchParams();
-  if (params.source) q.set('source', params.source);
-  q.set('origin', params.origin);
-  q.set('dest', params.destination);
-  if (params.date) q.set('date', params.date);
-  if (params.price != null) q.set('price', String(params.price));
-  return `/go?${q.toString()}`;
-}
+

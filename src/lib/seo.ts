@@ -9,44 +9,48 @@
  */
 import type { FlightResult } from '@/components/flights/types';
 import type { Route } from '@/db/schema';
+import { airlineName } from '@/lib/airlines';
 
 export const BASE_URL = 'https://izgetour.com';
 
 // ─── Kur ────────────────────────────────────────────────────────────────────
-/** USD→TRY kuru: env FX_USD_TRY, verilmezse 40. */
-export function getUsdTryRate(): number {
+/** USD→TRY sabit kuru (env FX_USD_TRY, verilmezse 40). Tek kaynak. */
+export const FX_USD_TRY: number = (() => {
   const raw = Number(process.env.FX_USD_TRY);
   return Number.isFinite(raw) && raw > 0 ? raw : 40;
+})();
+
+/** Geriye dönük uyumluluk: sabit kuru döner. */
+export function getUsdTryRate(): number {
+  return FX_USD_TRY;
 }
 
-export type Currency = 'USD' | 'TRY';
+/** Ham USD fiyatı geçerli mi? (0, negatif, NaN → geçersiz). */
+export function isValidPrice(priceUsd: number | null | undefined): boolean {
+  return typeof priceUsd === 'number' && Number.isFinite(priceUsd) && priceUsd > 0;
+}
+
+/** USD → TL (yuvarlanmış tam sayı, sabit kur). */
+export function usdToTry(priceUsd: number): number {
+  return Math.round(priceUsd * FX_USD_TRY);
+}
+
+export type Currency = 'TRY';
 
 export interface FormattedPrice {
-  amount: number;       // sayısal değer
-  currency: Currency;
+  amount: number;       // TL değeri (yuvarlanmış)
+  currency: 'TRY';
   display: string;      // gösterim metni (ör. "₺15.300")
-  approximate: boolean; // TRY çevriminde true
+  approximate: boolean; // sabit kur çevriminde her zaman true
 }
 
 /**
- * USD fiyatı verilen para birimine göre formatlar.
- * TRY seçilirse sabit kurla "yaklaşık" çevrim yapar.
+ * Ham USD fiyatını TL'ye çevirip formatlar. TR sitesi → her yerde TL, tek birim.
+ * Geçersiz fiyat (0/negatif/NaN) durumunda amount=0 döner; çağıran taraf
+ * isValidPrice ile kontrol edip "fiyat için tıkla" gösterebilir.
  */
-export function formatPrice(
-  priceUsd: number,
-  currency: Currency = 'TRY',
-  locale: string = 'tr',
-): FormattedPrice {
-  if (currency === 'USD') {
-    return {
-      amount: priceUsd,
-      currency: 'USD',
-      display: `$${priceUsd.toLocaleString(locale === 'tr' ? 'tr-TR' : 'en-US', { maximumFractionDigits: 0 })}`,
-      approximate: false,
-    };
-  }
-
-  const tryAmount = Math.round(priceUsd * getUsdTryRate());
+export function formatPrice(priceUsd: number): FormattedPrice {
+  const tryAmount = isValidPrice(priceUsd) ? usdToTry(priceUsd) : 0;
   return {
     amount: tryAmount,
     currency: 'TRY',
@@ -56,18 +60,81 @@ export function formatPrice(
 }
 
 /**
- * USD ham fiyatı → "~2.600 TL" formatında TL gösterim.
- * Sabit kur (getUsdTryRate) ile çevrilir; her zaman yaklaşık ("~") ibaresi taşır.
+ * Ham USD fiyatı → "~2.600 TL" formatında TL gösterim (sabit kur, "~" yaklaşık).
+ * Geçersiz fiyatta null döner → çağıran "Fiyat için tıkla" gösterebilir.
  */
-export function formatPriceTRY(priceUsd: number): string {
-  const tryAmount = Math.round(priceUsd * getUsdTryRate());
+export function formatPriceTRY(priceUsd: number): string | null {
+  if (!isValidPrice(priceUsd)) return null;
+  const tryAmount = usdToTry(priceUsd);
   return `~${tryAmount.toLocaleString('tr-TR', { maximumFractionDigits: 0 })} TL`;
 }
 
-// ─── En ucuz fiyatı bul ─────────────────────────────────────────────────────
+// ─── Saat / süre yardımcıları ───────────────────────────────────────────────
+/**
+ * ISO datetime veya "HH:mm" stringinden HH:mm gösterimi üretir.
+ * Timezone offset'i olan ISO'da yerel duvar saati (kaynak TZ) korunur.
+ */
+export function displayTime(value: string | null | undefined): string {
+  if (!value) return '';
+  const s = String(value);
+  // "2026-07-14T06:05:00+03:00" veya "2026-07-14T13:45:00.000Z"
+  const m = s.match(/T(\d{2}):(\d{2})/);
+  if (m) return `${m[1]}:${m[2]}`;
+  // "HH:mm..." düz string
+  const hm = s.match(/^(\d{2}):(\d{2})/);
+  if (hm) return `${hm[1]}:${hm[2]}`;
+  return '';
+}
+
+/** ISO datetime → epoch ms (offset dahil). Parse edilemezse null. */
+function toEpoch(value: string | null | undefined): number | null {
+  if (!value) return null;
+  const t = Date.parse(String(value));
+  return Number.isFinite(t) ? t : null;
+}
+
+/**
+ * Uçuş süresini dakika olarak döndürür.
+ * Öncelik: geçerli görünen durationMinutes; değilse kalkış/varış farkından
+ * (offset'ler dahil) hesaplar. Hiçbiri olmazsa 0.
+ * DB'deki bozuk timezone kaynaklı hatalı süreleri düzeltmek için kullanılır.
+ */
+export function resolveDurationMinutes(
+  durationMinutes: number,
+  departureTime: string | null | undefined,
+  arrivalTime: string | null | undefined,
+): number {
+  const dep = toEpoch(departureTime);
+  const arr = toEpoch(arrivalTime);
+  if (dep != null && arr != null && arr > dep) {
+    const diff = Math.round((arr - dep) / 60000);
+    // 20 dk – 24 saat arası makul aralık
+    if (diff >= 20 && diff <= 24 * 60) return diff;
+  }
+  if (Number.isFinite(durationMinutes) && durationMinutes >= 20 && durationMinutes <= 24 * 60) {
+    return durationMinutes;
+  }
+  return 0;
+}
+
+/** Dakikayı "1s 35dk" (tr) / "1h 35m" (en) biçiminde gösterir. */
+export function formatDuration(minutes: number, locale: string = 'tr'): string {
+  if (!minutes || minutes <= 0) return '';
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  const isTR = locale === 'tr';
+  const hu = isTR ? 's' : 'h';
+  const mu = isTR ? 'dk' : 'm';
+  if (h === 0) return `${m}${mu}`;
+  if (m === 0) return `${h}${hu}`;
+  return `${h}${hu} ${m}${mu}`;
+}
+
+// ─── En ucuz fiyatı bul (geçersiz fiyatları eler) ───────────────────────────
 export function cheapestFlight(flights: FlightResult[]): FlightResult | null {
-  if (flights.length === 0) return null;
-  return flights.reduce((min, f) => (f.price < min.price ? f : min), flights[0]);
+  const valid = flights.filter((f) => isValidPrice(f.price));
+  if (valid.length === 0) return null;
+  return valid.reduce((min, f) => (f.price < min.price ? f : min), valid[0]);
 }
 
 // ─── FAQ üretimi ────────────────────────────────────────────────────────────
@@ -85,10 +152,15 @@ export function buildFaq(
   const origin = route.origin;
   const dest = route.destination;
   const cheapest = cheapestFlight(flights);
-  const priceStr = cheapest
-    ? formatPrice(cheapest.price, 'TRY', locale).display
-    : isTR ? 'değişken' : 'variable';
-  const airlines = [...new Set(flights.map((f) => f.airline).filter(Boolean))];
+  const priceStr =
+    cheapest && isValidPrice(cheapest.price)
+      ? formatPrice(cheapest.price).display
+      : isTR ? 'değişken' : 'variable';
+  const airlines = [
+    ...new Set(
+      flights.map((f) => airlineName(f.carrierCode, f.airline)).filter(Boolean),
+    ),
+  ];
   const airlinesStr = airlines.length > 0
     ? airlines.slice(0, 4).join(', ')
     : isTR ? 'çeşitli havayolları' : 'various airlines';
@@ -206,8 +278,9 @@ export function buildRouteJsonLd(
 
   const graph: Record<string, unknown>[] = [breadcrumb, faqPage];
 
-  if (cheapest) {
-    const price = formatPrice(cheapest.price, 'USD', locale); // Offer'da net kur: USD
+  if (cheapest && isValidPrice(cheapest.price)) {
+    // TR sitesi → Offer da TL (TRY). price: TL değeri, priceCurrency: TRY.
+    const price = formatPrice(cheapest.price);
     graph.push({
       '@type': 'Product',
       name: title,
@@ -216,7 +289,7 @@ export function buildRouteJsonLd(
       offers: {
         '@type': 'Offer',
         price: price.amount,
-        priceCurrency: 'USD',
+        priceCurrency: 'TRY',
         availability: 'https://schema.org/InStock',
         url,
       },
