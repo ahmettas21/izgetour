@@ -7,6 +7,7 @@
  * try/catch ile sarıp mock fallback'e düşülmeli.
  */
 import type { FlightResult, SearchParams, CabinClass } from '@/components/flights/types';
+import { fetchViaFlareSolverr } from '@/lib/flaresolverr';
 
 // ─── Skiplagged raw types ────────────────────────────────────────────────────
 interface SkSegment {
@@ -142,17 +143,9 @@ export async function searchSkiplaggedFlights(params: SearchParams): Promise<Fli
     'counts[children]': String(params.passengers.child || 0),
   });
 
-  const res = await fetch(`${SK_BASE}?${qs.toString()}`, {
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126.0 Safari/537.36',
-      Referer: 'https://skiplagged.com/',
-      Accept: 'application/json',
-    },
-    cache: 'no-store',
-  });
-  if (!res.ok) throw new Error(`Skiplagged API error: ${res.status}`);
-
-  const data: SkResponse = await res.json();
+  // Cloudflare korumalı endpoint → FlareSolverr üzerinden çekilir.
+  // (Düz fetch CF challenge'ına takılır; bu fonksiyon yalnızca worker'dan çağrılır.)
+  const data = await fetchViaFlareSolverr<SkResponse>(`${SK_BASE}?${qs.toString()}`);
   const out = data.itineraries?.outbound ?? [];
 
   // Dedup: aynı flight key (id) birden fazla itinerary'de dönebilir → Map ile tekilleştir

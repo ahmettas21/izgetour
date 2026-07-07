@@ -2,7 +2,7 @@
 
 import { Airport } from '@/data/airports';
 import type { FlightResult, SearchParams, CabinClass } from '@/components/flights/types';
-import { searchSkiplaggedFlights } from './skiplagged';
+import { getRouteByOriginDest, getCachedFlights } from '@/db/repository';
 
 // Re-export types for consumers
 export type { FlightResult, SearchParams, CabinClass } from '@/components/flights/types';
@@ -368,7 +368,9 @@ export async function searchFlights(params: SearchParams): Promise<{
       return { success: false, error: 'Bebek sayısı yetişkin sayısını aşamaz' };
     }
 
-    // ─── Sağlayıcı zinciri: Amadeus → Skiplagged → mock ──────────────────────
+    // ─── Sağlayıcı zinciri: Amadeus → DB cache → mock ────────────────────────
+    // NOT: Skiplagged runtime'dan çıkarıldı; yalnızca worker FlareSolverr ile
+    // çekip DB'ye (price_cache) yazar. Site yalnızca DB okur.
     const hasCredentials = !!(process.env.AMADEUS_CLIENT_ID && process.env.AMADEUS_CLIENT_SECRET);
 
     let results: FlightResult[] = [];
@@ -378,17 +380,20 @@ export async function searchFlights(params: SearchParams): Promise<{
       try {
         results = await searchAmadeusFlights(params);
       } catch (err) {
-        console.warn('Amadeus arama başarısız, Skiplagged deneniyor:', err);
+        console.warn('Amadeus arama başarısız, DB cache deneniyor:', err);
         results = [];
       }
     }
 
-    // 2) Skiplagged (Amadeus boş/başarısız ise)
+    // 2) DB cache (worker'ın FlareSolverr ile doldurduğu price_cache)
     if (results.length === 0) {
       try {
-        results = await searchSkiplaggedFlights(params);
+        const route = getRouteByOriginDest(params.from.iata, params.to.iata);
+        if (route) {
+          results = getCachedFlights(route.id, params.departDate);
+        }
       } catch (err) {
-        console.warn('Skiplagged arama başarısız, mock veriye düşülüyor:', err);
+        console.warn('DB cache okuma başarısız, mock veriye düşülüyor:', err);
         results = [];
       }
     }
