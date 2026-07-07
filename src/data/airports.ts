@@ -20,7 +20,10 @@ export const AIRPORTS: Airport[] = [
   { iata: 'BJV', city: 'Bodrum', cityNative: 'Bodrum', country: 'Turkey', countryCode: 'TR', name: 'Milas-Bodrum Airport' },
   { iata: 'DLM', city: 'Dalaman', cityNative: 'Dalaman', country: 'Turkey', countryCode: 'TR', name: 'Dalaman Airport' },
   { iata: 'TZX', city: 'Trabzon', cityNative: 'Trabzon', country: 'Turkey', countryCode: 'TR', name: 'Trabzon Airport' },
-  { iata: 'ADA', city: 'Adana', cityNative: 'Adana', country: 'Turkey', countryCode: 'TR', name: 'Sakirpasa Airport' },
+  // Adana: eski Şakirpaşa (ADA) kapatıldı → aktif havalimanı Çukurova (COV).
+  // Skiplagged yalnızca COV'u indeksliyor; ADA 0 döner. Arama uyumu için
+  // cityNative'e "Adana Şakirpaşa" da eklendi (ADA->COV alias etkisi).
+  { iata: 'COV', city: 'Adana', cityNative: 'Adana Şakirpaşa', country: 'Turkey', countryCode: 'TR', name: 'Çukurova Airport' },
   { iata: 'ASR', city: 'Kayseri', cityNative: 'Kayseri', country: 'Turkey', countryCode: 'TR', name: 'Erciyes Airport' },
   // Europe
   { iata: 'LHR', city: 'London', cityNative: 'Londra', country: 'United Kingdom', countryCode: 'GB', name: 'Heathrow Airport' },

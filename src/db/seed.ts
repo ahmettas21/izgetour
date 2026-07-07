@@ -17,7 +17,8 @@ const AIRPORTS: NewAirport[] = [
   { code: 'ESB', name: 'Ankara Esenboğa Havalimanı', city: 'Ankara', country: 'Türkiye', lat: 40.1281, lng: 32.9951 },
   { code: 'TZX', name: 'Trabzon Havalimanı', city: 'Trabzon', country: 'Türkiye', lat: 40.9951, lng: 39.7897 },
   { code: 'BJV', name: 'Bodrum-Milas Havalimanı', city: 'Bodrum', country: 'Türkiye', lat: 37.2506, lng: 27.6644 },
-  { code: 'ADA', name: 'Adana Şakirpaşa Havalimanı', city: 'Adana', country: 'Türkiye', lat: 36.9822, lng: 35.2804 },
+  // Adana: eski Şakirpaşa (ADA) kapandı → aktif havalimanı Çukurova (COV).
+  { code: 'COV', name: 'Adana Çukurova Havalimanı', city: 'Adana', country: 'Türkiye', lat: 36.9086, lng: 35.2794 },
   { code: 'GZT', name: 'Gaziantep Havalimanı', city: 'Gaziantep', country: 'Türkiye', lat: 36.9472, lng: 37.4787 },
 ];
 
@@ -68,7 +69,8 @@ const ROUTES: RouteSeed[] = [
     descriptionEn: 'Affordable flight options from Izmir to Antalya.',
   },
   {
-    origin: 'IST', destination: 'ADA', popular: true, enabled: true, slug: 'istanbul-adana',
+    // slug 'istanbul-adana' SEO/URL için AYNEN korunuyor; yalnızca destination IATA ADA->COV.
+    origin: 'IST', destination: 'COV', popular: true, enabled: true, slug: 'istanbul-adana',
     titleTr: 'İstanbul - Adana Uçak Bileti', titleEn: 'Istanbul to Adana Flights',
     descriptionTr: 'İstanbul Adana arası en iyi bilet fiyatları.',
     descriptionEn: 'Best ticket prices from Istanbul to Adana.',
