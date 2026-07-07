@@ -8,5 +8,5 @@ export default function middleware(request: Parameters<typeof handleI18nRouting>
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)'],
+  matcher: ['/((?!api|go|_next|_vercel|.*\\..*).*)'],
 };

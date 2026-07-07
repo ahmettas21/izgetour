@@ -10,10 +10,11 @@ import {
 import {
   buildFaq,
   buildRouteJsonLd,
-  formatPrice,
+  formatPriceTRY,
   cheapestFlight,
   routeUrl,
 } from '@/lib/seo';
+import { buildGoLink } from '@/lib/affiliate';
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -82,7 +83,7 @@ export default async function RotaLandingPage({ params }: Props) {
   const snapshot = getNearestCachedFlights(route.id);
   const flights = [...snapshot.flights].sort((a, b) => a.price - b.price).slice(0, 10);
   const cheapest = cheapestFlight(snapshot.flights);
-  const cheapestPrice = cheapest ? formatPrice(cheapest.price, 'TRY', locale) : null;
+  const cheapestPriceTRY = cheapest ? formatPriceTRY(cheapest.price) : null;
 
   // FAQ + JSON-LD
   const faq = buildFaq(route, snapshot.flights, locale);
@@ -121,18 +122,16 @@ export default async function RotaLandingPage({ params }: Props) {
           <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">{title}</h1>
           <p className="mx-auto mt-4 max-w-2xl text-base text-white/80">{description}</p>
 
-          {cheapestPrice && (
+          {cheapestPriceTRY && (
             <div className="mt-6 inline-flex flex-col items-center rounded-2xl bg-white/10 px-6 py-4 backdrop-blur">
               <span className="text-xs uppercase tracking-wide text-white/60">
                 {isTR ? 'Başlangıç fiyatı' : 'Starting from'}
               </span>
               <span className="text-3xl font-bold text-white">
-                {cheapestPrice.display}
-                {cheapestPrice.approximate && (
-                  <span className="ml-1 align-middle text-xs font-normal text-white/60">
-                    {isTR ? '(yaklaşık)' : '(approx.)'}
-                  </span>
-                )}
+                {cheapestPriceTRY}
+                <span className="ml-1 align-middle text-xs font-normal text-white/60">
+                  {isTR ? '(yaklaşık)' : '(approx.)'}
+                </span>
               </span>
               {fetchedLabel && (
                 <span className="mt-1 text-[11px] text-white/50">
@@ -171,7 +170,14 @@ export default async function RotaLandingPage({ params }: Props) {
             </div>
             <div className="space-y-4">
               {flights.map((flight) => {
-                const price = formatPrice(flight.price, 'TRY', locale);
+                const priceTRY = formatPriceTRY(flight.price);
+                const goHref = buildGoLink({
+                  source: flight.bookingSource,
+                  origin: flight.departureCode || route.origin,
+                  destination: flight.arrivalCode || route.destination,
+                  date: snapshot.departDate ?? undefined,
+                  price: flight.price,
+                });
                 return (
                   <div
                     key={flight.slug}
@@ -226,20 +232,20 @@ export default async function RotaLandingPage({ params }: Props) {
                       <div className="flex items-center gap-4">
                         <div className="text-right">
                           <div className="text-2xl font-bold text-[#0066CC] dark:text-[#3399ff]">
-                            {price.display}
+                            {priceTRY}
                           </div>
-                          {price.approximate && (
-                            <div className="text-[10px] text-zinc-400">
-                              {isTR ? 'yaklaşık' : 'approx.'}
-                            </div>
-                          )}
+                          <div className="text-[10px] text-zinc-400">
+                            {isTR ? 'yaklaşık' : 'approx.'}
+                          </div>
                         </div>
-                        <Link
-                          href={`/flights?from=${flight.departureCode}&to=${flight.arrivalCode}`}
+                        <a
+                          href={goHref}
+                          target="_blank"
+                          rel="nofollow sponsored noopener"
                           className="rounded-lg bg-[#0066CC] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#0052a3] dark:bg-[#3399ff] dark:hover:bg-[#1a8cff]"
                         >
-                          {isTR ? 'Bileti Bul' : 'Find Ticket'}
-                        </Link>
+                          {isTR ? 'Bileti Al' : 'Book Ticket'}
+                        </a>
                       </div>
                     </div>
                   </div>

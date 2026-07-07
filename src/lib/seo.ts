@@ -13,9 +13,10 @@ import type { Route } from '@/db/schema';
 export const BASE_URL = 'https://izgetour.com';
 
 // ─── Kur ────────────────────────────────────────────────────────────────────
+/** USD→TRY kuru: env FX_USD_TRY, verilmezse 40. */
 export function getUsdTryRate(): number {
   const raw = Number(process.env.FX_USD_TRY);
-  return Number.isFinite(raw) && raw > 0 ? raw : 34;
+  return Number.isFinite(raw) && raw > 0 ? raw : 40;
 }
 
 export type Currency = 'USD' | 'TRY';
@@ -52,6 +53,15 @@ export function formatPrice(
     display: `₺${tryAmount.toLocaleString('tr-TR', { maximumFractionDigits: 0 })}`,
     approximate: true,
   };
+}
+
+/**
+ * USD ham fiyatı → "~2.600 TL" formatında TL gösterim.
+ * Sabit kur (getUsdTryRate) ile çevrilir; her zaman yaklaşık ("~") ibaresi taşır.
+ */
+export function formatPriceTRY(priceUsd: number): string {
+  const tryAmount = Math.round(priceUsd * getUsdTryRate());
+  return `~${tryAmount.toLocaleString('tr-TR', { maximumFractionDigits: 0 })} TL`;
 }
 
 // ─── En ucuz fiyatı bul ─────────────────────────────────────────────────────
