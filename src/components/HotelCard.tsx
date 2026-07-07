@@ -44,7 +44,7 @@ export default function HotelCard({ hotel, locale }: Props) {
   return (
     <Link href={`/hotels/${hotel.slug}`} className="group block h-full">
       <article
-        className="flex h-full flex-col overflow-hidden rounded-2xl bg-[var(--surface)] transition-all duration-300"
+        className="flex h-full flex-col overflow-hidden rounded-2xl bg-[var(--surface)] dark:bg-[var(--surface)] transition-all duration-300"
         style={{
           boxShadow: 'var(--shadow-card)',
         }}
@@ -102,18 +102,18 @@ export default function HotelCard({ hotel, locale }: Props) {
         {/* Content */}
         <div className="flex flex-1 flex-col p-5">
           {/* City */}
-          <div className="mb-2 flex items-center gap-1.5 text-xs font-medium text-[var(--muted)]">
-            <MapPin className="h-3.5 w-3.5 shrink-0 text-[var(--brand)]" />
+          <div className="mb-2 flex items-center gap-1.5 text-xs font-medium text-[var(--muted)] dark:text-gray-400">
+            <MapPin className="h-3.5 w-3.5 shrink-0 text-[var(--brand)] dark:text-[var(--brand)]" />
             {hotel.city}
           </div>
 
           {/* Title */}
-          <h3 className="text-base font-bold leading-snug text-[var(--foreground)] transition-colors duration-150 group-hover:text-[var(--brand)] line-clamp-2">
+          <h3 className="text-base font-bold leading-snug text-[var(--foreground)] dark:text-gray-100 transition-colors duration-150 group-hover:text-[var(--brand)] line-clamp-2">
             {title}
           </h3>
 
           {/* Description */}
-          <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--muted)] line-clamp-2">
+          <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--muted)] dark:text-gray-400 line-clamp-2">
             {description}
           </p>
 
@@ -135,11 +135,11 @@ export default function HotelCard({ hotel, locale }: Props) {
           </div>
 
           {/* Divider */}
-          <div className="my-4 h-px bg-[var(--border)]" />
+          <div className="my-4 h-px bg-[var(--border)] dark:bg-gray-700" />
 
           {/* Info row */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3 text-xs text-[var(--muted)]">
+            <div className="flex items-center gap-3 text-xs text-[var(--muted)] dark:text-gray-400">
               <span className="flex items-center gap-1">
                 <Users className="h-3.5 w-3.5" />
                 {hotel.rooms.length} {locale === 'tr' ? 'oda' : 'rooms'}
@@ -147,10 +147,10 @@ export default function HotelCard({ hotel, locale }: Props) {
             </div>
 
             <div className="text-right">
-              <div className="text-[10px] uppercase tracking-wide text-[var(--muted)]">
+              <div className="text-[10px] uppercase tracking-wide text-[var(--muted)] dark:text-gray-400">
                 {locale === 'tr' ? 'gecelik' : 'per night'}
               </div>
-              <div className="text-xl font-extrabold text-[var(--brand)]">
+              <div className="text-xl font-extrabold text-[var(--brand)] dark:text-[var(--brand)]">
                 ₺{minPrice.toLocaleString('tr-TR')}
               </div>
             </div>

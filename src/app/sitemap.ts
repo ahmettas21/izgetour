@@ -1,8 +1,11 @@
+import type { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
+import { getEnabledRoutes } from '@/db/repository';
+import { routeUrl } from '@/lib/seo';
 
 const BASE_URL = 'https://izgetour.com';
 
-export default async function sitemap() {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { locales } = routing;
   
   const staticPages = [
@@ -24,7 +27,7 @@ export default async function sitemap() {
   ];
 
   const localesFlat = [...locales];
-  const sitemapEntries = [...staticPages];
+  const sitemapEntries: MetadataRoute.Sitemap = [...staticPages];
 
   for (const locale of localesFlat) {
     for (const tour of tourSlugs) {
@@ -33,6 +36,21 @@ export default async function sitemap() {
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.8,
+      });
+    }
+  }
+
+  // ─── Dinamik rota landing sayfaları (programmatic SEO) ────────────────────
+  // localePrefix: 'as-needed' → TR prefix'siz, EN prefix'li (routeUrl helper).
+  const routes = await getEnabledRoutes();
+  for (const route of routes) {
+    if (!route.slug) continue;
+    for (const locale of localesFlat) {
+      sitemapEntries.push({
+        url: routeUrl(route.slug, locale),
+        lastModified: new Date(),
+        changeFrequency: 'daily' as const,
+        priority: route.popular ? 0.9 : 0.7,
       });
     }
   }

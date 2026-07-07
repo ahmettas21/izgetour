@@ -112,7 +112,7 @@ export default function MoodDestinationPicker({ locale = 'tr' }: Props) {
         </h2>
       </div>
       <p className="mb-6 text-sm text-zinc-500 dark:text-zinc-400">
-        {isTr ? 'Nasıl hissediyorsun? Sana en uygun destinasyonu bulalım.' : 'How do you feel? Let\'s find the perfect destination.'}
+        {isTr ? 'Nasıl hissediyorsun? Sana en uygun destinasyonu bulalım.' : "How do you feel? Let's find the perfect destination."}
       </p>
 
       {/* Mood Grid */}

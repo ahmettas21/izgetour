@@ -2,6 +2,7 @@
 
 import { Airport } from '@/data/airports';
 import type { FlightResult, SearchParams, CabinClass } from '@/components/flights/types';
+import { getRouteByOriginDest, getCachedFlights } from '@/db/repository';
 
 // Re-export types for consumers
 export type { FlightResult, SearchParams, CabinClass } from '@/components/flights/types';
@@ -367,15 +368,38 @@ export async function searchFlights(params: SearchParams): Promise<{
       return { success: false, error: 'Bebek sayısı yetişkin sayısını aşamaz' };
     }
 
-    // Check if Amadeus credentials are configured
+    // ─── Sağlayıcı zinciri: Amadeus → DB cache → mock ────────────────────────
+    // NOT: Skiplagged runtime'dan çıkarıldı; yalnızca worker FlareSolverr ile
+    // çekip DB'ye (price_cache) yazar. Site yalnızca DB okur.
     const hasCredentials = !!(process.env.AMADEUS_CLIENT_ID && process.env.AMADEUS_CLIENT_SECRET);
 
-    let results: FlightResult[];
+    let results: FlightResult[] = [];
 
+    // 1) Amadeus (yalnızca credential varsa)
     if (hasCredentials) {
-      results = await searchAmadeusFlights(params);
-    } else {
-      // Fallback to mock data for development
+      try {
+        results = await searchAmadeusFlights(params);
+      } catch (err) {
+        console.warn('Amadeus arama başarısız, DB cache deneniyor:', err);
+        results = [];
+      }
+    }
+
+    // 2) DB cache (worker'ın FlareSolverr ile doldurduğu price_cache)
+    if (results.length === 0) {
+      try {
+        const route = await getRouteByOriginDest(params.from.iata, params.to.iata);
+        if (route) {
+          results = await getCachedFlights(route.id, params.departDate);
+        }
+      } catch (err) {
+        console.warn('DB cache okuma başarısız, mock veriye düşülüyor:', err);
+        results = [];
+      }
+    }
+
+    // 3) Mock (son çare)
+    if (results.length === 0) {
       await new Promise((r) => setTimeout(r, 800 + Math.random() * 600));
       results = generateMockResults(params.from, params.to, params.cabinClass);
     }

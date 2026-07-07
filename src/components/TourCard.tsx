@@ -95,7 +95,7 @@ export default function TourCard({ tour, locale }: Props) {
           </div>
 
           {/* Title */}
-          <h3 className="text-base font-bold leading-snug text-[var(--foreground)] transition-colors duration-150 group-hover:text-[var(--brand)] line-clamp-2">
+          <h3 className="text-base font-bold leading-snug text-[var(--foreground)] dark:text-gray-100 transition-colors duration-150 group-hover:text-[var(--brand)] line-clamp-2">
             {title}
           </h3>
 
@@ -113,7 +113,7 @@ export default function TourCard({ tour, locale }: Props) {
               <span className="text-[10px] uppercase tracking-wide text-[var(--muted)] dark:text-gray-400">
                 {t('perPerson')}
               </span>
-              <span className="text-xl font-extrabold text-[var(--brand)]">
+              <span className="text-xl font-extrabold text-[var(--brand)] dark:text-[var(--brand)]">
                 ₺{tour.price.toLocaleString('tr-TR')}
               </span>
             </div>

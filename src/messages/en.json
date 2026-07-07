@@ -347,7 +347,8 @@
       "cleanest": "Cleanest",
       "selectThis": "Select This Flight",
       "details": "Details →"
-    }
+    },
+    "solo_travel": "Solo Travel"
   },
   "meta": {
     "siteName": "Izgetour",

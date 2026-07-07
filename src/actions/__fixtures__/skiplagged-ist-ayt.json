@@ -1,0 +1,977 @@
+{
+  "airlines": {
+    "BT": {
+      "name": "Air Baltic"
+    },
+    "J2": {
+      "name": "Azerbaijan Airlines"
+    },
+    "KU": {
+      "name": "Kuwait Airways"
+    },
+    "LH": {
+      "name": "Lufthansa"
+    },
+    "TK": {
+      "name": "Turkish Airlines"
+    },
+    "XQ": {
+      "name": "SunExpress"
+    }
+  },
+  "cities": {
+    "AYT": {
+      "name": "Antalya"
+    },
+    "FRA": {
+      "name": "Frankfurt am Main"
+    },
+    "GYD": {
+      "name": "Baku"
+    },
+    "IST": {
+      "name": "Arnavutköy, Istanbul"
+    },
+    "KWI": {
+      "name": "Kuwait City"
+    },
+    "MUC": {
+      "name": "Munich"
+    },
+    "RIX": {
+      "name": "Riga"
+    }
+  },
+  "airports": {
+    "AYT": {
+      "name": "Antalya Intl"
+    },
+    "FRA": {
+      "name": "Frankfurt Airport"
+    },
+    "GYD": {
+      "name": "Heydar Aliyev Intl"
+    },
+    "IST": {
+      "name": "İstanbul Airport"
+    },
+    "KWI": {
+      "name": "Kuwait Intl"
+    },
+    "MUC": {
+      "name": "Munich Airport"
+    },
+    "RIX": {
+      "name": "Riga Intl"
+    }
+  },
+  "flights": {
+    "01514ff": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2422,
+          "departure": {
+            "time": "2026-08-01T14:15:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T15:50:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 5700
+        }
+      ],
+      "duration": 5700,
+      "count": 1,
+      "data": "4a4301d|{\"count\":1,\"key\":\"01514ff\",\"legs\":[[\"TK2422\",\"IST\",\"2026-08-01T14:15:00+03:00\",\"AYT\",\"2026-08-01T15:50:00+03:00\"]]}"
+    },
+    "02df97c": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 1757,
+          "departure": {
+            "time": "2026-08-01T06:55:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T10:05:00+03:00",
+            "airport": "RIX"
+          },
+          "duration": 11400
+        },
+        {
+          "airline": "BT",
+          "flight_number": 715,
+          "departure": {
+            "time": "2026-08-01T15:30:00+03:00",
+            "airport": "RIX"
+          },
+          "arrival": {
+            "time": "2026-08-01T19:15:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 13500
+        }
+      ],
+      "duration": 44400,
+      "count": 2,
+      "data": "a1e895a|{\"count\":2,\"key\":\"02df97c\",\"legs\":[[\"TK1757\",\"IST\",\"2026-08-01T06:55:00+03:00\",\"RIX\",\"2026-08-01T10:05:00+03:00\"],[\"BT715\",\"RIX\",\"2026-08-01T15:30:00+03:00\",\"AYT\",\"2026-08-01T19:15:00+03:00\"]]}"
+    },
+    "10f7cb0": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 336,
+          "departure": {
+            "time": "2026-08-01T21:50:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-02T01:35:00+04:00",
+            "airport": "GYD"
+          },
+          "duration": 9900
+        },
+        {
+          "airline": "J2",
+          "flight_number": 27,
+          "departure": {
+            "time": "2026-08-02T05:55:00+04:00",
+            "airport": "GYD"
+          },
+          "arrival": {
+            "time": "2026-08-02T08:00:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 11100
+        }
+      ],
+      "duration": 36600,
+      "count": 2,
+      "data": "0573fb2|{\"count\":2,\"key\":\"10f7cb0\",\"legs\":[[\"TK336\",\"IST\",\"2026-08-01T21:50:00+03:00\",\"GYD\",\"2026-08-02T01:35:00+04:00\"],[\"J227\",\"GYD\",\"2026-08-02T05:55:00+04:00\",\"AYT\",\"2026-08-02T08:00:00+03:00\"]]}"
+    },
+    "29896b3": {
+      "segments": [
+        {
+          "airline": "LH",
+          "flight_number": 1299,
+          "departure": {
+            "time": "2026-08-01T13:55:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T16:05:00+02:00",
+            "airport": "FRA"
+          },
+          "duration": 11400
+        },
+        {
+          "airline": "XQ",
+          "flight_number": 143,
+          "departure": {
+            "time": "2026-08-01T19:40:00+02:00",
+            "airport": "FRA"
+          },
+          "arrival": {
+            "time": "2026-08-02T00:10:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 12600
+        }
+      ],
+      "duration": 36900,
+      "count": 2,
+      "data": "dd2712b|{\"count\":2,\"key\":\"29896b3\",\"legs\":[[\"LH1299\",\"IST\",\"2026-08-01T13:55:00+03:00\",\"FRA\",\"2026-08-01T16:05:00+02:00\"],[\"XQ143\",\"FRA\",\"2026-08-01T19:40:00+02:00\",\"AYT\",\"2026-08-02T00:10:00+03:00\"]]}"
+    },
+    "336fe30": {
+      "segments": [
+        {
+          "airline": "LH",
+          "flight_number": 1743,
+          "departure": {
+            "time": "2026-08-01T03:45:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T05:30:00+02:00",
+            "airport": "MUC"
+          },
+          "duration": 9900
+        },
+        {
+          "airline": "LH",
+          "flight_number": 95,
+          "departure": {
+            "time": "2026-08-01T09:00:00+02:00",
+            "airport": "MUC"
+          },
+          "arrival": {
+            "time": "2026-08-01T10:00:00+02:00",
+            "airport": "FRA"
+          },
+          "duration": 3600
+        },
+        {
+          "airline": "XQ",
+          "flight_number": 143,
+          "departure": {
+            "time": "2026-08-01T19:40:00+02:00",
+            "airport": "FRA"
+          },
+          "arrival": {
+            "time": "2026-08-02T00:10:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 12600
+        }
+      ],
+      "duration": 73500,
+      "count": 3,
+      "data": "9da479f|{\"count\":3,\"key\":\"336fe30\",\"legs\":[[\"LH1743\",\"IST\",\"2026-08-01T03:45:00+03:00\",\"MUC\",\"2026-08-01T05:30:00+02:00\"],[\"LH95\",\"MUC\",\"2026-08-01T09:00:00+02:00\",\"FRA\",\"2026-08-01T10:00:00+02:00\"],[\"XQ143\",\"FRA\",\"2026-08-01T19:40:00+02:00\",\"AYT\",\"2026-08-02T00:10:00+03:00\"]]}"
+    },
+    "3ffc7b7": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2410,
+          "departure": {
+            "time": "2026-08-01T08:25:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T09:50:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 5100
+        }
+      ],
+      "duration": 5100,
+      "count": 1,
+      "data": "aea477d|{\"count\":1,\"key\":\"3ffc7b7\",\"legs\":[[\"TK2410\",\"IST\",\"2026-08-01T08:25:00+03:00\",\"AYT\",\"2026-08-01T09:50:00+03:00\"]]}"
+    },
+    "4186f8b": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2446,
+          "departure": {
+            "time": "2026-08-01T18:15:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T19:40:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 5100
+        }
+      ],
+      "duration": 5100,
+      "count": 1,
+      "data": "a982af2|{\"count\":1,\"key\":\"4186f8b\",\"legs\":[[\"TK2446\",\"IST\",\"2026-08-01T18:15:00+03:00\",\"AYT\",\"2026-08-01T19:40:00+03:00\"]]}"
+    },
+    "4256c46": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2428,
+          "departure": {
+            "time": "2026-08-01T17:35:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T19:00:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 5100
+        }
+      ],
+      "duration": 5100,
+      "count": 1,
+      "data": "a25d0db|{\"count\":1,\"key\":\"4256c46\",\"legs\":[[\"TK2428\",\"IST\",\"2026-08-01T17:35:00+03:00\",\"AYT\",\"2026-08-01T19:00:00+03:00\"]]}"
+    },
+    "4299fa9": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2424,
+          "departure": {
+            "time": "2026-08-01T15:10:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T16:35:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 5100
+        }
+      ],
+      "duration": 5100,
+      "count": 1,
+      "data": "a1aabc0|{\"count\":1,\"key\":\"4299fa9\",\"legs\":[[\"TK2424\",\"IST\",\"2026-08-01T15:10:00+03:00\",\"AYT\",\"2026-08-01T16:35:00+03:00\"]]}"
+    },
+    "464b058": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2434,
+          "departure": {
+            "time": "2026-08-01T21:10:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T22:40:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 5400
+        }
+      ],
+      "duration": 5400,
+      "count": 1,
+      "data": "e229d53|{\"count\":1,\"key\":\"464b058\",\"legs\":[[\"TK2434\",\"IST\",\"2026-08-01T21:10:00+03:00\",\"AYT\",\"2026-08-01T22:40:00+03:00\"]]}"
+    },
+    "4f4e57d": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2430,
+          "departure": {
+            "time": "2026-08-01T17:45:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T19:10:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 5100
+        }
+      ],
+      "duration": 5100,
+      "count": 1,
+      "data": "727230b|{\"count\":1,\"key\":\"4f4e57d\",\"legs\":[[\"TK2430\",\"IST\",\"2026-08-01T17:45:00+03:00\",\"AYT\",\"2026-08-01T19:10:00+03:00\"]]}"
+    },
+    "5e538e0": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2426,
+          "departure": {
+            "time": "2026-08-01T16:30:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T17:55:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 5100
+        }
+      ],
+      "duration": 5100,
+      "count": 1,
+      "data": "1da8a1e|{\"count\":1,\"key\":\"5e538e0\",\"legs\":[[\"TK2426\",\"IST\",\"2026-08-01T16:30:00+03:00\",\"AYT\",\"2026-08-01T17:55:00+03:00\"]]}"
+    },
+    "641d046": {
+      "segments": [
+        {
+          "airline": "KU",
+          "flight_number": 156,
+          "departure": {
+            "time": "2026-08-01T13:00:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T16:40:00+03:00",
+            "airport": "KWI"
+          },
+          "duration": 13200
+        },
+        {
+          "airline": "KU",
+          "flight_number": 141,
+          "departure": {
+            "time": "2026-08-02T08:05:00+03:00",
+            "airport": "KWI"
+          },
+          "arrival": {
+            "time": "2026-08-02T11:35:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 12600
+        }
+      ],
+      "duration": 81300,
+      "count": 2,
+      "data": "43b2939|{\"count\":2,\"key\":\"641d046\",\"legs\":[[\"KU156\",\"IST\",\"2026-08-01T13:00:00+03:00\",\"KWI\",\"2026-08-01T16:40:00+03:00\"],[\"KU141\",\"KWI\",\"2026-08-02T08:05:00+03:00\",\"AYT\",\"2026-08-02T11:35:00+03:00\"]]}"
+    },
+    "81c80b0": {
+      "segments": [
+        {
+          "airline": "LH",
+          "flight_number": 1743,
+          "departure": {
+            "time": "2026-08-01T03:45:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T05:30:00+02:00",
+            "airport": "MUC"
+          },
+          "duration": 9900
+        },
+        {
+          "airline": "LH",
+          "flight_number": 127,
+          "departure": {
+            "time": "2026-08-01T08:00:00+02:00",
+            "airport": "MUC"
+          },
+          "arrival": {
+            "time": "2026-08-01T09:00:00+02:00",
+            "airport": "FRA"
+          },
+          "duration": 3600
+        },
+        {
+          "airline": "XQ",
+          "flight_number": 143,
+          "departure": {
+            "time": "2026-08-01T19:40:00+02:00",
+            "airport": "FRA"
+          },
+          "arrival": {
+            "time": "2026-08-02T00:10:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 12600
+        }
+      ],
+      "duration": 73500,
+      "count": 3,
+      "data": "a9d3cc6|{\"count\":3,\"key\":\"81c80b0\",\"legs\":[[\"LH1743\",\"IST\",\"2026-08-01T03:45:00+03:00\",\"MUC\",\"2026-08-01T05:30:00+02:00\"],[\"LH127\",\"MUC\",\"2026-08-01T08:00:00+02:00\",\"FRA\",\"2026-08-01T09:00:00+02:00\"],[\"XQ143\",\"FRA\",\"2026-08-01T19:40:00+02:00\",\"AYT\",\"2026-08-02T00:10:00+03:00\"]]}"
+    },
+    "8444e9c": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 338,
+          "departure": {
+            "time": "2026-08-01T01:35:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T05:25:00+04:00",
+            "airport": "GYD"
+          },
+          "duration": 10200
+        },
+        {
+          "airline": "J2",
+          "flight_number": 25,
+          "departure": {
+            "time": "2026-08-01T07:55:00+04:00",
+            "airport": "GYD"
+          },
+          "arrival": {
+            "time": "2026-08-01T10:00:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 11100
+        }
+      ],
+      "duration": 30300,
+      "count": 2,
+      "data": "273fbb2|{\"count\":2,\"key\":\"8444e9c\",\"legs\":[[\"TK338\",\"IST\",\"2026-08-01T01:35:00+03:00\",\"GYD\",\"2026-08-01T05:25:00+04:00\"],[\"J225\",\"GYD\",\"2026-08-01T07:55:00+04:00\",\"AYT\",\"2026-08-01T10:00:00+03:00\"]]}"
+    },
+    "84513aa": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 332,
+          "departure": {
+            "time": "2026-08-01T06:45:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T10:30:00+04:00",
+            "airport": "GYD"
+          },
+          "duration": 9900
+        },
+        {
+          "airline": "J2",
+          "flight_number": 125,
+          "departure": {
+            "time": "2026-08-01T14:55:00+04:00",
+            "airport": "GYD"
+          },
+          "arrival": {
+            "time": "2026-08-01T17:00:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 11100
+        }
+      ],
+      "duration": 36900,
+      "count": 2,
+      "data": "db1c5a2|{\"count\":2,\"key\":\"84513aa\",\"legs\":[[\"TK332\",\"IST\",\"2026-08-01T06:45:00+03:00\",\"GYD\",\"2026-08-01T10:30:00+04:00\"],[\"J2125\",\"GYD\",\"2026-08-01T14:55:00+04:00\",\"AYT\",\"2026-08-01T17:00:00+03:00\"]]}"
+    },
+    "87308d1": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2442,
+          "departure": {
+            "time": "2026-08-01T19:20:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T20:50:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 5400
+        }
+      ],
+      "duration": 5400,
+      "count": 1,
+      "data": "751b16e|{\"count\":1,\"key\":\"87308d1\",\"legs\":[[\"TK2442\",\"IST\",\"2026-08-01T19:20:00+03:00\",\"AYT\",\"2026-08-01T20:50:00+03:00\"]]}"
+    },
+    "8b9b858": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2416,
+          "departure": {
+            "time": "2026-08-01T11:35:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T13:00:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 5100
+        }
+      ],
+      "duration": 5100,
+      "count": 1,
+      "data": "a75674f|{\"count\":1,\"key\":\"8b9b858\",\"legs\":[[\"TK2416\",\"IST\",\"2026-08-01T11:35:00+03:00\",\"AYT\",\"2026-08-01T13:00:00+03:00\"]]}"
+    },
+    "a737636": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2412,
+          "departure": {
+            "time": "2026-08-01T09:40:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T11:05:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 5100
+        }
+      ],
+      "duration": 5100,
+      "count": 1,
+      "data": "617e9ca|{\"count\":1,\"key\":\"a737636\",\"legs\":[[\"TK2412\",\"IST\",\"2026-08-01T09:40:00+03:00\",\"AYT\",\"2026-08-01T11:05:00+03:00\"]]}"
+    },
+    "b33b2c2": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2440,
+          "departure": {
+            "time": "2026-08-01T02:00:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T03:20:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 4800
+        }
+      ],
+      "duration": 4800,
+      "count": 1,
+      "data": "d6842c3|{\"count\":1,\"key\":\"b33b2c2\",\"legs\":[[\"TK2440\",\"IST\",\"2026-08-01T02:00:00+03:00\",\"AYT\",\"2026-08-01T03:20:00+03:00\"]]}"
+    },
+    "b6b56bc": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2408,
+          "departure": {
+            "time": "2026-08-01T06:20:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T07:45:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 5100
+        }
+      ],
+      "duration": 5100,
+      "count": 1,
+      "data": "1c34705|{\"count\":1,\"key\":\"b6b56bc\",\"legs\":[[\"TK2408\",\"IST\",\"2026-08-01T06:20:00+03:00\",\"AYT\",\"2026-08-01T07:45:00+03:00\"]]}"
+    },
+    "bab38c2": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2418,
+          "departure": {
+            "time": "2026-08-01T12:40:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T14:05:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 5100
+        }
+      ],
+      "duration": 5100,
+      "count": 1,
+      "data": "ef2e0be|{\"count\":1,\"key\":\"bab38c2\",\"legs\":[[\"TK2418\",\"IST\",\"2026-08-01T12:40:00+03:00\",\"AYT\",\"2026-08-01T14:05:00+03:00\"]]}"
+    },
+    "bdc94a5": {
+      "segments": [
+        {
+          "airline": "J2",
+          "flight_number": 78,
+          "departure": {
+            "time": "2026-08-01T23:00:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-02T02:50:00+04:00",
+            "airport": "GYD"
+          },
+          "duration": 10200
+        },
+        {
+          "airline": "J2",
+          "flight_number": 27,
+          "departure": {
+            "time": "2026-08-02T05:55:00+04:00",
+            "airport": "GYD"
+          },
+          "arrival": {
+            "time": "2026-08-02T08:00:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 11100
+        }
+      ],
+      "duration": 32400,
+      "count": 2,
+      "data": "8e5f6c7|{\"count\":2,\"key\":\"bdc94a5\",\"legs\":[[\"J278\",\"IST\",\"2026-08-01T23:00:00+03:00\",\"GYD\",\"2026-08-02T02:50:00+04:00\"],[\"J227\",\"GYD\",\"2026-08-02T05:55:00+04:00\",\"AYT\",\"2026-08-02T08:00:00+03:00\"]]}"
+    },
+    "c7c7c8f": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2432,
+          "departure": {
+            "time": "2026-08-01T20:15:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T21:40:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 5100
+        }
+      ],
+      "duration": 5100,
+      "count": 1,
+      "data": "209e7e2|{\"count\":1,\"key\":\"c7c7c8f\",\"legs\":[[\"TK2432\",\"IST\",\"2026-08-01T20:15:00+03:00\",\"AYT\",\"2026-08-01T21:40:00+03:00\"]]}"
+    },
+    "d418a9c": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2414,
+          "departure": {
+            "time": "2026-08-01T10:40:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T12:05:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 5100
+        }
+      ],
+      "duration": 5100,
+      "count": 1,
+      "data": "cdf695c|{\"count\":1,\"key\":\"d418a9c\",\"legs\":[[\"TK2414\",\"IST\",\"2026-08-01T10:40:00+03:00\",\"AYT\",\"2026-08-01T12:05:00+03:00\"]]}"
+    },
+    "d7ded63": {
+      "segments": [
+        {
+          "airline": "J2",
+          "flight_number": 176,
+          "departure": {
+            "time": "2026-08-01T22:05:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-02T01:55:00+04:00",
+            "airport": "GYD"
+          },
+          "duration": 10200
+        },
+        {
+          "airline": "J2",
+          "flight_number": 27,
+          "departure": {
+            "time": "2026-08-02T05:55:00+04:00",
+            "airport": "GYD"
+          },
+          "arrival": {
+            "time": "2026-08-02T08:00:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 11100
+        }
+      ],
+      "duration": 35700,
+      "count": 2,
+      "data": "33c02de|{\"count\":2,\"key\":\"d7ded63\",\"legs\":[[\"J2176\",\"IST\",\"2026-08-01T22:05:00+03:00\",\"GYD\",\"2026-08-02T01:55:00+04:00\"],[\"J227\",\"GYD\",\"2026-08-02T05:55:00+04:00\",\"AYT\",\"2026-08-02T08:00:00+03:00\"]]}"
+    },
+    "e8fe61e": {
+      "segments": [
+        {
+          "airline": "LH",
+          "flight_number": 1743,
+          "departure": {
+            "time": "2026-08-01T03:45:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-01T05:30:00+02:00",
+            "airport": "MUC"
+          },
+          "duration": 9900
+        },
+        {
+          "airline": "LH",
+          "flight_number": 97,
+          "departure": {
+            "time": "2026-08-01T10:00:00+02:00",
+            "airport": "MUC"
+          },
+          "arrival": {
+            "time": "2026-08-01T11:00:00+02:00",
+            "airport": "FRA"
+          },
+          "duration": 3600
+        },
+        {
+          "airline": "XQ",
+          "flight_number": 143,
+          "departure": {
+            "time": "2026-08-01T19:40:00+02:00",
+            "airport": "FRA"
+          },
+          "arrival": {
+            "time": "2026-08-02T00:10:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 12600
+        }
+      ],
+      "duration": 73500,
+      "count": 3,
+      "data": "b17a948|{\"count\":3,\"key\":\"e8fe61e\",\"legs\":[[\"LH1743\",\"IST\",\"2026-08-01T03:45:00+03:00\",\"MUC\",\"2026-08-01T05:30:00+02:00\"],[\"LH97\",\"MUC\",\"2026-08-01T10:00:00+02:00\",\"FRA\",\"2026-08-01T11:00:00+02:00\"],[\"XQ143\",\"FRA\",\"2026-08-01T19:40:00+02:00\",\"AYT\",\"2026-08-02T00:10:00+03:00\"]]}"
+    },
+    "ee2f89b": {
+      "segments": [
+        {
+          "airline": "TK",
+          "flight_number": 2438,
+          "departure": {
+            "time": "2026-08-01T23:55:00+03:00",
+            "airport": "IST"
+          },
+          "arrival": {
+            "time": "2026-08-02T01:15:00+03:00",
+            "airport": "AYT"
+          },
+          "duration": 4800
+        }
+      ],
+      "duration": 4800,
+      "count": 1,
+      "data": "4a312e5|{\"count\":1,\"key\":\"ee2f89b\",\"legs\":[[\"TK2438\",\"IST\",\"2026-08-01T23:55:00+03:00\",\"AYT\",\"2026-08-02T01:15:00+03:00\"]]}"
+    }
+  },
+  "itineraries": {
+    "outbound": [
+      {
+        "data": "ab48965|{\"cost\":7200,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"4f4e57d\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":7200,\"source\":{\"FAST\":[1783385713,7200]}}],\"to\":\"AYT\"}",
+        "flight": "4f4e57d",
+        "one_way_price": 7200
+      },
+      {
+        "data": "ed72807|{\"cost\":7200,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"ee2f89b\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":7200,\"source\":{\"FAST\":[1783385713,7200]}}],\"to\":\"AYT\"}",
+        "flight": "ee2f89b",
+        "one_way_price": 7200
+      },
+      {
+        "data": "335b3e5|{\"cost\":8000,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"4256c46\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":8000,\"source\":{\"FAST\":[1783385713,8000]}}],\"to\":\"AYT\"}",
+        "flight": "4256c46",
+        "one_way_price": 8000
+      },
+      {
+        "data": "2d2f5d3|{\"cost\":8000,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"4186f8b\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":8000,\"source\":{\"FAST\":[1783385713,8000]}}],\"to\":\"AYT\"}",
+        "flight": "4186f8b",
+        "one_way_price": 8000
+      },
+      {
+        "data": "8e62eac|{\"cost\":8000,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"c7c7c8f\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":8000,\"source\":{\"FAST\":[1783385713,8000]}}],\"to\":\"AYT\"}",
+        "flight": "c7c7c8f",
+        "one_way_price": 8000
+      },
+      {
+        "data": "bfd9362|{\"cost\":8000,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"87308d1\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":8000,\"source\":{\"FAST\":[1783385713,8000]}}],\"to\":\"AYT\"}",
+        "flight": "87308d1",
+        "one_way_price": 8000
+      },
+      {
+        "data": "22658b0|{\"cost\":8000,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"464b058\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":8000,\"source\":{\"FAST\":[1783385713,8000]}}],\"to\":\"AYT\"}",
+        "flight": "464b058",
+        "one_way_price": 8000
+      },
+      {
+        "data": "dae592a|{\"cost\":9700,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"b33b2c2\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":9700,\"source\":{\"FAST\":[1783385713,9700]}}],\"to\":\"AYT\"}",
+        "flight": "b33b2c2",
+        "one_way_price": 9700
+      },
+      {
+        "data": "7306cae|{\"cost\":10700,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"4299fa9\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":10700,\"source\":{\"FAST\":[1783385713,10700]}}],\"to\":\"AYT\"}",
+        "flight": "4299fa9",
+        "one_way_price": 10700
+      },
+      {
+        "data": "a495075|{\"cost\":10700,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"5e538e0\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":10700,\"source\":{\"FAST\":[1783385713,10700]}}],\"to\":\"AYT\"}",
+        "flight": "5e538e0",
+        "one_way_price": 10700
+      },
+      {
+        "data": "1c18919|{\"cost\":15000,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"b6b56bc\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":15000,\"source\":{\"FAST\":[1783385713,15000]}}],\"to\":\"AYT\"}",
+        "flight": "b6b56bc",
+        "one_way_price": 15000
+      },
+      {
+        "data": "99bfe42|{\"cost\":15000,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"3ffc7b7\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":15000,\"source\":{\"FAST\":[1783385713,15000]}}],\"to\":\"AYT\"}",
+        "flight": "3ffc7b7",
+        "one_way_price": 15000
+      },
+      {
+        "data": "b5ba156|{\"cost\":15000,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"a737636\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":15000,\"source\":{\"FAST\":[1783385713,15000]}}],\"to\":\"AYT\"}",
+        "flight": "a737636",
+        "one_way_price": 15000
+      },
+      {
+        "data": "17cf3fc|{\"cost\":15000,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"d418a9c\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":15000,\"source\":{\"FAST\":[1783385713,15000]}}],\"to\":\"AYT\"}",
+        "flight": "d418a9c",
+        "one_way_price": 15000
+      },
+      {
+        "data": "ccc108b|{\"cost\":15000,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"8b9b858\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":15000,\"source\":{\"FAST\":[1783385713,15000]}}],\"to\":\"AYT\"}",
+        "flight": "8b9b858",
+        "one_way_price": 15000
+      },
+      {
+        "data": "cc90154|{\"cost\":15000,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"bab38c2\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":15000,\"source\":{\"FAST\":[1783385713,15000]}}],\"to\":\"AYT\"}",
+        "flight": "bab38c2",
+        "one_way_price": 15000
+      },
+      {
+        "data": "0cadee7|{\"cost\":15000,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"01514ff\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":15000,\"source\":{\"FAST\":[1783385713,15000]}}],\"to\":\"AYT\"}",
+        "flight": "01514ff",
+        "one_way_price": 15000
+      },
+      {
+        "data": "5991ac4|{\"cost\":34400,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"641d046\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":34400,\"source\":{\"FAST\":[1783385713,34400]}}],\"to\":\"AYT\"}",
+        "flight": "641d046",
+        "one_way_price": 34400
+      },
+      {
+        "data": "a83bd2f|{\"cost\":51700,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"81c80b0\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":51700,\"source\":{\"FAST\":[1783385713,51700]}}],\"to\":\"AYT\"}",
+        "flight": "81c80b0",
+        "one_way_price": 51700
+      },
+      {
+        "data": "5375593|{\"cost\":51700,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"e8fe61e\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":51700,\"source\":{\"FAST\":[1783385713,51700]}}],\"to\":\"AYT\"}",
+        "flight": "e8fe61e",
+        "one_way_price": 51700
+      },
+      {
+        "data": "a47a1cf|{\"cost\":51700,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"336fe30\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":51700,\"source\":{\"FAST\":[1783385713,51700]}}],\"to\":\"AYT\"}",
+        "flight": "336fe30",
+        "one_way_price": 51700
+      },
+      {
+        "data": "ec39293|{\"cost\":58800,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"bdc94a5\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":58800,\"source\":{\"FAST\":[1783385713,58800]}}],\"to\":\"AYT\"}",
+        "flight": "bdc94a5",
+        "one_way_price": 58800
+      },
+      {
+        "data": "f12cea6|{\"cost\":58800,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"d7ded63\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":58800,\"source\":{\"FAST\":[1783385713,58800]}}],\"to\":\"AYT\"}",
+        "flight": "d7ded63",
+        "one_way_price": 58800
+      },
+      {
+        "data": "be68bfc|{\"cost\":63900,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"02df97c\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":63900,\"source\":{\"FAST\":[1783385713,63900]}}],\"to\":\"AYT\"}",
+        "flight": "02df97c",
+        "one_way_price": 63900
+      },
+      {
+        "data": "9c64174|{\"cost\":65000,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"84513aa\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":65000,\"source\":{\"FAST\":[1783385713,65000]}}],\"to\":\"AYT\"}",
+        "flight": "84513aa",
+        "one_way_price": 65000
+      },
+      {
+        "data": "4fe4798|{\"cost\":65000,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"10f7cb0\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":65000,\"source\":{\"FAST\":[1783385713,65000]}}],\"to\":\"AYT\"}",
+        "flight": "10f7cb0",
+        "one_way_price": 65000
+      },
+      {
+        "data": "497f5d5|{\"cost\":127600,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"29896b3\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":127600,\"source\":{\"FAST\":[1783385713,127600]}}],\"to\":\"AYT\"}",
+        "flight": "29896b3",
+        "one_way_price": 127600
+      },
+      {
+        "data": "59c9528|{\"cost\":161000,\"counts\":{\"adults\":1,\"children\":0,\"infants_lap\":0,\"infants_seat\":0},\"depart\":\"2026-08-01\",\"fare_class\":\"economy\",\"from\":\"IST\",\"key\":\"8444e9c\",\"return\":\"\",\"sort\":\"cost\",\"source\":[{\"cost\":161000,\"source\":{\"FAST\":[1783385713,161000]}}],\"to\":\"AYT\"}",
+        "flight": "8444e9c",
+        "one_way_price": 161000
+      }
+    ]
+  },
+  "info": {
+    "from": {
+      "city": "Arnavutköy, Istanbul",
+      "state": "",
+      "country": "Turkey",
+      "airports": [
+        "IST"
+      ]
+    },
+    "to": {
+      "city": "Antalya",
+      "state": "",
+      "country": "Turkey",
+      "airports": [
+        "AYT"
+      ]
+    }
+  },
+  "incomplete": true,
+  "show_loading": true,
+  "duration": 3.81169676780701
+}
