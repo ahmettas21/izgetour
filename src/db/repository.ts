@@ -5,7 +5,7 @@
  * yalnızca bu dosya ve src/db/index.ts değişir; çağıran kod aynı kalır.
  */
 import { randomUUID } from 'node:crypto';
-import { and, eq, desc } from 'drizzle-orm';
+import { and, eq, desc, asc, gte } from 'drizzle-orm';
 import { getDb } from './index';
 import {
   routes,
@@ -117,6 +117,54 @@ export function getCachedFlights(routeId: string, departDate: string): FlightRes
     .where(and(eq(priceCache.routeId, routeId), eq(priceCache.departDate, departDate)))
     .all();
   return rows.map(rowToFlightResult);
+}
+
+export interface CachedRouteSnapshot {
+  departDate: string | null;
+  fetchedAt: string | null;
+  flights: FlightResult[];
+}
+
+/**
+ * Bir rota için cache'te bulunan EN YAKIN gelecekteki tarihin uçuşlarını döner.
+ * Landing sayfası "en ucuz fiyat" özeti için kullanılır.
+ */
+export function getNearestCachedFlights(routeId: string): CachedRouteSnapshot {
+  const db = getDb();
+  const today = new Date().toISOString().slice(0, 10);
+
+  // En yakın gelecekteki tarih (>= bugün). Yoksa herhangi bir tarih (en yeni fetch).
+  const nearest = db
+    .select({ departDate: priceCache.departDate, fetchedAt: priceCache.fetchedAt })
+    .from(priceCache)
+    .where(and(eq(priceCache.routeId, routeId), gte(priceCache.departDate, today)))
+    .orderBy(asc(priceCache.departDate))
+    .get();
+
+  const chosen = nearest
+    ? nearest
+    : db
+        .select({ departDate: priceCache.departDate, fetchedAt: priceCache.fetchedAt })
+        .from(priceCache)
+        .where(eq(priceCache.routeId, routeId))
+        .orderBy(desc(priceCache.departDate))
+        .get();
+
+  if (!chosen?.departDate) {
+    return { departDate: null, fetchedAt: null, flights: [] };
+  }
+
+  const rows = db
+    .select()
+    .from(priceCache)
+    .where(and(eq(priceCache.routeId, routeId), eq(priceCache.departDate, chosen.departDate)))
+    .all();
+
+  return {
+    departDate: chosen.departDate,
+    fetchedAt: chosen.fetchedAt,
+    flights: rows.map(rowToFlightResult),
+  };
 }
 
 // ─── Cache yazma: "yaz-önce-sil" (transaction) ──────────────────────────────
